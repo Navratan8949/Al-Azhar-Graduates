@@ -1,0 +1,27 @@
+{
+  "name": "World Association for Al-Azhar Graduates",
+  "short_name": "World Association for Al-Azhar Graduates",
+  "description": "World Association for Al-Azhar Graduates — a Rajkot, Gujarat based NGO working for education, empowerment and community upliftment.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16307a",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
