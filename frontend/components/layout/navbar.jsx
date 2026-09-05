@@ -313,6 +313,11 @@ export function Navbar() {
 
           {/* Right — only Donate button */}
           <div className="flex items-center gap-2">
+            {/* Mobile Language Selector */}
+            <div className="block sm:hidden mr-1">
+              <GoogleTranslate variant="light" />
+            </div>
+
             <Button
               asChild
               size="sm"

@@ -17,15 +17,21 @@ const LANGUAGES = [
   { code: "ur", label: "اردو (Urdu)" },
 ]
 
-export function GoogleTranslate() {
+export function GoogleTranslate({ variant = "dark" }) {
   const [currentLang, setCurrentLang] = useState("en")
 
   useEffect(() => {
+    // Read from localStorage first for immediate UI consistency
+    const savedLang = localStorage.getItem('selected_lang')
+    if (savedLang && LANGUAGES.some(l => l.code === savedLang)) {
+      setCurrentLang(savedLang)
+    }
+
     // Read current language from Google translate cookie
     const getCookie = (name) => {
       const value = `; ${document.cookie}`
       const parts = value.split(`; ${name}=`)
-      if (parts.length === 2) return parts.pop().split(';').shift()
+      if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift())
       return null
     }
     
@@ -34,12 +40,14 @@ export function GoogleTranslate() {
       const code = googCookie.split("/").pop()
       if (code && LANGUAGES.some(l => l.code === code)) {
         setCurrentLang(code)
+        localStorage.setItem('selected_lang', code)
       }
     }
   }, [])
 
   const setLanguage = (langCode) => {
     setCurrentLang(langCode)
+    localStorage.setItem('selected_lang', langCode)
     
     const hostname = window.location.hostname
     const cookieDomain = hostname === 'localhost' ? '' : `domain=${hostname};`
@@ -68,14 +76,18 @@ export function GoogleTranslate() {
 
   const activeObj = LANGUAGES.find(l => l.code === currentLang) || LANGUAGES[0]
 
+  const triggerClassName = variant === "light" 
+    ? "notranslate group flex items-center gap-1.5 rounded-full border border-border bg-white px-2.5 py-1 text-[11px] font-semibold text-foreground transition-all hover:bg-secondary focus:outline-none"
+    : "notranslate group flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[11px] font-semibold text-white transition-all hover:bg-white/20 focus:outline-none"
+
   return (
     <>
       {/* Hidden Google Translate Mount Container */}
       <div id="google_translate_element" className="hidden" />
 
       <DropdownMenu modal={false}>
-        <DropdownMenuTrigger className="notranslate group flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[11px] font-semibold text-white transition-all hover:bg-white/20 focus:outline-none">
-          <Globe className="size-3.5 text-accent opacity-90" />
+        <DropdownMenuTrigger className={triggerClassName}>
+          <Globe className={`size-3.5 opacity-90 ${variant === 'light' ? 'text-navy' : 'text-accent'}`} />
           <span>{activeObj.label}</span>
           <ChevronDown className="size-3 opacity-60 transition-transform group-data-[state=open]:rotate-180" />
         </DropdownMenuTrigger>
