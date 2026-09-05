@@ -32,7 +32,7 @@ export function Logo({ variant = "dark", showText = true, className = "" }) {
         priority
       />
       {showText && (
-        <span className="notranslate flex flex-col leading-tight min-w-0">
+        <span className="flex flex-col leading-tight min-w-0">
           <span
             className={`font-serif text-[10px] sm:text-[14px] font-bold tracking-tight ${textColor} truncate uppercase`}
           >
