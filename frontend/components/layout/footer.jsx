@@ -162,8 +162,10 @@ export function Footer() {
           </div>
           <p>Registered Charitable Trust · 80G &amp; 12A Certified</p>
         </div>
-        <div className="text-center pb-5 text-xs text-white/45">
-          Designed by <span className="font-bold text-white/70">ZDC Techglobal Pvt Ltd</span>
+        <div className="flex justify-center items-center pb-6 pt-2">
+          <p className="text-sm font-medium text-white/60 tracking-wide">
+            Designed by <span className="font-black text-white tracking-wider drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/70">ZDC Techglobal Pvt Ltd</span>
+          </p>
         </div>
       </div>
     </footer>
