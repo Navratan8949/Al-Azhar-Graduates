@@ -88,7 +88,7 @@ exports.uploadMedia = async (req, res) => {
         .status(400)
         .json({ success: false, message: "No file provided" });
     const uploadResult = await uploadLocalFile(req.file.path);
-    if (!uploadResult) throw new Error("Cloudinary upload failed");
+    if (!uploadResult) throw new Error("File upload failed");
     res.status(200).json({ success: true, url: uploadResult.url });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

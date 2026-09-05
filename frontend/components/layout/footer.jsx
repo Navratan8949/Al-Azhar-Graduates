@@ -154,13 +154,16 @@ export function Footer() {
       </div>
 
       <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-5 text-xs text-white/45 md:flex-row">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 pt-5 pb-3 text-xs text-white/45 md:flex-row">
           <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="/privacy-policy" className="hover:text-white transition">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition">Terms & Conditions</Link>
           </div>
           <p>Registered Charitable Trust · 80G &amp; 12A Certified</p>
+        </div>
+        <div className="text-center pb-5 text-xs text-white/45">
+          Designed by <span className="font-bold text-white/70">ZDC Techglobal Pvt Ltd</span>
         </div>
       </div>
     </footer>

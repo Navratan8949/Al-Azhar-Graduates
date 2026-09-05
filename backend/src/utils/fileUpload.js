@@ -79,4 +79,4 @@ const deleteLocalFile = async (public_id) => {
     }
 };
 
-module.exports = { uploadLocalFile, deleteLocalFile, uploadOnCloudinary: uploadLocalFile, deleteFromCloudinary: deleteLocalFile };
+module.exports = { uploadLocalFile, deleteLocalFile };
