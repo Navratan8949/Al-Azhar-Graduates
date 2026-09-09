@@ -34,6 +34,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import api from "@/service/api";
+import { GoogleTranslate } from "@/components/shared/google-translate";
 
 const NAV = [
   { href: "/member", label: "Overview", icon: LayoutDashboard, exact: true },
@@ -252,6 +253,8 @@ export default function MemberLayout({ children }) {
               <span className="absolute right-2.5 top-2.5 size-2 rounded-full bg-rose-500 border-2 border-white"></span>
             </button> */}
 
+            <GoogleTranslate variant="light" />
+
             <div className="h-8 w-px bg-border/60"></div>
 
             <Link
@@ -290,12 +293,15 @@ export default function MemberLayout({ children }) {
             </span>
           </div>
 
-          <Link
-            href="/member/profile"
-            className="flex size-9 items-center justify-center rounded-full bg-navy text-xs font-bold text-white shadow-sm"
-          >
-            {user?.fullName?.[0]?.toUpperCase() || "M"}
-          </Link>
+          <div className="flex items-center gap-3">
+            <GoogleTranslate variant="light" />
+            <Link
+              href="/member/profile"
+              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-white shadow-sm"
+            >
+              {user?.fullName?.[0]?.toUpperCase() || "M"}
+            </Link>
+          </div>
         </header>
 
         <main className="min-w-0 flex-1 p-4 md:p-8 lg:p-10">{children}</main>
