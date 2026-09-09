@@ -122,19 +122,6 @@ export function GoogleTranslate({ variant = "dark" }) {
         strategy="afterInteractive"
       />
 
-      <style jsx global>{`
-        html { top: 0 !important; }
-        body { top: 0 !important; position: static !important; }
-        .skiptranslate { display: none !important; }
-        .skiptranslate iframe { display: none !important; }
-        #goog-gt-tt { display: none !important; }
-        .goog-te-banner-frame { display: none !important; }
-        .goog-te-balloon-frame { display: none !important; }
-        .goog-tooltip { display: none !important; }
-        .goog-tooltip:hover { display: none !important; }
-        .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
-        iframe.goog-te-menu-frame { display: none !important; }
-      `}</style>
     </>
   )
 }

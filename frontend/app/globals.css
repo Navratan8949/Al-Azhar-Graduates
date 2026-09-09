@@ -140,6 +140,32 @@
   p {
     text-wrap: pretty;
   }
+
+  /* OBLITERATE GOOGLE TRANSLATE UI */
+  html, body {
+    top: 0px !important;
+    position: static !important;
+  }
+  .skiptranslate,
+  .goog-te-banner-frame,
+  .goog-te-balloon-frame,
+  #goog-gt-tt,
+  .goog-tooltip,
+  .VIpgJd-ZVi9od-ORHb-OEVmcd,
+  .VIpgJd-ZVi9od-aZ2wEe-wOHMyf {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .goog-text-highlight {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  iframe.goog-te-menu-frame {
+    display: none !important;
+  }
 }
 
 @layer utilities {
