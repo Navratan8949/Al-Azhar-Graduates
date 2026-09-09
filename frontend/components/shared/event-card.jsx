@@ -15,7 +15,7 @@ export function EventCard({ event }) {
             src={event.image?.url || (typeof event.image === 'string' ? event.image : null) || "/placeholder.svg"}
             alt={event.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-contain transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         </div>

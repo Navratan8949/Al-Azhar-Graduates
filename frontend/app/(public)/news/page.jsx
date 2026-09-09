@@ -60,7 +60,8 @@ export default function NewsPage() {
                       src={item.image.url} 
                       alt={item.title} 
                       fill 
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     />
                   </div>
                 ) : (

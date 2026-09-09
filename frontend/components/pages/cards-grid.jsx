@@ -35,7 +35,7 @@ export function CardsGrid({ items = [], type }) {
             <Link key={item._id} href={hrefFor(type, item._id)} className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-primary/20 bg-primary text-white shadow-soft transition-all duration-300 hover:-translate-y-2 hover:border-accent/40 hover:shadow-2xl">
               <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-muted">
                 {(item.image?.url || (typeof item.image === 'string' && item.image)) ? (
-                  <Image src={item.image?.url || item.image} alt={item.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(min-width:1024px) 33vw, 100vw" />
+                  <Image src={item.image?.url || item.image} alt={item.title} fill className="object-contain transition duration-500 group-hover:scale-105" sizes="(min-width:1024px) 33vw, 100vw" />
                 ) : (
                   <span className="font-serif text-muted-foreground">No Image</span>
                 )}

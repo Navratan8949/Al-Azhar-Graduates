@@ -212,8 +212,8 @@ export default function GalleryPage() {
                           src={item.image?.url || "/placeholder.svg"}
                           alt={item.title}
                           fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-contain transition-transform duration-500 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                         {/* Play overlay */}
                         <div className="absolute inset-0 flex items-center justify-center bg-navy/40 transition-colors duration-300 group-hover:bg-navy/55">

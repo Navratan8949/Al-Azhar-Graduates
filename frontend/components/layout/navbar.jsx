@@ -21,7 +21,6 @@ import {
 import { Logo } from "@/components/shared/logo"
 import { MAIN_NAV, isGroup } from "@/constants/nav"
 import { SITE } from "@/constants/site"
-import { GoogleTranslate } from "@/components/shared/google-translate"
 
 // Social icons as inline SVG (no extra package needed)
 function FacebookIcon({ className }) {
@@ -179,12 +178,6 @@ function TopBar() {
           </a>
           <span className="h-3 w-px bg-white/20" />
 
-          {/* Multi-language Selector */}
-          <div className="hidden sm:block">
-            <GoogleTranslate />
-          </div>
-          <span className="h-3 w-px bg-white/20 hidden sm:block" />
-
           {user ? (
             <div className="flex items-center gap-2">
               <Link href={user.role === "admin" ? '/admin' : '/member'} className="inline-flex items-center gap-1.5 text-navy bg-accent transition hover:bg-white px-3 py-1 rounded-full text-[11px] font-bold">
@@ -311,12 +304,7 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Right — only Donate button */}
           <div className="flex items-center gap-2">
-            {/* Mobile Language Selector */}
-            <div className="block sm:hidden mr-1">
-              <GoogleTranslate variant="light" />
-            </div>
 
             <Button
               asChild

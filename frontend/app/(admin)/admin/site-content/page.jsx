@@ -75,7 +75,7 @@ export default function SiteContentAdminPage() {
   const [siteLogo, setSiteLogo] = useState({ logo: "", favicon: "", signature: "", siteName: "", shortName: "" })
   const [founderForm, setFounderForm] = useState({ title: "", name: "", designation: "", message: "", file: null, existingImage: "" })
   const [heroSlides, setHeroSlides] = useState([])
-  const [aboutPreview, setAboutPreview] = useState({ title: "", content: "", points: ["", "", "", ""] })
+  const [aboutPreview, setAboutPreview] = useState({ title: "", content: "", mission: "", vision: "", image: "" })
   const [aboutMain, setAboutMain] = useState({ image: "", stats: ["", "", ""], sections: [] })
   const [focusAreas, setFocusAreas] = useState([])
   const [impactStats, setImpactStats] = useState([])
@@ -149,7 +149,9 @@ export default function SiteContentAdminPage() {
           setAboutPreview({
             title: siteContent.about_preview.title || "",
             content: parsed.description || "",
-            points: parsed.points || ["", "", "", ""]
+            mission: parsed.mission || "",
+            vision: parsed.vision || "",
+            image: parsed.image || ""
           })
         } catch (e) { }
       }
@@ -591,16 +593,20 @@ export default function SiteContentAdminPage() {
             <div className="p-6 space-y-5 bg-white">
               <FieldGroup label="Section Heading"><Input value={aboutPreview.title} onChange={(e) => setAboutPreview({ ...aboutPreview, title: e.target.value })} className="border-primary/20" /></FieldGroup>
               <FieldGroup label="Description" hint="A short paragraph introducing the organization"><Textarea className="min-h-[120px] border-primary/20" value={aboutPreview.content} onChange={(e) => setAboutPreview({ ...aboutPreview, content: e.target.value })} /></FieldGroup>
-              <FieldGroup label="✅ Bullet Points" hint="Key highlights shown as a list">
-                <div className="space-y-2">
-                  {aboutPreview.points.map((point, index) => (
-                    <Input key={index} value={point} onChange={(e) => {
-                      const newP = [...aboutPreview.points]; newP[index] = e.target.value; setAboutPreview({ ...aboutPreview, points: newP });
-                    }} placeholder={`Point ${index + 1}`} className="border-primary/20" />
-                  ))}
+              <FieldGroup label="Preview Image" hint="Displayed on the left side of the About section">
+                <div className="flex gap-3 items-center">
+                  {aboutPreview.image && <Image src={aboutPreview.image} width={60} height={60} className="rounded-xl object-cover h-16 w-16 shrink-0 border-2 border-primary/20" alt="preview" />}
+                  <Input type="file" accept="image/*" onChange={(e) => handleFileUpload(e, (url) => setAboutPreview({ ...aboutPreview, image: url }), "about_preview")} className="border-primary/20" />
+                  {uploadingImage === "about_preview" && <div className="flex items-center gap-1 text-primary text-xs"><Loader2 className="animate-spin h-4 w-4" /> Uploading</div>}
                 </div>
               </FieldGroup>
-              <SaveBtn onClick={() => saveContent("about_preview", aboutPreview.title, { description: aboutPreview.content, points: aboutPreview.points.filter(p => p.trim() !== "") })} disabled={isSaving}>Save About Section</SaveBtn>
+              <FieldGroup label="Mission (Short)" hint="A short mission statement for the homepage card">
+                <Textarea className="border-primary/20" value={aboutPreview.mission} onChange={(e) => setAboutPreview({ ...aboutPreview, mission: e.target.value })} />
+              </FieldGroup>
+              <FieldGroup label="Vision (Short)" hint="A short vision statement for the homepage card">
+                <Textarea className="border-primary/20" value={aboutPreview.vision} onChange={(e) => setAboutPreview({ ...aboutPreview, vision: e.target.value })} />
+              </FieldGroup>
+              <SaveBtn onClick={() => saveContent("about_preview", aboutPreview.title, { description: aboutPreview.content, mission: aboutPreview.mission, vision: aboutPreview.vision, image: aboutPreview.image })} disabled={isSaving}>Save About Section</SaveBtn>
             </div>
           </div>
         </TabsContent>

@@ -22,10 +22,9 @@ export default async function Page() {
   return (
     <>
       <PageHero 
-        eyebrow="Crowdfunding" 
-        title="Support Campaigns" 
-        description="Transparent targets." 
-        image="/children-receiving-school-supplies-india.png" 
+        title="Crowdfunding & Zakat" 
+        description="Support our initiatives to provide education, healthcare, and welfare to the underprivileged. Calculate and pay your Zakat to purify your wealth."
+        image="/logo.png" 
       />
       <CardsGrid items={campaigns} type="campaign" />
     </>

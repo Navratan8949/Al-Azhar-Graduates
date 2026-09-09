@@ -14,6 +14,7 @@ export function AboutPreview() {
   let description = "The World Association for Al-Azhar Graduates – India is a national platform connecting Al-Azhar graduates across India and promoting the scholarly, intellectual and humanitarian values of Al-Azhar University.\n\nRooted in the traditions of knowledge, moderation, dialogue and service, the organization works to strengthen cooperation among Al-Azhar graduates and contribute to the educational, intellectual and social development of Indian society."
   let mission = "To connect Al-Azhar graduates, promote the message of moderation and balanced Islamic thought, support academic and intellectual initiatives, and serve society through knowledge, dialogue and constructive engagement."
   let vision = "To build a strong and united network of Al-Azhar graduates across India and make their collective academic, intellectual and social contribution a meaningful force for peace, knowledge and human development."
+  let image = "/al-azhar-cairo.jpg"
 
   if (siteContent?.about_preview?.content) {
     try {
@@ -22,6 +23,7 @@ export function AboutPreview() {
       if (parsed.description) description = parsed.description
       if (parsed.mission) mission = parsed.mission
       if (parsed.vision) vision = parsed.vision
+      if (parsed.image) image = parsed.image
     } catch (e) { }
   }
 
@@ -39,7 +41,7 @@ export function AboutPreview() {
         <Reveal className="relative mx-auto w-full max-w-lg lg:max-w-none">
           <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2rem] shadow-[0_20px_60px_rgba(2,61,40,0.15)] border-[8px] border-white bg-white">
             <Image
-              src="/al-azhar-cairo.jpg"
+              src={image}
               alt="Al-Azhar University"
               fill
               className="object-cover transition-transform duration-700 hover:scale-105"

@@ -17,25 +17,25 @@ import { Button } from "@/components/ui/button";
 
 const defaultSlides = [
   {
-    image: "/hero-community-education-india.png",
+    image: "/al-azhar-cairo.jpg",
     title: "Moderation is our",
     highlight: "Method.",
     desc: "The World Association for Al-Azhar Graduates promotes awareness of Al-Azhar's global scholarly and civilizational contribution.",
   },
   {
-    image: "/community-health-camp-india.png",
+    image: "/logo.png",
     title: "Unity is our",
     highlight: "Strength.",
     desc: "Connecting Al-Azhar graduates across India through a strong national network to encourage academic cooperation and intellectual exchange.",
   },
   {
-    image: "/women-skill-training-workshop-india.png",
+    image: "/al-azhar-cairo.jpg",
     title: "Knowledge is our",
     highlight: "Identity.",
     desc: "Supporting Arabic language, Islamic studies, and organizing educational, intellectual and training programs.",
   },
   {
-    image: "/al-azhar-cairo.jpg",
+    image: "/logo.png",
     title: "Service is our",
     highlight: "Mission.",
     desc: "Presenting the authentic and humane teachings of Islam to wider society and engaging youth through constructive initiatives.",
