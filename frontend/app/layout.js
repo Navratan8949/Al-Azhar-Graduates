@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/sonner";
 import { SplashScreen } from "@/components/splash-screen/splash-screen";
 import { ReduxProvider } from "@/redux/Provider";
+import { cookies } from "next/headers";
 import "./globals.css";
 
 const siteUrl =
@@ -113,6 +114,21 @@ export const viewport = {
 };
 
 export default async function RootLayout({ children }) {
+  const cookieStore = await cookies();
+  const googtrans = cookieStore.get("googtrans")?.value;
+  let dir = "ltr";
+  let lang = "en";
+
+  if (googtrans) {
+    const selectedLang = googtrans.split("/").pop();
+    if (["ar", "ur"].includes(selectedLang)) {
+      dir = "rtl";
+    }
+    if (selectedLang) {
+      lang = selectedLang;
+    }
+  }
+
   let seoTitle = "World Association for Al-Azhar Graduates - India Branch";
   let seoDesc = "The India Branch works to connect Al-Azhar graduates throughout India and promote Al-Azhar's message of knowledge, moderation, dialogue and service.";
   let siteLogo = `${siteUrl}/logo.png`;
@@ -157,7 +173,7 @@ export default async function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className="bg-background" suppressHydrationWarning>
+    <html lang={lang} dir={dir} className="bg-background" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
