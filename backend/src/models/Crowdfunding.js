@@ -47,7 +47,7 @@ const crowdfundingSchema = new mongoose.Schema(
             type: String,
             enum: ["active", "completed", "closed"],
             default: "active",
-        },,
+        },
         translations: {
             type: mongoose.Schema.Types.Mixed,
             default: {},
