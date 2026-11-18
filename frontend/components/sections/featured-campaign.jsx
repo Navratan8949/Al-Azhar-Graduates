@@ -1,24 +1,31 @@
+"use client";
+
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Calendar, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/shared/reveal"
+import { useLanguage } from "@/context/LanguageContext"
 
-export async function FeaturedCampaign() {
+export function FeaturedCampaign() {
+  const { t, isRTL, language } = useLanguage()
+
   const event = {
-    title: "International Peace Conference – 2017",
-    subtitle: "“The Need and Importance of Peace and Peaceful Coexistence in the Contemporary World”",
-    description: "In 2017, the India Branch organized an international peace conference bringing together distinguished scholars, academics, religious leaders and social figures from India and abroad. Professor Dr. Yousuf Amer, then Vice President of Al-Azhar University, participated from Egypt. The conference highlighted the values of peace, moderation, tolerance, dialogue and peaceful coexistence, serving as an important platform for presenting Al-Azhar's balanced message in India.",
+    title: t("conferences.peace_conf_title", "International Peace Conference – 2017"),
+    subtitle: `“${t("conferences.peace_conf_subtitle", "The Need and Importance of Peace and Peaceful Coexistence in the Contemporary World")}”`,
+    description: `${t("conferences.peace_conf_desc", "In 2017, the India Branch hosted the landmark International Peace Conference...")} ${t("conferences.peace_conf_guest", "")} ${t("conferences.peace_conf_focus", "")}`,
     image: "/logo.png",
-    date: "2017",
-    location: "India Islamic Cultural Centre, New Delhi",
+    date: isRTL ? (language === "ar" ? "٢٠١٧ م" : "۲۰۱۷ء") : "2017",
+    location: isRTL
+      ? (language === "ar" ? "المركز الثقافي الإسلامي الهندي، نيودلهي" : "انڈیا اسلامک کلچرل سینٹر، نئی دہلی")
+      : "India Islamic Cultural Centre, New Delhi",
   };
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 md:py-20">
       <Reveal>
         <div className="grid overflow-hidden rounded-[2rem] bg-primary border border-primary/20 shadow-xl lg:grid-cols-2 transition-all hover:shadow-2xl">
-          <div className="relative min-h-64 lg:min-h-full bg-primary flex items-center justify-center p-8 relative">
+          <div className="relative min-h-64 lg:min-h-full bg-primary flex items-center justify-center p-8">
             <Image
               src={event.image}
               alt={event.title}
@@ -29,9 +36,12 @@ export async function FeaturedCampaign() {
           </div>
           <div className="flex flex-col justify-center p-8 text-navy-foreground md:p-12">
             <span className="inline-flex w-fit items-center gap-2 rounded-md bg-accent px-3 py-1 text-xs font-bold uppercase text-primary">
-              Featured Event
+              {t("nav.events", "Featured Event")}
             </span>
-            <h2 className="mt-4 text-balance font-serif text-3xl font-bold leading-tight md:text-4xl">
+            <h2
+              className="mt-4 text-balance font-serif text-3xl font-bold leading-tight md:text-4xl"
+              style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}
+            >
               {event.title}
             </h2>
             <p className="mt-2 text-sm font-semibold italic text-accent">{event.subtitle}</p>
@@ -51,8 +61,8 @@ export async function FeaturedCampaign() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                 <Link href="/events">
-                  View All Events
-                  <ArrowRight className="ml-2 size-4" />
+                  {t("conferences.all_events", "View All Events")}
+                  <ArrowRight className="ml-2 size-4 rtl-flip" />
                 </Link>
               </Button>
             </div>
@@ -60,5 +70,5 @@ export async function FeaturedCampaign() {
         </div>
       </Reveal>
     </section>
-  )
+  );
 }

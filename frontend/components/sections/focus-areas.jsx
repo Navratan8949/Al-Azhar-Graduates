@@ -6,51 +6,53 @@ import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal } from "@/components/shared/reveal";
 import { useSelector } from "react-redux";
-
-const DEFAULT_AREAS = [
-  {
-    icon: "GraduationCap",
-    title: "Education",
-    desc: "Free coaching centres, school sponsorships, books and digital learning for children in need.",
-    image: "/rural-classroom-children-learning-india.png",
-  },
-  {
-    icon: "HeartPulse",
-    title: "Healthcare",
-    desc: "Medical camps, mobile health units and awareness drives bringing care to remote villages.",
-    image: "/community-health-camp-india.png",
-  },
-  {
-    icon: "Apple",
-    title: "Nutrition",
-    desc: "Community kitchens serving daily nutritious meals to the hungry and vulnerable.",
-    image: "/community-kitchen-serving-food-india.png",
-  },
-  {
-    icon: "Users2",
-    title: "Empowerment",
-    desc: "Skill development and micro-enterprise training that helps women stand independently.",
-    image: "/women-skill-training-workshop-india.png",
-  },
-  {
-    icon: "TreePine",
-    title: "Environment",
-    desc: "Tree plantation and sustainability drives for a greener, healthier tomorrow.",
-    image: "/tree-plantation-volunteers-india.png",
-  },
-  {
-    icon: "Sprout",
-    title: "Relief & Welfare",
-    desc: "Rapid disaster relief, ration kits and support for families during times of crisis.",
-    image: "/al-azhar-cairo.jpg",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export function FocusAreas() {
+  const { t, isRTL, language } = useLanguage();
   const { data: siteContent } = useSelector((state) => state.siteContent);
 
-  let areas = DEFAULT_AREAS;
-  if (siteContent?.focus_areas?.content) {
+  const localizedAreas = [
+    {
+      icon: "GraduationCap",
+      title: t("activities.academic_title", "Academic & Educational Programs"),
+      desc: t("activities.academic_text", "Comprehensive academic and educational programs designed to promote lifelong learning, research, and scholarly development."),
+      image: "/rural-classroom-children-learning-india.png",
+    },
+    {
+      icon: "BookOpen",
+      title: t("activities.arabic_title", "Arabic Language Programs"),
+      desc: t("activities.arabic_text", "Conducting specialized workshops, intensive diploma courses, and certificate programs in Arabic language and linguistics."),
+      image: "/al-azhar-cairo.jpg",
+    },
+    {
+      icon: "BookMarked",
+      title: t("activities.hadith_title", "Hadith & Tafsir Programs"),
+      desc: t("activities.hadith_text", "Scholarly lectures and study circles focused on Quranic interpretation, prophetic traditions, and jurisprudence."),
+      image: "/community-health-camp-india.png",
+    },
+    {
+      icon: "Video",
+      title: t("activities.lectures_title", "Lectures from Al-Azhar Scholars"),
+      desc: t("activities.lectures_text", "Online lectures and webinars led by eminent professors and scholars from Al-Azhar University, Cairo."),
+      image: "/women-skill-training-workshop-india.png",
+    },
+    {
+      icon: "Users2",
+      title: t("activities.outreach_title", "Intellectual & Outreach Programs"),
+      desc: t("activities.empowerment_text", "Empowering Indian scholars through international academic exposure, seminars, conferences, and youth engagement."),
+      image: "/community-kitchen-serving-food-india.png",
+    },
+    {
+      icon: "Heart",
+      title: t("activities.humanitarian_title", "Humanitarian & Community Relief"),
+      desc: t("activities.humanitarian_text", "Promoting social solidarity through healthcare drives, support for underserved families, educational scholarships, and community relief."),
+      image: "/tree-plantation-volunteers-india.png",
+    },
+  ];
+
+  let areas = localizedAreas;
+  if (siteContent?.focus_areas?.content && language === "en") {
     try {
       const parsed = JSON.parse(siteContent.focus_areas.content);
       if (Array.isArray(parsed) && parsed.length > 0) {
@@ -77,9 +79,9 @@ export function FocusAreas() {
       <div className="relative z-10 mx-auto max-w-[1440px] px-6 lg:px-12">
         <Reveal>
           <SectionHeading
-            eyebrow="What We Do"
-            title="Our Areas of Impact"
-            description="Six focused programs working together to uplift communities and create lasting, measurable change."
+            eyebrow={t("nav.our_work", "What We Do")}
+            title={t("activities.title", "Our Areas of Impact")}
+            description={t("activities.academic_text", "Six focused programs working together to uplift communities and create lasting, measurable change.")}
           />
         </Reveal>
 
@@ -112,7 +114,7 @@ export function FocusAreas() {
 
                     <h3
                       className="mt-3 mb-2 text-2xl font-bold text-white transition-colors duration-300 group-hover:text-accent tracking-wide"
-                      style={{ fontFamily: "var(--font-cinzel), serif" }}
+                      style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}
                     >
                       {a.title}
                     </h3>
@@ -122,9 +124,9 @@ export function FocusAreas() {
 
                     {/* Learn More link */}
                     <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-sm font-bold uppercase tracking-widest text-accent overflow-hidden transition-colors group-hover:text-white">
-                      <span>Explore Program</span>
+                      <span>{t("common.read_more", "Explore Program")}</span>
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-accent group-hover:text-primary">
-                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 rtl-flip" />
                       </div>
                     </div>
                   </div>

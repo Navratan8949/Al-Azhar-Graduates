@@ -1,32 +1,49 @@
-import { PageHero } from "@/components/pages/page-hero"
-import { CardsGrid } from "@/components/pages/cards-grid"
-import { getCrowdfundings } from "@/service/crowdfunding.service"
+"use client";
 
-export const metadata = { title: "Support Campaigns" }
-export const dynamic = "force-dynamic"
+import { useEffect, useState } from "react";
+import { PageHero } from "@/components/pages/page-hero";
+import { CardsGrid } from "@/components/pages/cards-grid";
+import { Loader2 } from "lucide-react";
+import { getCrowdfundings } from "@/service/crowdfunding.service";
+import { useLanguage } from "@/context/LanguageContext";
 
-export default async function Page() {
-  let campaigns = []
-  try {
-    const res = await getCrowdfundings()
-    if (res && res.success && res.campaigns) {
-      campaigns = res.campaigns
-    }
-  } catch (error) {
-    console.error("Failed to fetch campaigns:", error)
-  }
+export default function Page() {
+  const { t } = useLanguage();
+  const [campaigns, setCampaigns] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Only show active or completed campaigns (not closed) if preferred, or all.
-  // We'll show all that were fetched.
+  useEffect(() => {
+    getCrowdfundings()
+      .then((res) => {
+        if (res && res.success && res.campaigns) {
+          setCampaigns(res.campaigns);
+        }
+      })
+      .catch((err) => console.error("Failed to fetch campaigns:", err))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <>
-      <PageHero 
-        title="Crowdfunding & Zakat" 
-        description="Support our initiatives to provide education, healthcare, and welfare to the underprivileged. Calculate and pay your Zakat to purify your wealth."
-        image="/logo.png" 
+      <PageHero
+        eyebrow={t("crowdfunding_section.badge", "Support Our Cause")}
+        title={t(
+          "crowdfunding_section.title",
+          "Humanitarian & Welfare Campaigns"
+        )}
+        description={t(
+          "crowdfunding_section.description",
+          "Join hands with us to make a lasting impact. Your contributions help provide educational opportunities and welfare to those in need."
+        )}
+        image="/logo.png"
       />
-      <CardsGrid items={campaigns} type="campaign" />
+      {loading ? (
+        <div className="flex justify-center py-20">
+          <Loader2 className="size-10 animate-spin text-navy/50" />
+        </div>
+      ) : (
+        <CardsGrid items={campaigns} type="campaign" />
+      )}
     </>
-  )
+  );
 }

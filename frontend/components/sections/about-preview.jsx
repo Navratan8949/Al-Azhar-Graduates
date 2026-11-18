@@ -6,17 +6,19 @@ import { ArrowRight, Target, Eye, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/shared/reveal"
 import { useSelector } from "react-redux"
+import { useLanguage } from "@/context/LanguageContext"
 
 export function AboutPreview() {
+  const { t, isRTL, language } = useLanguage()
   const { data: siteContent } = useSelector((state) => state.siteContent)
 
-  let title = "Welcome to the India Branch"
-  let description = "The World Association for Al-Azhar Graduates – India is a national platform connecting Al-Azhar graduates across India and promoting the scholarly, intellectual and humanitarian values of Al-Azhar University.\n\nRooted in the traditions of knowledge, moderation, dialogue and service, the organization works to strengthen cooperation among Al-Azhar graduates and contribute to the educational, intellectual and social development of Indian society."
-  let mission = "To connect Al-Azhar graduates, promote the message of moderation and balanced Islamic thought, support academic and intellectual initiatives, and serve society through knowledge, dialogue and constructive engagement."
-  let vision = "To build a strong and united network of Al-Azhar graduates across India and make their collective academic, intellectual and social contribution a meaningful force for peace, knowledge and human development."
+  let title = t("home.heading", "Welcome to the India Branch")
+  let description = t("home.intro", "The World Association for Al-Azhar Graduates – India is a national platform connecting Al-Azhar graduates across India...")
+  let mission = t("home.mission", "To connect Al-Azhar graduates, promote the message of moderation and balanced Islamic thought...")
+  let vision = t("home.vision", "To build a strong and united network of Al-Azhar graduates across India...")
   let image = "/al-azhar-cairo.jpg"
 
-  if (siteContent?.about_preview?.content) {
+  if (siteContent?.about_preview?.content && language === "en") {
     try {
       const parsed = JSON.parse(siteContent.about_preview.content)
       if (siteContent.about_preview.title) title = siteContent.about_preview.title
@@ -89,11 +91,11 @@ export function AboutPreview() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 pt-8 border-t border-border">
             <Reveal delay={0.1}>
               <div className="flex flex-col h-full rounded-2xl bg-primary/5 p-6 shadow-sm border border-primary/10 hover:border-accent/40 transition-colors backdrop-blur-md">
-                <div className="flex items-center gap-3 text-primary font-bold text-lg mb-4" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+                <div className="flex items-center gap-3 text-primary font-bold text-lg mb-4" style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}>
                   <div className="p-2 bg-accent/10 rounded-lg">
                     <Target className="size-5 text-accent" />
                   </div>
-                  Our Mission
+                  {t("home.mission_title", "Our Mission")}
                 </div>
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   {mission}
@@ -103,11 +105,11 @@ export function AboutPreview() {
             
             <Reveal delay={0.2}>
               <div className="flex flex-col h-full rounded-2xl bg-primary/5 p-6 shadow-sm border border-primary/10 hover:border-accent/40 transition-colors backdrop-blur-md">
-                <div className="flex items-center gap-3 text-primary font-bold text-lg mb-4" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+                <div className="flex items-center gap-3 text-primary font-bold text-lg mb-4" style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}>
                   <div className="p-2 bg-accent/10 rounded-lg">
                     <Eye className="size-5 text-accent" />
                   </div>
-                  Our Vision
+                  {t("home.vision_title", "Our Vision")}
                 </div>
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   {vision}
@@ -123,8 +125,8 @@ export function AboutPreview() {
               className="h-14 rounded-full bg-accent px-8 text-base font-bold text-primary shadow-lg shadow-accent/20 transition-all hover:-translate-y-1 hover:bg-[#ebd074] hover:shadow-accent/40"
             >
               <Link href="/about">
-                Explore About Us
-                <ArrowRight className="ml-2 size-5" />
+                {t("about.title", "Explore About Us")}
+                <ArrowRight className="ml-2 size-5 rtl-flip" />
               </Link>
             </Button>
           </Reveal>

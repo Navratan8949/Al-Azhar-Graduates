@@ -45,9 +45,11 @@ function YoutubeIcon({ className }) {
 }
 
 import { useSelector } from "react-redux";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Footer() {
   const pathname = usePathname();
+  const { t, isRTL } = useLanguage();
   const { data: siteContent } = useSelector((state) => state.siteContent) || {};
   if (pathname?.startsWith("/admin") || pathname?.startsWith("/member"))
     return null;
@@ -133,10 +135,17 @@ export function Footer() {
 
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-accent">
-              Quick Links
+              {t("footer.quick_links", "Quick Links")}
             </h3>
             <ul className="mt-4 space-y-2.5">
-              {FOOTER_QUICK_LINKS.map((l) => (
+              {[
+                { label: t("about.title", "About Us"), href: "/about" },
+                { label: t("activities.title", "Programs & Activities"), href: "/projects" },
+                { label: t("conferences.title", "Events & Forums"), href: "/events" },
+                { label: t("membership.title", "Membership"), href: "/membership" },
+                { label: t("contact.title", "Contact"), href: "/contact" },
+                { label: t("nav.donate", "Donate"), href: "/donate" },
+              ].map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
@@ -151,10 +160,17 @@ export function Footer() {
 
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-accent">
-              Resources
+              {t("footer.resources", "Resources")}
             </h3>
             <ul className="mt-4 space-y-2.5">
-              {FOOTER_RESOURCE_LINKS.map((l) => (
+              {[
+                { label: t("publications.title", "Publications & Resources"), href: "/publications" },
+                { label: t("nav.media_centre", "Media Centre"), href: "/news" },
+                { label: t("gallery.title", "Media Gallery"), href: "/gallery/photos" },
+                { label: t("nav.crowdfunding", "Crowdfunding"), href: "/crowdfunding" },
+                { label: t("nav.awards", "Awards"), href: "/awards" },
+                { label: t("testimonials_section.title", "Testimonials"), href: "/testimonials" },
+              ].map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
@@ -169,12 +185,12 @@ export function Footer() {
 
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-accent">
-              Reach Us
+              {t("footer.contact_info", "Reach Us")}
             </h3>
             <ul className="mt-4 space-y-4 text-sm text-white/65">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
-                <span className="leading-relaxed">{site.address}</span>
+                <span className="leading-relaxed">{t("contact.head_office_address", site.address)}</span>
               </li>
               <li className="flex gap-3">
                 <Phone className="mt-0.5 size-4 shrink-0 text-accent" />
@@ -201,7 +217,7 @@ export function Footer() {
               href="/membership"
               className="mt-6 inline-flex h-10 items-center rounded-xl bg-accent px-5 text-sm font-bold text-accent-foreground transition hover:bg-accent/90"
             >
-              Become a Member
+              {t("nav.apply_member", "Become a Member")}
             </Link>
           </div>
         </div>
@@ -210,20 +226,20 @@ export function Footer() {
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 pt-5 pb-3 text-xs text-white/45 md:flex-row">
           <p>
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+            © {new Date().getFullYear()} {t("org.name", site.name)}. {t("footer.rights", "All rights reserved.")}
           </p>
           <div className="flex gap-4">
             <Link
               href="/privacy-policy"
               className="hover:text-white transition"
             >
-              Privacy Policy
+              {t("common.privacy_policy", "Privacy Policy")}
             </Link>
             <Link href="/terms" className="hover:text-white transition">
-              Terms & Conditions
+              {t("common.terms", "Terms & Conditions")}
             </Link>
           </div>
-          <p>Registered Charitable Trust · 80G &amp; 12A Certified</p>
+          <p>{t("footer.tax_info", "Registered Charitable Trust · 80G & 12A Certified")}</p>
         </div>
         <div className="flex justify-center items-center pb-6 pt-2">
           <p className="text-sm font-medium text-white/60 tracking-wide">

@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { Reveal } from "@/components/shared/reveal"
 import { EventCard } from "@/components/shared/event-card"
+import { useLanguage } from "@/context/LanguageContext"
 import api from "@/service/api"
 
 export function UpcomingEvents() {
+  const { t } = useLanguage()
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -35,14 +37,14 @@ export function UpcomingEvents() {
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
             align="left"
-            eyebrow="Get Involved"
-            title="Events & Forums"
-            description="Discover our latest conferences, academic sessions, and intellectual forums."
+            eyebrow={t("nav.events", "Events & Forums")}
+            title={t("conferences.title", "Conferences & Events")}
+            description={t("conferences.desc", "Discover our latest conferences, academic sessions, and intellectual forums.")}
           />
           <Button asChild variant="outline" className="shrink-0 border-navy/20">
             <Link href="/events">
-              All Events
-              <ArrowRight className="ml-2 size-4" />
+              {t("conferences.all_events", "All Events")}
+              <ArrowRight className="ml-2 size-4 rtl-flip" />
             </Link>
           </Button>
         </div>
@@ -53,7 +55,7 @@ export function UpcomingEvents() {
           </div>
         ) : events.length === 0 ? (
           <div className="mt-12 text-center py-12 bg-white rounded-2xl border border-dashed border-border/80">
-            <p className="text-muted-foreground font-medium">No events scheduled at the moment.</p>
+            <p className="text-muted-foreground font-medium">{t("conferences.no_events", "No events scheduled at the moment.")}</p>
           </div>
         ) : (
           <div className="mt-12 grid gap-6 md:grid-cols-3">

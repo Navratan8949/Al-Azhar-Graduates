@@ -5,36 +5,37 @@ import { ArrowRight, BookOpen, CalendarDays, HeartHandshake, Newspaper, ChevronR
 import { Button } from "@/components/ui/button"
 import { getNews } from "@/service/news.service"
 import { getEvents } from "@/service/event.service"
-
-
-
-const serviceLinks = [
-  {
-    title: "Fatwas & Guidance",
-    href: "/publications?type=fatwa",
-    icon: BookOpen,
-    desc: "Islamic rulings and statements by Al-Azhar scholars.",
-    color: "bg-emerald-500/10 text-emerald-600 border-emerald-200/60"
-  },
-  {
-    title: "Books & Articles",
-    href: "/publications?type=book",
-    icon: Newspaper,
-    desc: "Digital library of academic papers and publications.",
-    color: "bg-amber-500/10 text-amber-600 border-amber-200/60"
-  },
-  {
-    title: "Membership Registration",
-    href: "/membership",
-    icon: HeartHandshake,
-    desc: "Join our global network of Al-Azhar graduates.",
-    color: "bg-blue-500/10 text-blue-600 border-blue-200/60"
-  },
-]
+import { useLanguage } from "@/context/LanguageContext"
+import { getLocalizedField } from "@/lib/localized-field"
 
 export function LatestUpdates() {
+  const { t, isRTL, language } = useLanguage()
   const [news, setNews] = useState([])
   const [events, setEvents] = useState([])
+
+  const serviceLinks = [
+    {
+      title: t("publications.journals_title", "Fatwas & Guidance"),
+      href: "/publications?type=fatwa",
+      icon: BookOpen,
+      desc: t("publications.academic_papers", "Islamic rulings and statements by Al-Azhar scholars."),
+      color: "bg-emerald-500/10 text-emerald-600 border-emerald-200/60"
+    },
+    {
+      title: t("publications.books_title", "Books & Articles"),
+      href: "/publications?type=book",
+      icon: Newspaper,
+      desc: t("publications.digital_library", "Digital library of academic papers and publications."),
+      color: "bg-amber-500/10 text-amber-600 border-amber-200/60"
+    },
+    {
+      title: t("membership.title", "Membership Registration"),
+      href: "/membership",
+      icon: HeartHandshake,
+      desc: t("membership.desc", "Join our global network of Al-Azhar graduates."),
+      color: "bg-blue-500/10 text-blue-600 border-blue-200/60"
+    },
+  ]
 
   useEffect(() => {
     // Fetch News
@@ -57,8 +58,6 @@ export function LatestUpdates() {
       .catch(console.error)
   }, [])
 
-
-
   return (
     <section className="border-y border-border/60 bg-gradient-to-b from-card via-background to-card py-10 md:py-12">
       <div className="mx-auto grid grid-cols-1 max-w-7xl gap-8 px-4 lg:grid-cols-12 lg:gap-10">
@@ -71,12 +70,14 @@ export function LatestUpdates() {
                 <span className="flex size-8 items-center justify-center rounded-lg bg-accent/15 text-accent font-bold">
                   <Newspaper className="size-4" />
                 </span>
-                <h2 className="font-serif text-2xl font-bold text-navy">Latest Updates</h2>
+                <h2 className="font-serif text-2xl font-bold text-navy" style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}>
+                  {t("news.title", "Latest Updates")}
+                </h2>
               </div>
 
               <Button asChild variant="ghost" size="sm" className="font-bold text-navy hover:text-accent hover:bg-navy/5">
                 <Link href="/news" className="inline-flex items-center gap-1 text-xs">
-                  View All Updates <ArrowRight className="size-3.5" />
+                  {t("news.all_articles", "View All Updates")} <ArrowRight className="size-3.5 rtl-flip" />
                 </Link>
               </Button>
             </div>
@@ -84,38 +85,45 @@ export function LatestUpdates() {
             <div className="space-y-3">
               {news.length === 0 ? (
                 <div className="rounded-2xl border border-dashed border-border/80 bg-card/50 p-8 text-center shadow-sm">
-                  <p className="text-sm font-medium text-muted-foreground">No recent updates published yet.</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t("news.no_articles", "No recent updates published yet.")}</p>
                 </div>
               ) : (
-                news.map((item) => (
-                  <Link
-                    key={item._id}
-                    href={`/news/${item._id}`}
-                    className="group relative block overflow-hidden rounded-[2rem] border border-primary/20 bg-primary p-6 sm:p-8 shadow-soft transition-all duration-300 hover:border-accent/40 hover:-translate-y-1.5 hover:shadow-xl"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                      <span className="inline-flex items-center gap-1.5 rounded-md bg-accent/10 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-accent">
-                        {item.category?.replace("_", " ") || "NEWS"}
-                      </span>
-                      <span className="text-[11px] font-medium text-white/70 flex items-center gap-1 shrink-0">
-                        <Clock className="size-3" />
-                        {new Date(item.createdAt || Date.now()).toLocaleDateString("en-IN", { month: "short", day: "numeric" })}
-                      </span>
-                    </div>
+                news.map((item) => {
+                  const itemTitle = getLocalizedField(item, "title", language)
+                  const itemDesc = getLocalizedField(item, "description", language)
+                  return (
+                    <Link
+                      key={item._id}
+                      href={`/news/${item._id}`}
+                      className="group relative block overflow-hidden rounded-[2rem] border border-primary/20 bg-primary p-6 sm:p-8 shadow-soft transition-all duration-300 hover:border-accent/40 hover:-translate-y-1.5 hover:shadow-xl"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span className="inline-flex items-center gap-1.5 rounded-md bg-accent/10 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-accent">
+                          {item.category?.replace("_", " ") || "NEWS"}
+                        </span>
+                        <span className="text-[11px] font-medium text-white/70 flex items-center gap-1 shrink-0">
+                          <Clock className="size-3" />
+                          {new Date(item.createdAt || Date.now()).toLocaleDateString(language === "ar" ? "ar-EG" : language === "ur" ? "ur-PK" : "en-IN", { month: "short", day: "numeric" })}
+                        </span>
+                      </div>
 
-                    <h3 className="font-serif text-lg sm:text-xl font-bold text-white group-hover:text-accent transition-colors line-clamp-1">
-                      {item.title}
-                    </h3>
+                      <h3
+                        className="font-serif text-lg sm:text-xl font-bold text-white group-hover:text-accent transition-colors line-clamp-1"
+                        style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}
+                      >
+                        {itemTitle}
+                      </h3>
 
-                    <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/80 font-medium">
-                      {item.description}
-                    </p>
+                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/80 font-medium">
+                        {itemDesc}
+                      </p>
 
-                    <div className="mt-5 flex items-center gap-1 text-sm font-bold uppercase tracking-wider text-accent group-hover:text-white group-hover:translate-x-1 transition-all">
-                      Read Story <ChevronRight className="size-3.5" />
-                    </div>
-                  </Link>
-                ))
+                      <div className="mt-5 flex items-center gap-1 text-sm font-bold uppercase tracking-wider text-accent group-hover:text-white group-hover:translate-x-1 transition-all">
+                        {t("common.read_more", "Read Story")} <ChevronRight className="size-3.5 rtl-flip" />
+                      </div>
+                    </Link>
+                  )
+                })
               )}
             </div>
           </div>
@@ -128,7 +136,9 @@ export function LatestUpdates() {
               <span className="flex size-8 items-center justify-center rounded-lg bg-navy/10 text-navy font-bold">
                 <Sparkles className="size-4 text-accent" />
               </span>
-              <h2 className="font-serif text-2xl font-bold text-navy">Al-Azhar Resources</h2>
+              <h2 className="font-serif text-2xl font-bold text-navy" style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}>
+                {t("publications.title", "Al-Azhar Resources")}
+              </h2>
             </div>
 
             <div className="grid gap-3.5">
@@ -145,7 +155,7 @@ export function LatestUpdates() {
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-white text-base sm:text-[17px] group-hover:text-accent transition-colors flex items-center justify-between gap-2">
                       <span className="truncate">{item.title}</span>
-                      <ChevronRight className="size-5 text-white/50 group-hover:text-accent group-hover:translate-x-1 transition-all shrink-0" />
+                      <ChevronRight className="size-5 text-white/50 group-hover:text-accent group-hover:translate-x-1 transition-all shrink-0 rtl-flip" />
                     </h3>
                     <p className="mt-1 text-xs sm:text-sm text-white/70 font-medium truncate">{item.desc}</p>
                   </div>
@@ -159,10 +169,10 @@ export function LatestUpdates() {
               <div className="absolute -right-6 -top-6 size-24 rounded-full bg-accent/20 blur-xl" />
               <div className="relative z-10">
                 <span className="inline-flex items-center gap-1 rounded-full bg-accent/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent backdrop-blur-sm">
-                  ★ Next Featured Drive
+                  ★ {t("conferences.peace_conf_title", "Featured Event")}
                 </span>
-                <h3 className="mt-2 font-serif text-base font-bold text-white line-clamp-1">{events[0].title}</h3>
-                <p className="mt-1 text-xs text-white/75 line-clamp-1">{events[0].location}</p>
+                <h3 className="mt-2 font-serif text-base font-bold text-white line-clamp-1">{getLocalizedField(events[0], "title", language)}</h3>
+                <p className="mt-1 text-xs text-white/75 line-clamp-1">{getLocalizedField(events[0], "location", language)}</p>
               </div>
             </div>
           )}

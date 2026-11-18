@@ -1,29 +1,43 @@
-import { PageHero } from "@/components/pages/page-hero"
-import { CardsGrid } from "@/components/pages/cards-grid"
-import { getProjects } from "@/service/project.service"
+"use client";
 
-export const metadata = { title: "Programs & Activities" }
+import { useEffect, useState } from "react";
+import { PageHero } from "@/components/pages/page-hero";
+import { CardsGrid } from "@/components/pages/cards-grid";
+import { Loader2 } from "lucide-react";
+import { getProjects } from "@/service/project.service";
+import { useLanguage } from "@/context/LanguageContext";
 
-export default async function Page() {
-  let projects = []
-  try {
-    const data = await getProjects()
-    if (data?.success) {
-      projects = data.data || data.projects || []
-    }
-  } catch (error) {
-    console.error("Failed to fetch projects:", error)
-  }
+export default function Page() {
+  const { t } = useLanguage();
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProjects()
+      .then((data) => {
+        if (data?.success) {
+          setProjects(data.data || data.projects || []);
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <>
-      <PageHero 
-        eyebrow="Our Work" 
-        title="Programs & Activities" 
-        description="Educational initiatives, outreach programs, and intellectual forums." 
-        image="/rural-classroom-children-learning-india.png" 
+      <PageHero
+        eyebrow={t("nav.activities", "Programs & Activities")}
+        title={t("activities.title", "Educational & Community Activities")}
+        description={t("activities.desc", "Our core activities focus on the following fields: Academic, Research, Intellectual, Language, and Community.")}
+        image="/rural-classroom-children-learning-india.png"
       />
-      <CardsGrid items={projects} type="project" />
+      {loading ? (
+        <div className="flex justify-center py-20">
+          <Loader2 className="size-10 animate-spin text-navy/50" />
+        </div>
+      ) : (
+        <CardsGrid items={projects} type="project" />
+      )}
     </>
-  )
+  );
 }

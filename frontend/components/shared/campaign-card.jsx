@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image"
 import Link from "next/link"
 import { Heart } from "lucide-react"
+import { useLanguage } from "@/context/LanguageContext"
+import { getLocalizedField } from "@/lib/localized-field"
 
 // Shared helper — exported so other components can use it
 export function formatINR(amount = 0) {
@@ -8,6 +12,10 @@ export function formatINR(amount = 0) {
 }
 
 export function CampaignCard({ campaign }) {
+  const { t, language } = useLanguage()
+  const title = getLocalizedField(campaign, "title", language)
+  const description = getLocalizedField(campaign, "description", language)
+
   const raised = campaign.raisedAmount || 0
   const target = campaign.targetAmount || 1
   const pct = Math.min(100, Math.round((raised / target) * 100))
@@ -18,18 +26,18 @@ export function CampaignCard({ campaign }) {
         <div className="relative aspect-[16/10] overflow-hidden">
           <Image
             src={campaign.image || "/placeholder.svg"}
-            alt={campaign.title}
+            alt={title}
             fill
             className="object-contain transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <h3 className="font-serif text-lg font-bold leading-snug group-hover:text-navy">{campaign.title}</h3>
-          <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{campaign.description}</p>
+          <h3 className="font-serif text-lg font-bold leading-snug group-hover:text-navy">{title}</h3>
+          <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{description}</p>
           <div className="mt-4">
             <div className="mb-2 flex justify-between text-xs font-semibold">
-              <span className="text-muted-foreground">Raised</span>
+              <span className="text-muted-foreground">{t("crowdfunding_section.raised", "Raised")}</span>
               <span className="text-navy">
                 {formatINR(raised)} / {formatINR(target)}
               </span>
@@ -39,7 +47,7 @@ export function CampaignCard({ campaign }) {
             </div>
             <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
               <Heart className="size-3.5" />
-              Support this campaign
+              {t("crowdfunding_section.support_now", "Support this campaign")}
             </p>
           </div>
         </div>

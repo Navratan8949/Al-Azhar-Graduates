@@ -361,3 +361,60 @@
   pointer-events: none;
   will-change: opacity, transform;
 }
+
+/* ============================================================
+   MULTI-LANGUAGE & RTL STYLES (Arabic, Urdu, Hindi, English)
+   ============================================================ */
+:root {
+  --font-arabic: 'Noto Naskh Arabic', 'Amiri', serif;
+  --font-urdu: 'Noto Nastaliq Urdu', 'Amiri', serif;
+}
+
+[dir="rtl"],
+html.rtl,
+body.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="ltr"],
+html.ltr,
+body.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Arabic typography per client instructions */
+html[lang="ar"],
+body[lang="ar"],
+.rtl[lang="ar"],
+.font-arabic {
+  font-family: 'Noto Naskh Arabic', 'Amiri', system-ui, -apple-system, sans-serif !important;
+}
+
+/* Urdu typography per client instructions */
+html[lang="ur"],
+body[lang="ur"],
+.rtl[lang="ur"],
+.font-urdu {
+  font-family: 'Noto Nastaliq Urdu', 'Amiri', system-ui, -apple-system, sans-serif !important;
+  line-height: 1.85;
+}
+
+/* Hindi typography */
+html[lang="hi"],
+body[lang="hi"] {
+  line-height: 1.65;
+}
+
+/* RTL Icon mirroring and alignment fixes */
+[dir="rtl"] .rtl-flip,
+[dir="rtl"] .lucide-arrow-right,
+[dir="rtl"] .lucide-chevron-right {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .rtl-mirror {
+  transform: scaleX(-1);
+}
+

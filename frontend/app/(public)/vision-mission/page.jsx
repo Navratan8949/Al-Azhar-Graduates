@@ -1,109 +1,144 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchSiteContent } from "@/redux/features/siteContentSlice"
-import { PageHero } from "@/components/pages/page-hero"
-import { ContentSections } from "@/components/pages/content-sections"
-import { CtaBand } from "@/components/sections/cta-band"
-import { SectionHeading } from "@/components/shared/section-heading"
-import { Reveal } from "@/components/shared/reveal"
-import { HeartHandshake, Eye, Target, ShieldCheck } from "lucide-react"
-
-const fallbackSections = [
-  [
-    "Our Vision",
-    "To build a compassionate, inclusive society where every individual has the resources to lead a dignified life. We envision a future where poverty and lack of opportunity do not dictate a child's educational outcome or a family's health. By empowering the most vulnerable sections of our communities, we aim to eradicate inequality and foster a world driven by mutual support, continuous learning, and shared prosperity.",
-  ],
-  [
-    "Our Mission",
-    "Our mission is to implement sustainable, localized programs that provide immediate relief and long-term empowerment. We are committed to bridging the gap in primary education through school supplies and coaching, delivering essential healthcare via mobile camps, and offering vocational skills to women and youth. Through the collective effort of dedicated volunteers, donors, and partners, we turn compassion into measurable, on-the-ground action every single day.",
-  ],
-]
-
-const values = [
-  {
-    title: "Compassion in Action",
-    description: "We don't just feel empathy; we act on it. Every initiative is driven by a deep desire to alleviate hardship.",
-    icon: HeartHandshake,
-  },
-  {
-    title: "Absolute Transparency",
-    description: "We hold ourselves accountable to our donors and the communities we serve with open financial reporting.",
-    icon: Eye,
-  },
-  {
-    title: "Targeted Impact",
-    description: "We focus our resources where they are needed most, ensuring every effort yields tangible, lasting results.",
-    icon: Target,
-  },
-  {
-    title: "Integrity & Trust",
-    description: "Our work is grounded in honesty and ethical practices, building enduring trust with our stakeholders.",
-    icon: ShieldCheck,
-  },
-]
+import { PageHero } from "@/components/pages/page-hero";
+import { SectionHeading } from "@/components/shared/section-heading";
+import { Reveal } from "@/components/shared/reveal";
+import { Eye, Compass, BookOpen, Scale, Heart, Sparkles, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Page() {
-  const dispatch = useDispatch()
-  const { data: siteContent } = useSelector((state) => state.siteContent)
+  const { t, locale, isRTL } = useLanguage();
 
-  useEffect(() => {
-    dispatch(fetchSiteContent())
-  }, [dispatch])
+  const identityIcons = [BookOpen, Scale, Heart];
 
-  let image = "/rural-classroom-children-learning-india.png"
-  let stats = ["Education for All", "Accessible Healthcare", "Community Empowerment"]
-  let sections = fallbackSections
+  // Raw locale data for lists
+  let identityItems = [];
+  try {
+    const raw = t("vision_mission.identity_items");
+    if (Array.isArray(raw)) identityItems = raw;
+  } catch (e) {}
 
-  if (siteContent?.vision_mission?.content) {
-    try {
-      const parsed = JSON.parse(siteContent.vision_mission.content)
-      if (parsed.image) image = parsed.image
-      if (Array.isArray(parsed.stats) && parsed.stats.length > 0) stats = parsed.stats
-      if (Array.isArray(parsed.sections) && parsed.sections.length > 0) sections = parsed.sections
-    } catch (e) {}
-  }
+  let philosophySteps = [];
+  try {
+    const rawSteps = t("vision_mission.philosophy_steps");
+    if (Array.isArray(rawSteps)) philosophySteps = rawSteps;
+  } catch (e) {}
 
   return (
     <>
       <PageHero
-        eyebrow="Vision & Mission"
-        title="A fair chance to learn, grow and live with dignity."
-        description="Our guiding principles for education, health, livelihood and public welfare."
-        image={image}
+        eyebrow={t("vision_mission.page_title", "Vision & Mission")}
+        title={t("vision_mission.subtitle", "Knowledge | Moderation | Unity | Service to Humanity")}
+        description={t("home.motto", "Moderation is our methodology, unity is our strength, knowledge is our identity, and service to humanity is our mission.")}
+        image="/rural-classroom-children-learning-india.png"
       />
 
-      <ContentSections
-        image={image}
-        stats={stats}
-        sections={sections}
-      />
-
-      <section className="bg-secondary/30 py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <SectionHeading
-            eyebrow="What Drives Us"
-            title="Our Core Values"
-            description="The fundamental beliefs that guide our daily operations, our long-term strategies, and our interactions with the community."
-          />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((v, i) => (
-              <Reveal key={v.title} delay={i * 0.1}>
-                <div className="flex h-full flex-col items-center rounded-2xl border border-border/60 bg-card p-8 text-center shadow-soft transition-all hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-lift">
-                  <div className="mb-5 flex size-14 items-center justify-center rounded-full bg-navy text-white">
-                    <v.icon className="size-6" />
-                  </div>
-                  <h3 className="mb-3 font-serif text-xl font-bold text-navy">{v.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{v.description}</p>
+      {/* Mission & Vision Side-by-Side Cards */}
+      <section className="py-20 bg-background relative overflow-hidden">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* Vision Card */}
+            <Reveal>
+              <div className="h-full rounded-3xl border border-border/60 bg-gradient-to-br from-white to-slate-50 p-8 sm:p-12 shadow-soft hover:shadow-lift transition-all flex flex-col">
+                <div className="mb-6 flex size-16 items-center justify-center rounded-2xl bg-navy text-lime shadow-md">
+                  <Eye className="size-8" />
                 </div>
-              </Reveal>
-            ))}
+                <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-2">
+                  {t("vision_mission.vision_badge", "OUR VISION")}
+                </span>
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-navy mb-4">
+                  {t("vision_mission.vision_title", "Building a Cohesive National Network")}
+                </h2>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed flex-1">
+                  {t("vision_mission.vision_desc", "To build a cohesive national network of Al-Azhar graduates across India that contributes to disseminating knowledge, promoting peace, mutual understanding, and human development.")}
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Mission Card */}
+            <Reveal delay={0.1}>
+              <div className="h-full rounded-3xl border border-border/60 bg-gradient-to-br from-white to-slate-50 p-8 sm:p-12 shadow-soft hover:shadow-lift transition-all flex flex-col">
+                <div className="mb-6 flex size-16 items-center justify-center rounded-2xl bg-navy text-lime shadow-md">
+                  <Compass className="size-8" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-2">
+                  {t("vision_mission.mission_badge", "OUR MISSION")}
+                </span>
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-navy mb-4">
+                  {t("vision_mission.mission_title", "Dedicated to Knowledge, Moderation & Service")}
+                </h2>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed flex-1">
+                  {t("vision_mission.mission_desc", "To unite Al-Azhar graduates across India, foster academic and intellectual collaboration, spread moderate values across all sections of Indian society, support educational and research initiatives, and serve society through knowledge, dialogue, and constructive work.")}
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* <CtaBand /> */}
+      {/* Identity Pillars */}
+      {identityItems.length > 0 && (
+        <section className="bg-secondary/30 py-20 border-y border-border/40">
+          <div className="mx-auto max-w-7xl px-4">
+            <SectionHeading
+              eyebrow={t("vision_mission.identity_badge", "OUR IDENTITY")}
+              title={t("vision_mission.identity_title", "Grounded in the Noble Al-Azhar Heritage")}
+              description={t("vision_mission.identity_desc", "For more than a thousand years, Al-Azhar Al-Sharif has been the world preeminent beacon of balanced Islamic learning, scholarly moderation, and service to humanity.")}
+            />
+            <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {identityItems.map((item, idx) => {
+                const IconComponent = identityIcons[idx % identityIcons.length] || Sparkles;
+                return (
+                  <Reveal key={idx} delay={idx * 0.1}>
+                    <div className="flex h-full flex-col rounded-3xl border border-border/60 bg-card p-8 shadow-soft transition-all hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-lift">
+                      <div className="mb-6 flex size-14 items-center justify-center rounded-2xl bg-navy text-lime shadow-md">
+                        <IconComponent className="size-7" />
+                      </div>
+                      <h3 className="mb-3 font-serif text-xl font-bold text-navy">{item.title}</h3>
+                      <p className="text-sm sm:text-base leading-relaxed text-muted-foreground flex-1">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Philosophy Steps */}
+      {philosophySteps.length > 0 && (
+        <section className="py-20 bg-background">
+          <div className="mx-auto max-w-7xl px-4">
+            <SectionHeading
+              eyebrow={t("vision_mission.philosophy_badge", "CORE PHILOSOPHY")}
+              title={t("vision_mission.philosophy_title", "Education with Purpose")}
+              description={t("vision_mission.philosophy_desc", "Excellence with values. We believe education must empower minds, build righteous character, and inspire people to serve humanity:")}
+            />
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+              {philosophySteps.map((step, idx) => (
+                <Reveal key={idx} delay={idx * 0.1}>
+                  <div className="h-full rounded-2xl border border-border/60 bg-white p-6 shadow-sm hover:shadow-md transition-all flex flex-col text-center relative overflow-hidden group">
+                    <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-navy/10 text-navy font-bold text-lg mb-4 group-hover:bg-navy group-hover:text-lime transition-colors">
+                      {step.num || idx + 1}
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1">
+                      {step.title}
+                    </span>
+                    <h4 className="font-serif text-lg font-bold text-navy mb-2">
+                      {step.subtitle}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed flex-1">
+                      {step.desc}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </>
-  )
+  );
 }

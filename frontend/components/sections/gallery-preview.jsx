@@ -6,8 +6,10 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { getGalleryItems } from "@/service/gallery.service";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function GalleryPreview() {
+  const { t } = useLanguage();
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
@@ -28,14 +30,14 @@ export function GalleryPreview() {
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
             align="left"
-            eyebrow="Gallery"
-            title="Moments from the field"
-            description="A visual record of our work, events, and gatherings."
+            eyebrow={t("nav.gallery", "Media Gallery")}
+            title={t("gallery.title", "Moments from the field")}
+            description={t("gallery.photos_desc", "A visual record of our work, events, conferences, and gatherings.")}
           />
           <Button asChild variant="outline" className="shrink-0 border-navy/20">
             <Link href="/gallery/photos">
-              Photo Gallery
-              <ArrowRight className="ml-2 size-4" />
+              {t("gallery.photos_title", "Photo Gallery")}
+              <ArrowRight className="ml-2 size-4 rtl-flip" />
             </Link>
           </Button>
         </div>

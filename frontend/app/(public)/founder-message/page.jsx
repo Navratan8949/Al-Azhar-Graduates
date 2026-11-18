@@ -1,19 +1,22 @@
-import { PageHero } from "@/components/pages/page-hero"
-import { FounderMessageSection } from "@/components/sections/founder-message"
+"use client";
 
-export const metadata = { title: "President's Message" }
+import { PageHero } from "@/components/pages/page-hero";
+import { FounderMessageSection } from "@/components/sections/founder-message";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Page() {
+  const { t } = useLanguage();
+
   return (
     <>
       <PageHero
-        eyebrow="President's Message"
-        title="Knowledge, Moderation, and Service."
-        description="A message from the President of the World Association for Al-Azhar Graduates – India Branch."
-        image="/hero-community-education-india.png"
+        eyebrow={t("nav.about", "About Us")}
+        title={t("president_message.title", "President's Message")}
+        description={t("home.motto", "Moderation is our methodology, unity is our strength, knowledge is our identity, and service to humanity is our mission.")}
+        image="/al-azhar-cairo.jpg"
       />
 
       <FounderMessageSection />
     </>
-  )
+  );
 }

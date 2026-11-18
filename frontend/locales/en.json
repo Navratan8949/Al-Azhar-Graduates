@@ -1,0 +1,522 @@
+{
+  "org": {
+    "name": "World Association for Al-Azhar Graduates – India",
+    "tagline": "Knowledge | Moderation | Unity | Service to Humanity",
+    "motto": "Moderation is our methodology, unity is our strength, knowledge is our identity, and service to humanity is our mission."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "about_org": "About Organization",
+    "vision_mission": "Mission & Vision",
+    "approach": "Our Approach",
+    "founder_trustees": "President & Trustees",
+    "president_message": "President's Message",
+    "team": "Our Team",
+    "certificates": "Certificates & Documents",
+    "awards": "Awards & Recognition",
+    "legal": "Registration & Legal",
+    "tax_info": "Tax Exemption Info",
+    "our_work": "Our Activities",
+    "activities": "Activities & Programs",
+    "services": "What We Do",
+    "projects": "Projects & Initiatives",
+    "crowdfunding": "Support & Relief",
+    "success_stories": "Success Stories",
+    "events": "Events & Conferences",
+    "media_reports": "Media Centre",
+    "news": "News & Articles",
+    "gallery": "Media Gallery",
+    "publications": "Publications",
+    "media_centre": "Media Centre",
+    "reports_annual": "Annual Reports",
+    "reports_financial": "Financial Transparency",
+    "get_involved": "Get Involved",
+    "membership": "Membership",
+    "volunteer": "Volunteer With Us",
+    "csr": "CSR Partnership",
+    "contact": "Contact Us",
+    "donate": "Donate",
+    "join_now": "Join Now",
+    "apply_member": "Apply For Membership",
+    "login": "Member / Volunteer Login",
+    "admin_login": "Admin Login",
+    "member_login": "Member Login",
+    "portal": "Dashboard",
+    "logout": "Logout"
+  },
+  "home": {
+    "heading": "Welcome to the India Branch",
+    "intro": "World Association for Al-Azhar Graduates – India is an academic and intellectual institution uniting Al-Azhar graduates across India, promoting Al-Azhar's message of moderation, scholarship, dialogue, and community service.",
+    "mission_title": "Our Mission",
+    "mission": "To unite Al-Azhar graduates across India, foster academic and intellectual collaboration, spread moderate values across all sections of Indian society, support educational and research initiatives, and serve society through knowledge, dialogue, and constructive work.",
+    "vision_title": "Our Vision",
+    "vision": "Building a strong national network of Al-Azhar graduates in India contributing to knowledge, peace, understanding, and human development.",
+    "motto_title": "Our Motto",
+    "motto": "Moderation is our methodology, unity is our strength, knowledge is our identity, and service to humanity is our mission.",
+    "quick_links_title": "Quick Links",
+    "quick_links": [
+      {
+        "label": "About Us",
+        "href": "/about"
+      },
+      {
+        "label": "Our Objectives",
+        "href": "/objectives"
+      },
+      {
+        "label": "Our Activities",
+        "href": "/services"
+      },
+      {
+        "label": "Membership",
+        "href": "/membership"
+      },
+      {
+        "label": "News & Articles",
+        "href": "/news"
+      },
+      {
+        "label": "Publications",
+        "href": "/publications"
+      },
+      {
+        "label": "Contact Us",
+        "href": "/contact"
+      }
+    ]
+  },
+  "about": {
+    "title": "About Us",
+    "al_azhar_title": "About Al-Azhar Al-Sharif",
+    "al_azhar_text": "For over a millennium, Al-Azhar Al-Sharif has stood as a global beacon of knowledge, Islamic scholarship, and moderate thought. Throughout history, it has nurtured generations of scholars, thinkers, and educators who have served communities across the globe.",
+    "world_assoc_title": "About The World Association",
+    "world_assoc_text": "Established in Cairo in 2006, the World Association for Al-Azhar Graduates fosters lifelong ties with alumni worldwide, building an international platform for intellectual, scientific, and cultural collaboration.",
+    "world_assoc_patron": "The association functions under the patronage of His Eminence Prof. Dr. Ahmed El-Tayeb, Grand Imam of Al-Azhar.",
+    "india_branch_title": "India Branch",
+    "india_branch_p1": "The India Branch was officially inaugurated in Lucknow on November 14, 2010, and established its central office in New Delhi on November 14, 2011, expanding nationwide outreach.",
+    "india_branch_p2": "The branch unites Al-Azhar graduates across India, promoting moderate Islamic thought, educational excellence, academic cooperation, and community welfare.",
+    "distinctive_title": "Our Distinctive Character",
+    "distinctive_text": "Non-partisan and independent, the association welcomes scholars and community members from all backgrounds, fostering brotherhood, intellectual exchange, and mutual respect."
+  },
+  "objectives": {
+    "title": "Our Objectives",
+    "items": [
+      "Highlight Al-Azhar Al-Sharif's academic and civilisational contributions globally.",
+      "Connect Al-Azhar graduates across India into a cohesive national network.",
+      "Promote academic collaboration, research, and intellectual dialogue.",
+      "Disseminate values of moderation, balance, mutual respect, and tolerance.",
+      "Support Arabic language education and classical Islamic sciences.",
+      "Organise academic conferences, intellectual seminars, and training programs.",
+      "Nurture youth leadership and intellectual capacity development.",
+      "Foster peaceful coexistence, interfaith dialogue, and societal harmony.",
+      "Present the authentic, compassionate teachings and human values of Islam.",
+      "Support scholarly research and outreach initiatives of Al-Azhar alumni.",
+      "Connect Indian scholars with international academic platforms."
+    ]
+  },
+  "activities": {
+    "title": "Our Activities & Programs",
+    "academic_title": "Academic & Educational Programs",
+    "academic_text": "Comprehensive academic and educational programs designed to promote lifelong learning, research, and scholarly development.",
+    "arabic_title": "Arabic Language Programs",
+    "arabic_text": "Conducting specialized workshops, intensive diploma courses, and certificate programs in Arabic language and linguistics.",
+    "hadith_title": "Hadith & Tafsir Programs",
+    "hadith_text": "Scholarly lectures and study circles focused on Quranic interpretation, prophetic traditions, and jurisprudence.",
+    "lectures_title": "Lectures from Al-Azhar Scholars",
+    "lectures_text": "Online lectures and webinars led by eminent professors and scholars from Al-Azhar University, Cairo.",
+    "outreach_title": "Intellectual & Outreach Programs",
+    "outreach_items": [
+      "Academic Seminars",
+      "Intellectual Forums",
+      "National Conferences",
+      "Training Workshops",
+      "Youth Empowerment Programs",
+      "Online Interactive Lectures",
+      "Interfaith Harmony Dialogues",
+      "Cultural & Literary Programs",
+      "Public Awareness Campaigns",
+      "Community Service Initiatives"
+    ],
+    "humanitarian_title": "Humanitarian & Community Initiatives",
+    "humanitarian_text": "Promoting social solidarity through healthcare drives, support for underserved families, educational scholarships, and community relief.",
+    "empowerment_title": "Scholar Empowerment",
+    "empowerment_text": "Empowering Indian scholars through international academic exposure, teacher training, and scholarly publication opportunities."
+  },
+  "impact": {
+    "title": "Our Impact in Numbers",
+    "arabic_courses": "25+ Arabic Language Courses & Workshops",
+    "gatherings": "100+ Academic & Intellectual Gatherings",
+    "welfare_programs": "10+ Welfare & Community Support Programs",
+    "stats": [
+      {
+        "value": "25+",
+        "label": "Arabic Language Courses & Workshops"
+      },
+      {
+        "value": "100+",
+        "label": "Academic & Intellectual Gatherings"
+      },
+      {
+        "value": "10+",
+        "label": "Welfare & Community Support Programs"
+      }
+    ],
+    "dialogues": "Numerous goodwill meetings and academic dialogues.",
+    "cooperation": "Promoting educational cooperation between Indian scholars and Al-Azhar."
+  },
+  "conferences": {
+    "title": "Conferences & Events",
+    "peace_conf_title": "International Peace Conference – 2017",
+    "peace_conf_subtitle": "The Need and Importance of Peace and Peaceful Coexistence in the Contemporary World",
+    "peace_conf_desc": "In 2017, the India Branch hosted the landmark International Peace Conference at the India Islamic Cultural Centre, New Delhi, attended by eminent scholars, academics, and dignitaries from India and abroad.",
+    "peace_conf_guest": "Special participation by Prof. Dr. Yousuf Amer, then Vice President of Al-Azhar University.",
+    "peace_conf_focus": "The conference reinforced shared human values, moderate religious discourse, dialogue, and peaceful coexistence.",
+    "upcoming_title": "Upcoming Events",
+    "upcoming_subtitle": "Explore upcoming academic conferences, seminars, lectures, and training workshops.",
+    "details_title": "Event Details",
+    "fields": {
+      "title": "Event Title",
+      "date_time": "Date & Time",
+      "venue": "Venue",
+      "description": "Description",
+      "registration": "Registration"
+    }
+  },
+  "news": {
+    "title": "News & Articles",
+    "latest_title": "Latest News",
+    "latest_desc": "Stay updated with the latest news, announcements, academic events, and community initiatives of the India Branch.",
+    "articles_title": "Articles",
+    "categories": [
+      "Islamic Thought",
+      "Moderation & Balance",
+      "Arabic Language & Literature",
+      "Islamic Scholarship",
+      "Contemporary Issues",
+      "Education & Research",
+      "Interfaith Dialogue",
+      "Society & Culture"
+    ],
+    "read_full": "Read Full Article"
+  },
+  "publications": {
+    "title": "Publications",
+    "subtitle": "Knowledge & Publications",
+    "desc": "Facilitating access to scholarly publications, research papers, newsletters, and educational literature.",
+    "categories": [
+      "Articles & Essays",
+      "Research Papers & Studies",
+      "Scholarly Magazines",
+      "Academic Books",
+      "Periodical Newsletters",
+      "Annual Reports",
+      "Conference Proceedings",
+      "Educational Materials"
+    ]
+  },
+  "gallery": {
+    "title": "Media Gallery",
+    "photo_title": "Photo Gallery",
+    "photo_desc": "Visual documentation of conferences, seminars, educational workshops, and community welfare programs.",
+    "video_title": "Video Gallery",
+    "video_desc": "Watch recorded lectures, conference proceedings, interviews, and special video presentations."
+  },
+  "membership": {
+    "title": "Membership",
+    "become_title": "Become a Member",
+    "question": "Are you an Al-Azhar graduate residing in India?",
+    "desc": "Join the World Association for Al-Azhar Graduates – India Branch and become part of a prestigious national network of scholars, academicians, researchers, and professionals.",
+    "why_join_title": "Why Join Us?",
+    "benefits": [
+      "Connect with Al-Azhar graduates across India.",
+      "Participate in academic and intellectual programs.",
+      "Receive priority updates on international conferences and seminars.",
+      "Contribute to educational and community initiatives.",
+      "Build scholarly and professional relationships.",
+      "Active involvement in association activities.",
+      "Direct access to global Al-Azhar alumni platforms."
+    ],
+    "app_title": "Membership Application",
+    "personal_title": "Personal Information",
+    "personal_fields": {
+      "full_name": "Full Name",
+      "arabic_name": "Arabic Name",
+      "father_name": "Father's Name",
+      "dob": "Date of Birth",
+      "gender": "Gender",
+      "phone": "Mobile Number",
+      "whatsapp": "WhatsApp Number",
+      "email": "Email Address"
+    },
+    "academic_title": "Academic Information",
+    "academic_fields": {
+      "faculty": "Al-Azhar Faculty",
+      "degree": "Degree / Qualification",
+      "specialisation": "Specialisation",
+      "graduation_year": "Year of Graduation",
+      "occupation": "Present Occupation",
+      "institution": "Current Institution",
+      "affiliation": "Al-Azhar Affiliation"
+    },
+    "address_title": "Address Details",
+    "address_fields": {
+      "state": "State",
+      "district": "District",
+      "city": "City",
+      "postal_code": "Postal Code",
+      "country": "Country",
+      "full_address": "Full Address"
+    },
+    "documents_title": "Required Documents",
+    "documents_fields": {
+      "photo": "Passport-size Photograph",
+      "certificate": "Al-Azhar Degree / Certificate",
+      "id_proof": "Identity Proof Document"
+    },
+    "declaration_title": "Declaration",
+    "declaration_text": "I hereby declare that all information provided in this application is true and complete, and I pledge to uphold the objectives, principles, and regulations of the association.",
+    "submit_button": "Submit Membership Application"
+  },
+  "president_message": {
+    "section_title": "President's Message",
+    "title": "Message From The President",
+    "bismillah": "In the Name of Allah, the Most Gracious, the Most Merciful",
+    "salutation": "Peace and blessings be upon the Messenger of Allah, and upon his family and companions.",
+    "p1": "It gives me immense pleasure to welcome you to the official portal of the World Association for Al-Azhar Graduates – India Branch. This platform unites Al-Azhar graduates across India under a shared banner of brotherhood, academic collaboration, and faithful service to the noble mission of Al-Azhar Al-Sharif.",
+    "p2": "For over a thousand years, Al-Azhar Al-Sharif has stood as an illuminating lighthouse of knowledge and a fortress of moderate Islamic thought. Al-Azhar alumni in India have consistently made profound contributions towards communal harmony, interfaith understanding, national development, and humanitarian service.",
+    "p3": "Guided by this responsibility, the India Branch is committed to strengthening bonds among alumni, fostering research and scholarly excellence, nurturing youth potential, and implementing impactful educational and social welfare initiatives.",
+    "p4": "I warmly invite all Al-Azhar graduates throughout India to join hands with the association, participate actively in its programs, and dedicate their learning and experience to the betterment of our nation and humanity.",
+    "closing": "With warm regards and prayers,",
+    "signatory_name": "Prof. Dr. Mohammad Mubeen Saleem Al-Azhari",
+    "signatory_title": "President, World Association for Al-Azhar Graduates – India Branch",
+    "p5": "We pray to the Almighty to bless these endeavors, grant us all success in serving our faith, nation, and humanity, and make this organisation a beacon of knowledge, a bridge of dialogue, and a pillar of moderation and community service."
+  },
+  "media_centre": {
+    "title": "Media Centre",
+    "desc": "Access official media resources, press releases, reports, and multimedia:",
+    "items": [
+      "Latest News",
+      "Press Releases",
+      "Articles & Opinions",
+      "Interviews",
+      "Event Reports",
+      "Official Photographs",
+      "Video Archives",
+      "Publications"
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "get_in_touch": "Get in Touch",
+    "desc": "For inquiries regarding membership, academic programs, conferences, partnerships, or general information, please reach out to us.",
+    "head_office_title": "Head Office",
+    "head_office_address": "World Association for Al-Azhar Graduates – India, New Delhi, India.",
+    "email_label": "Email Address",
+    "phone_label": "Phone Number",
+    "whatsapp_label": "WhatsApp",
+    "hours_label": "Office Hours",
+    "follow_us": "Follow Us on Social Media",
+    "socials": {
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "instagram": "Instagram",
+      "twitter": "X (Twitter)"
+    },
+    "send_message": "Send Us a Message",
+    "subject_placeholder": "Subject of Inquiry",
+    "message_placeholder": "How can we help you? Please describe in detail...",
+    "success": "Thank you! Your message has been sent successfully. Our team will get back to you shortly.",
+    "error": "Failed to send message. Please try again."
+  },
+  "join_network": {
+    "title": "Join Our Network",
+    "tagline": "United in Knowledge, Dedicated to Service",
+    "desc": "Be part of a nationwide network of scholars and educators working together for academic excellence, moderation, and community empowerment.",
+    "button": "Join Now"
+  },
+  "footer": {
+    "quick_links": "Quick Links",
+    "resources": "Resources & Info",
+    "contact_info": "Contact Info",
+    "copyright": "All Rights Reserved",
+    "rights": "World Association for Al-Azhar Graduates – India"
+  },
+  "featured_projects": {
+    "eyebrow": "Our Work",
+    "title": "Featured Projects & Initiatives",
+    "description": "Ongoing initiatives creating real educational and social impact across communities in India.",
+    "empty": "No featured projects published yet.",
+    "empty_desc": "We will highlight our ongoing initiatives here soon.",
+    "view_all": "View All Projects"
+  },
+  "testimonials_section": {
+    "eyebrow": "Voices of Impact",
+    "title": "Words From Our Community",
+    "description": "Reflections and feedback from scholars, students, and community members participating in our programs.",
+    "empty": "No testimonials available at the moment.",
+    "view_all": "View All Testimonials"
+  },
+  "latest_updates": {
+    "title": "Latest Updates & News",
+    "empty": "No recent updates published yet.",
+    "read_more": "Read Story",
+    "view_all": "View All Updates",
+    "resources_title": "Important Resources",
+    "service_1_title": "Projects & Activities",
+    "service_1_desc": "Academic, educational, and social welfare programs across India.",
+    "service_2_title": "Events & Conferences",
+    "service_2_desc": "Seminars, workshops, and lectures by prominent scholars.",
+    "service_3_title": "Membership Registration",
+    "service_3_desc": "Join the prestigious network of Al-Azhar graduates in India.",
+    "next_event_badge": "★ Next Featured Drive"
+  },
+  "crowdfunding_section": {
+    "badge": "Support Our Cause",
+    "title": "Humanitarian & Welfare Campaigns",
+    "description": "Join hands with us to make a lasting impact. Your contributions help provide educational opportunities and welfare to those in need.",
+    "view_all": "View All Campaigns"
+  },
+  "common": {
+    "scroll_to_top": "Back to top",
+    "no_image": "No Image",
+    "view_project": "View project",
+    "read_more": "Read more",
+    "know_more": "Know More",
+    "detailed_story": "Detailed Plan & Fund Utilization",
+    "verified_ngo_title": "100% Verified Non-Profit Campaign",
+    "share_campaign": "Share Campaign Link",
+    "copied": "Copied to Clipboard!",
+    "need_assistance": "Have questions about this campaign or want to donate via Bank Transfer?",
+    "contact_team": "Contact Our NGO Secretariat",
+    "campaign_not_found": "Campaign Not Found",
+    "campaign_not_found_desc": "This campaign may have ended, been closed, or the link is invalid.",
+    "nothing_to_show": "Nothing to show yet",
+    "check_back_later": "Check back later for updates in this section.",
+    "all_programs": "All Programs",
+    "about_program": "About this program",
+    "key_highlights": "Key Highlights",
+    "support_causes": "Support Our Causes",
+    "support_causes_desc": "Your contribution helps fund various initiatives and outreach programs.",
+    "donate_now": "Donate now",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "register_join": "Register / Join Us",
+    "all_events": "All events",
+    "event_details": "Event details",
+    "back_to_news": "Back to News",
+    "all_campaigns": "All campaigns",
+    "why_campaign_matters": "Why this campaign matters",
+    "campaign_funds_note": "Funds are tracked against the published target. Receipts are issued after verification.",
+    "donate_to_campaign": "Donate to this campaign"
+  },
+  "founder": {
+    "inspiration_badge": "Inspiration & Guiding Light",
+    "inspiration_title": "Honoring Our Guiding Inspirations",
+    "inspiration_desc": "Our mission is built upon the timeless principles, sacrifice, and dedication of the visionaries whose values inspire our daily service.",
+    "governance_badge": "Governance & Leadership",
+    "trustees_title": "Board of Trustees",
+    "trustees_desc": "The distinguished individuals providing governance, leadership, and ethical stewardship to the World Association for Al-Azhar Graduates – India Branch."
+  },
+  "project_detail": {
+    "hl_1": "Academic excellence and continuous learning",
+    "hl_2": "Fostering moderate and balanced Educational thought",
+    "hl_3": "Open to Al-Azhar graduates across India",
+    "hl_4": "Promoting interfaith dialogue and coexistence"
+  },
+  "vision_mission": {
+    "page_title": "Vision & Mission",
+    "subtitle": "Knowledge | Moderation | Unity | Service to Humanity",
+    "mission_badge": "OUR MISSION",
+    "mission_title": "Dedicated to Knowledge, Moderation & Service",
+    "mission_desc": "To unite Al-Azhar graduates across India, foster academic and intellectual collaboration, spread moderate values across all sections of Indian society, support educational and research initiatives, and serve society through knowledge, dialogue, and constructive work.",
+    "vision_badge": "OUR VISION",
+    "vision_title": "Building a Cohesive National Network",
+    "vision_desc": "To build a cohesive national network of Al-Azhar graduates across India that contributes to disseminating knowledge, promoting peace, mutual understanding, and human development.",
+    "objectives_badge": "STRATEGIC GOALS",
+    "objectives_title": "Our Key Objectives",
+    "objectives_subtitle": "Working systematically to advance scholarly excellence, youth leadership, and societal harmony.",
+    "identity_badge": "OUR IDENTITY",
+    "identity_title": "Grounded in the Noble Al-Azhar Heritage",
+    "identity_desc": "For more than a thousand years, Al-Azhar Al-Sharif has been the world preeminent beacon of balanced Islamic learning, scholarly moderation, and service to humanity. World Association for Al-Azhar Graduates (India Branch) proudly reflects this living legacy.",
+    "identity_items": [
+      {
+        "title": "Scholarly Excellence & Heritage",
+        "desc": "Rooted in over a millennium of authentic Islamic scholarship, intellectual integrity, and reverence for classic learning."
+      },
+      {
+        "title": "The Path of Moderation (Wasatiyyah)",
+        "desc": "Upholding balance, constructive dialogue, and mutual respect while firmly rejecting all forms of extremism and sectarianism."
+      },
+      {
+        "title": "Universal Service to Humanity",
+        "desc": "Translating sacred knowledge into compassionate action, social upliftment, and human dignity for all sections of society."
+      }
+    ],
+    "philosophy_badge": "CORE PHILOSOPHY",
+    "philosophy_title": "Education with Purpose",
+    "philosophy_desc": "Excellence with values. We believe education must empower minds, build righteous character, and inspire people to serve humanity:",
+    "philosophy_steps": [
+      {
+        "num": "1",
+        "title": "LEARN",
+        "subtitle": "Acquiring Knowledge",
+        "desc": "Acquire authentic knowledge, deep scholarly understanding, and intellectual depth."
+      },
+      {
+        "num": "2",
+        "title": "GROW",
+        "subtitle": "Character & Competence",
+        "desc": "Develop strong moral character, spiritual consciousness, and professional competence."
+      },
+      {
+        "num": "3",
+        "title": "LEAD",
+        "subtitle": "Responsible Leadership",
+        "desc": "Accept societal responsibility with humility and lead through wisdom and integrity."
+      },
+      {
+        "num": "4",
+        "title": "SERVE",
+        "subtitle": "Serving Humanity",
+        "desc": "Dedicate skills and resources for the upliftment, welfare, and dignity of humanity."
+      },
+      {
+        "num": "5",
+        "title": "TRANSFORM",
+        "subtitle": "Positive Change",
+        "desc": "Become active agents of positive change, peaceful coexistence, and lasting progress."
+      }
+    ]
+  },
+  "certificates": {
+    "eyebrow": "Public Records & Credentials",
+    "title": "Certificates & Documents",
+    "description": "View, preview, and download our official NGO certificates, legal documents, accreditation, and publications.",
+    "tab_all": "All Resources",
+    "tab_certificates": "Certificates",
+    "tab_documents": "Official Documents",
+    "tab_reports": "Reports & Publications",
+    "search_placeholder": "Search documents, certificates...",
+    "preview_btn": "Preview",
+    "download_btn": "Download File",
+    "open_new_tab": "Open in New Tab",
+    "download_pdf": "Download PDF",
+    "no_results": "No documents found",
+    "clear_search": "Clear Search",
+    "loading": "Loading documents and certificates...",
+    "pending_upload": "Document Upload Pending"
+  },
+  "awards": {
+    "hero_title": "Awards & Honours",
+    "hero_desc": "Recognition and accolades received for our persistent service to education, community empowerment, and social development.",
+    "badge": "Honours & Accolades",
+    "section_title": "Our Achievements",
+    "section_desc": "Every award we receive is a testament to the hard work of our scholars, volunteers, and the unwavering support of our well-wishers.",
+    "view_cert": "View Full Image",
+    "view_details": "Preview Certificate",
+    "honored": "Honored Recognition",
+    "no_awards": "No awards found",
+    "no_awards_desc": "Awards and certificates will appear here once published."
+  }
+}

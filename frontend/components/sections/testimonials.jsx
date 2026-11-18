@@ -6,8 +6,10 @@ import { TestimonialCard } from "@/components/shared/testimonial-card"
 import { getTestimonials } from "@/service/testimonial.service"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/context/LanguageContext"
 
 export function Testimonials() {
+  const { t, isRTL } = useLanguage()
   const scrollRef = useRef(null)
   const [testimonials, setTestimonials] = useState([])
 
@@ -43,18 +45,18 @@ export function Testimonials() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <SectionHeading
           align="left"
-          eyebrow="Voices of Change"
-          title="Stories from our community"
-          description="Real words from the people whose lives have been touched by your generosity."
+          eyebrow={t("testimonials_section.eyebrow", "Voices of Change")}
+          title={t("testimonials_section.title", "Stories from our community")}
+          description={t("testimonials_section.description", "Real words from the people whose lives have been touched by our initiatives.")}
           className="mx-0"
           inverted={true}
         />
         <div className="flex items-center gap-3">
           <Button variant="outline" size="icon" className="rounded-full shadow-sm h-12 w-12 border-white/20 bg-white/5 text-white hover:bg-accent hover:text-primary hover:border-accent transition-colors" onClick={() => scroll("left")}>
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-6 w-6 rtl-flip" />
           </Button>
           <Button variant="outline" size="icon" className="rounded-full shadow-sm h-12 w-12 border-white/20 bg-white/5 text-white hover:bg-accent hover:text-primary hover:border-accent transition-colors" onClick={() => scroll("right")}>
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-6 w-6 rtl-flip" />
           </Button>
         </div>
       </div>
@@ -67,14 +69,14 @@ export function Testimonials() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {testimonials.length > 0 ? (
-            testimonials.map((t) => (
-              <div key={t._id} className="w-[320px] md:w-[380px] shrink-0 snap-start">
-                <TestimonialCard item={t} />
+            testimonials.map((item) => (
+              <div key={item._id} className="w-[320px] md:w-[380px] shrink-0 snap-start">
+                <TestimonialCard item={item} />
               </div>
             ))
           ) : (
             <div className="w-full text-center py-12 text-white/60">
-              No testimonials available at the moment.
+              {t("testimonials_section.no_testimonials", "No testimonials available at the moment.")}
             </div>
           )}
         </div>
@@ -83,7 +85,7 @@ export function Testimonials() {
       <div className="mt-8 flex justify-center">
         <Button asChild size="lg" variant="outline" className="rounded-full border-white/20 bg-white/5 text-white hover:bg-accent hover:text-primary hover:border-accent transition-colors">
           <Link href="/testimonials">
-            View All Testimonials <ArrowRight className="ml-2 size-4" />
+            {t("testimonials_section.view_all", "View All Testimonials")} <ArrowRight className="ml-2 size-4 rtl-flip" />
           </Link>
         </Button>
       </div>

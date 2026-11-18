@@ -4,8 +4,10 @@ import { Mail, Send, Loader2, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { createNewsletter } from "@/service/newsletter.service"
+import { useLanguage } from "@/context/LanguageContext"
 
 export function NewsletterBand() {
+  const { t, isRTL } = useLanguage()
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
@@ -21,10 +23,10 @@ export function NewsletterBand() {
     
     try {
       await createNewsletter({ email })
-      setMessage("Thanks for subscribing!")
+      setMessage(t("common.subscribe_success", "Thanks for subscribing!"))
       setEmail("")
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong. Please try again.")
+      setError(err.response?.data?.message || t("common.error_occurred", "Something went wrong. Please try again."))
     } finally {
       setLoading(false)
     }
@@ -41,20 +43,23 @@ export function NewsletterBand() {
           <div className="relative z-10">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-accent backdrop-blur-md">
               <Mail className="size-4" />
-              Newsletter
+              {t("common.newsletter", "Newsletter")}
             </span>
-            <h2 className="mt-6 font-serif text-3xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
-              Stay connected with <span className="text-accent">trust updates</span>
+            <h2
+              className="mt-6 font-serif text-3xl font-bold leading-tight text-white md:text-4xl lg:text-5xl"
+              style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}
+            >
+              {t("common.stay_connected", "Stay connected with")} <span className="text-accent">{t("org.name", "Al-Azhar Graduates")}</span>
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-white/80">
-              Receive event notices, campaign updates and public reports from Al-Azhar Graduates directly in your inbox.
+              {t("common.newsletter_desc", "Receive event notices, academic updates and publications from Al-Azhar Graduates directly in your inbox.")}
             </p>
           </div>
           
           <div className="relative z-10 mt-10 lg:mt-0">
             <form onSubmit={handleSubmit} className="flex w-full flex-col gap-3 sm:flex-row p-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-inner">
               <Input 
-                placeholder="Enter your email address..." 
+                placeholder={t("common.email_placeholder", "Enter your email address...")} 
                 type="email" 
                 required
                 value={email}
@@ -63,8 +68,8 @@ export function NewsletterBand() {
                 className="h-14 w-full border-none bg-transparent px-5 text-base text-white placeholder:text-white/40 focus-visible:ring-0 focus-visible:ring-offset-0"
               />
               <Button type="submit" disabled={loading} className="h-14 rounded-xl bg-accent px-8 text-base font-bold text-accent-foreground shadow-lg transition-transform hover:-translate-y-0.5 hover:bg-accent/90 sm:w-auto">
-                {loading ? <Loader2 className="size-5 animate-spin" /> : "Subscribe"}
-                {!loading && <Send className="ml-3 size-5" />}
+                {loading ? <Loader2 className="size-5 animate-spin" /> : t("common.subscribe", "Subscribe")}
+                {!loading && <Send className="ml-3 size-5 rtl-flip" />}
               </Button>
             </form>
             
@@ -72,7 +77,7 @@ export function NewsletterBand() {
             {error && <p className="mt-4 text-sm font-semibold text-rose-400 text-center lg:text-left">{error}</p>}
             {!message && !error && (
               <p className="mt-4 text-center text-sm text-white/50 lg:text-left">
-                We care about your data. No spam, ever.
+                {t("common.privacy_note", "We care about your data. No spam, ever.")}
               </p>
             )}
           </div>

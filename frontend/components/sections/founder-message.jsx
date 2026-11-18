@@ -3,17 +3,33 @@ import Image from "next/image"
 import { useSelector } from "react-redux"
 import { Quote } from "lucide-react"
 import { Reveal } from "@/components/shared/reveal"
+import { useLanguage } from "@/context/LanguageContext"
 
 export function FounderMessageSection() {
+  const { t, isRTL, language, locale } = useLanguage()
   const { data: siteContent } = useSelector((state) => state.siteContent)
 
-  let title = "President's Message"
-  let name = "Dr. Mubeen Saleem Al-Azhari"
-  let designation = "President, World Association for Al-Azhar Graduates – India Branch"
-  let message = "Welcome to the official website of the World Association for Al-Azhar Graduates – India Branch.\n\nAl-Azhar Al-Sharif has carried a distinguished tradition of scholarship, moderation and service for more than a thousand years. Its graduates across the world represent an important intellectual and human resource capable of contributing to education, research, social development and peaceful coexistence.\n\nOur aim is to bring together Al-Azhar graduates across India, strengthen academic and professional cooperation, and create meaningful opportunities for collective service.\n\nWe invite all Al-Azhar graduates to join this shared journey and contribute their knowledge, experience and expertise to the advancement of society."
+  const pm = locale?.president_message || {}
+
+  let title = t("president_message.title", "President's Message")
+  let name = t("president_message.signatory_name", "Prof. Dr. Mohammad Mubeen Saleem Al-Azhari")
+  let designation = t("president_message.signatory_title", "President, World Association for Al-Azhar Graduates – India Branch")
+
+  const paragraphs = [
+    pm.bismillah,
+    pm.salutation,
+    pm.p1,
+    pm.p2,
+    pm.p3,
+    pm.p4,
+    pm.p5,
+    pm.closing,
+  ].filter(Boolean)
+
+  let message = paragraphs.join("\n\n")
   let image = "/founder-message.jpg"
 
-  if (siteContent?.founder_message?.content) {
+  if (siteContent?.founder_message?.content && language === "en") {
     try {
       const parsed = JSON.parse(siteContent.founder_message.content)
       if (parsed.name) name = parsed.name
@@ -21,22 +37,18 @@ export function FounderMessageSection() {
       if (parsed.message) message = parsed.message
       if (parsed.image) image = parsed.image
     } catch (e) {
-      // If it fails to parse, it might just be a regular string.
       message = siteContent.founder_message.content
     }
   }
 
-  // Get the title from the top level property
-  if (siteContent?.founder_message?.title) {
+  if (siteContent?.founder_message?.title && language === "en") {
     title = siteContent.founder_message.title
   }
 
-  // Get the uploaded image url if it exists
   if (siteContent?.founder_message?.image?.url) {
     image = siteContent.founder_message.image.url
   }
 
-  // Get first letter of name for the avatar fallback if no image
   const initial = name ? name.charAt(0).toUpperCase() : "P"
 
   return (
@@ -68,16 +80,23 @@ export function FounderMessageSection() {
           <div className="relative">
             <Reveal>
               <div className="mb-6 flex size-14 items-center justify-center rounded-2xl bg-accent/10 text-accent ring-1 ring-accent/20">
-                <Quote className="size-6 fill-current" />
+                <Quote className="size-6 fill-current rtl-flip" />
               </div>
-              <h2 className="font-serif text-3xl font-bold tracking-tight text-navy md:text-4xl lg:text-5xl mb-6">
+              <h2
+                className="font-serif text-3xl font-bold tracking-tight text-navy md:text-4xl lg:text-5xl mb-6"
+                style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}
+              >
                 {title}
               </h2>
             </Reveal>
             
             <Reveal delay={0.1}>
               <div className="prose prose-lg prose-p:leading-relaxed prose-p:text-muted-foreground max-w-none">
-                <p className="whitespace-pre-wrap">{message}</p>
+                {paragraphs.map((p, idx) => (
+                  <p key={idx} className="mb-4 text-base sm:text-lg leading-relaxed text-foreground/80">
+                    {p}
+                  </p>
+                ))}
               </div>
             </Reveal>
             
@@ -87,8 +106,8 @@ export function FounderMessageSection() {
                   <span className="font-serif text-xl font-bold">{initial}</span>
                 </div>
                 <div>
-                  <p className="font-bold text-navy">{name}</p>
-                  <p className="text-sm text-muted-foreground max-w-[300px]">{designation}</p>
+                  <p className="font-bold text-navy text-lg">{name}</p>
+                  <p className="text-sm text-muted-foreground max-w-[400px]">{designation}</p>
                 </div>
               </div>
             </Reveal>

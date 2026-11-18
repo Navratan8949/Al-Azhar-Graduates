@@ -14,40 +14,123 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/LanguageContext";
 
-const defaultSlides = [
-  {
-    image: "/al-azhar-cairo.jpg",
-    title: "Moderation is our",
-    highlight: "Method.",
-    desc: "The World Association for Al-Azhar Graduates promotes awareness of Al-Azhar's global scholarly and civilizational contribution.",
-  },
-  {
-    image: "/logo.png",
-    title: "Unity is our",
-    highlight: "Strength.",
-    desc: "Connecting Al-Azhar graduates across India through a strong national network to encourage academic cooperation and intellectual exchange.",
-  },
-  {
-    image: "/al-azhar-cairo.jpg",
-    title: "Knowledge is our",
-    highlight: "Identity.",
-    desc: "Supporting Arabic language, Islamic studies, and organizing educational, intellectual and training programs.",
-  },
-  {
-    image: "/logo.png",
-    title: "Service is our",
-    highlight: "Mission.",
-    desc: "Presenting the authentic and humane teachings of Islam to wider society and engaging youth through constructive initiatives.",
-  },
-];
+const localizedSlidesByLang = {
+  ar: [
+    {
+      image: "/al-azhar-cairo.jpg",
+      title: "الوسطية",
+      highlight: "منهجنا",
+      desc: "المنظمة العالمية لخريجي الأزهر – فرع الهند مؤسسة علمية وفكرية تجمع خريجي الأزهر الشريف في الهند وتنشر رسالة الوسطية والاعتدال.",
+    },
+    {
+      image: "/logo.png",
+      title: "الوحدة",
+      highlight: "قوتنا",
+      desc: "بناء شبكة وطنية متماسكة لخريجي الأزهر الشريف في الهند تسهم في نشر المعرفة وتعزيز السلام والتفاهم الإنساني.",
+    },
+    {
+      image: "/al-azhar-cairo.jpg",
+      title: "العلم",
+      highlight: "هويتنا",
+      desc: "دعم تعليم اللغة العربية والعلوم الإسلامية وتنظيم البرامج الفكرية والدورات العلمية بمشاركة كبار علماء الأزهر.",
+    },
+    {
+      image: "/logo.png",
+      title: "خدمة الإنسانية",
+      highlight: "رسالتنا",
+      desc: "إبراز تعاليم الإسلام السمحة وقيمه الإنسانية للمجتمع وخدمة المجتمع من خلال العلم والحوار والعمل البناء.",
+    },
+  ],
+  ur: [
+    {
+      image: "/al-azhar-cairo.jpg",
+      title: "اعتدال",
+      highlight: "ہمارا منہج",
+      desc: "عالمی رابطہ برائے فضلاء ازہر – انڈیا، ہندوستان بھر میں جامعہ ازہر شریف کے فضلاء کو ایک پلیٹ فارم پر جمع کرنے والا ایک علمی و فکری ادارہ ہے۔",
+    },
+    {
+      image: "/logo.png",
+      title: "اتحاد",
+      highlight: "ہماری قوت",
+      desc: "ہندوستان بھر میں فضلاء ازہر کا ایک مضبوط اور متحد قومی نیٹ ورک قائم کرنا جو علم، امن اور انسانی ترقی کے فروغ میں مؤثر کردار ادا کرے۔",
+    },
+    {
+      image: "/al-azhar-cairo.jpg",
+      title: "علم",
+      highlight: "ہماری شناخت",
+      desc: "عربی زبان اور اسلامی علوم کی ترویج اور فکری و تعلیمی پروگراموں اور تربیتی ورکشاپس کا انعقاد۔",
+    },
+    {
+      image: "/logo.png",
+      title: "خدمتِ انسانیت",
+      highlight: "ہمارا مشن",
+      desc: "اسلام کے آفاقی اور انسانی اقدار کو عام کرنا اور تعمیری جدوجہد کے ذریعے معاشرے کی بلا تفریق خدمت کرنا۔",
+    },
+  ],
+  hi: [
+    {
+      image: "/al-azhar-cairo.jpg",
+      title: "संयम एवं",
+      highlight: "सद्भाव",
+      desc: "अल-अज़हर शरीफ़ के शैक्षिक, बौद्धिक और मानवीय संदेश को भारत में प्रसारित करने वाली प्रतिष्ठित संस्था।",
+    },
+    {
+      image: "/logo.png",
+      title: "एकता हमारी",
+      highlight: "शक्ति",
+      desc: "भारतीय अज़हरी विद्वानों, शिक्षाविदों और समाज के बीच शैक्षिक एवं सांस्कृतिक संबंधों को सुदृढ़ करना।",
+    },
+    {
+      image: "/al-azhar-cairo.jpg",
+      title: "ज्ञान हमारी",
+      highlight: "पहचान",
+      desc: "गुणवत्तापूर्ण प्रशिक्षण, अरबी भाषा कार्यशालाओं और शैक्षिक अवसरों का राष्ट्रव्यापी विस्तार।",
+    },
+    {
+      image: "/logo.png",
+      title: "मानवता की सेवा",
+      highlight: "हमारा संकल्प",
+      desc: "ज्ञान, संवाद और सह-अस्तित्व के माध्यम से समाज में शांति और सकारात्मक मानवीय मूल्यों को बढ़ावा देना।",
+    },
+  ],
+  en: [
+    {
+      image: "/al-azhar-cairo.jpg",
+      title: "Moderation is our",
+      highlight: "Method.",
+      desc: "The World Association for Al-Azhar Graduates promotes awareness of Al-Azhar's global scholarly and civilizational contribution.",
+    },
+    {
+      image: "/logo.png",
+      title: "Unity is our",
+      highlight: "Strength.",
+      desc: "Connecting Al-Azhar graduates across India through a strong national network to encourage academic cooperation and intellectual exchange.",
+    },
+    {
+      image: "/al-azhar-cairo.jpg",
+      title: "Knowledge is our",
+      highlight: "Identity.",
+      desc: "Supporting Arabic language, Islamic studies, and organizing educational, intellectual and training programs.",
+    },
+    {
+      image: "/logo.png",
+      title: "Service is our",
+      highlight: "Mission.",
+      desc: "Presenting the authentic and humane teachings of Islam to wider society and engaging youth through constructive initiatives.",
+    },
+  ],
+};
 
 export function Hero() {
+  const { t, isRTL, language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const { data: siteContent } = useSelector((state) => state.siteContent);
 
+  const defaultSlides = localizedSlidesByLang[language] || localizedSlidesByLang.en;
   let slides = defaultSlides;
-  if (siteContent?.home_hero?.content) {
+  if (siteContent?.home_hero?.content && language === "en") {
     try {
       const parsed = JSON.parse(siteContent.home_hero.content);
       if (Array.isArray(parsed) && parsed.length > 0) slides = parsed;
@@ -138,22 +221,22 @@ export function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span>
                 <span className="relative inline-flex size-2 rounded-full bg-accent"></span>
               </span>
-              Est. 2010 · New Delhi
+              {isRTL ? "تأسست ۲۰۱۰ · نيودلهي" : "Est. 2010 · New Delhi"}
             </div>
           </motion.div>
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={`text-${currentSlide}`}
-              initial={{ opacity: 0, x: -30 }}
+              key={`text-${currentSlide}-${language}`}
+              initial={{ opacity: 0, x: isRTL ? 30 : -30 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 30 }}
+              exit={{ opacity: 0, x: isRTL ? -30 : 30 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex flex-col items-start w-full"
             >
               <h1
-                className="font-serif font-bold leading-[1.05] tracking-tight text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] text-white drop-shadow-2xl"
-                style={{ fontFamily: "var(--font-cinzel), serif" }}
+                className="font-serif font-bold leading-[1.1] tracking-tight text-4xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] text-white drop-shadow-2xl"
+                style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}
               >
                 {slides[currentSlide]?.title} <br />
                 <span className="text-accent italic font-normal tracking-normal pr-4">
@@ -179,8 +262,8 @@ export function Hero() {
               className="h-14 rounded-full bg-accent px-8 text-base font-bold text-[#011c13] shadow-[0_0_25px_rgba(212,175,55,0.3)] transition-all hover:-translate-y-1 hover:bg-[#ebd074] hover:shadow-[0_0_35px_rgba(212,175,55,0.5)] border-0"
             >
               <Link href="/membership">
-                <Users className="mr-2 size-5" />
-                Become a Member
+                <Users className="mr-2 size-5 rtl-flip" />
+                {t("nav.apply_member", "Become a Member")}
               </Link>
             </Button>
             <Button
@@ -189,9 +272,9 @@ export function Hero() {
               variant="outline"
               className="h-14 rounded-full border-white/20 bg-white/5 backdrop-blur-md px-8 text-base font-semibold text-white transition-all hover:-translate-y-1 hover:bg-white/10 hover:border-white/40"
             >
-              <Link href="/programs">
-                Explore Programs
-                <ArrowRight className="ml-2 size-5" />
+              <Link href="/projects">
+                {t("activities.title", "Explore Programs")}
+                <ArrowRight className="ml-2 size-5 rtl-flip" />
               </Link>
             </Button>
           </motion.div>

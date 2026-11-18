@@ -1,10 +1,19 @@
+"use client";
+
 import Image from "next/image"
 import Link from "next/link"
 import { CalendarDays, MapPin } from "lucide-react"
+import { useLanguage } from "@/context/LanguageContext"
+import { getLocalizedField } from "@/lib/localized-field"
 
 export function EventCard({ event }) {
+  const { language, isRTL } = useLanguage()
+  const title = getLocalizedField(event, "title", language)
+  const description = getLocalizedField(event, "description", language)
+  const location = getLocalizedField(event, "location", language)
+
   const date = event.eventDate
-    ? new Date(event.eventDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+    ? new Date(event.eventDate).toLocaleDateString(language === "ar" ? "ar-EG" : language === "ur" ? "ur-PK" : language === "hi" ? "hi-IN" : "en-IN", { day: "numeric", month: "short", year: "numeric" })
     : ""
 
   return (
@@ -13,15 +22,20 @@ export function EventCard({ event }) {
         <div className="relative aspect-[16/10] overflow-hidden bg-muted flex items-center justify-center">
           <Image
             src={event.image?.url || (typeof event.image === 'string' ? event.image : null) || "/placeholder.svg"}
-            alt={event.title}
+            alt={title}
             fill
             className="object-contain transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         </div>
         <div className="flex flex-1 flex-col p-6 sm:p-8">
-          <h3 className="font-serif text-2xl font-bold leading-snug text-white group-hover:text-accent transition-colors">{event.title}</h3>
-          <p className="mt-3 line-clamp-2 flex-1 text-base leading-relaxed text-white/80">{event.description}</p>
+          <h3
+            className="font-serif text-2xl font-bold leading-snug text-white group-hover:text-accent transition-colors"
+            style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}
+          >
+            {title}
+          </h3>
+          <p className="mt-3 line-clamp-2 flex-1 text-base leading-relaxed text-white/80">{description}</p>
           <div className="mt-6 space-y-2 text-sm font-medium text-white/80 border-t border-white/10 pt-5">
             {date && (
               <p className="flex items-center gap-2">
@@ -29,10 +43,10 @@ export function EventCard({ event }) {
                 {date}
               </p>
             )}
-            {event.location && (
+            {location && (
               <p className="flex items-center gap-2">
                 <MapPin className="size-4 text-accent" />
-                {event.location}
+                {location}
               </p>
             )}
           </div>

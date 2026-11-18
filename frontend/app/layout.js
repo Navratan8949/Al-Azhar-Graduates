@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/sonner";
 import { SplashScreen } from "@/components/splash-screen/splash-screen";
 import { ReduxProvider } from "@/redux/Provider";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { cookies } from "next/headers";
 import "./globals.css";
 
@@ -115,19 +116,17 @@ export const viewport = {
 
 export default async function RootLayout({ children }) {
   const cookieStore = await cookies();
-  const googtrans = cookieStore.get("googtrans")?.value;
-  let dir = "ltr";
+  const storedLocale = cookieStore.get("app_locale")?.value;
+  const legacyGoog = cookieStore.get("googtrans")?.value?.split("/").pop();
   let lang = "en";
 
-  if (googtrans) {
-    const selectedLang = googtrans.split("/").pop();
-    if (["ar", "ur"].includes(selectedLang)) {
-      dir = "rtl";
-    }
-    if (selectedLang) {
-      lang = selectedLang;
-    }
+  if (storedLocale && ["en", "ar", "ur", "hi"].includes(storedLocale)) {
+    lang = storedLocale;
+  } else if (legacyGoog && ["en", "ar", "ur", "hi"].includes(legacyGoog)) {
+    lang = legacyGoog;
   }
+
+  const dir = lang === "ar" || lang === "ur" ? "rtl" : "ltr";
 
   let seoTitle = "World Association for Al-Azhar Graduates - India Branch";
   let seoDesc = "The India Branch works to connect Al-Azhar graduates throughout India and promote Al-Azhar's message of knowledge, moderation, dialogue and service.";
@@ -188,7 +187,7 @@ export default async function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cinzel:wght@400;500;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cinzel:wght@400;500;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
         <script
@@ -198,8 +197,10 @@ export default async function RootLayout({ children }) {
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
         <ReduxProvider>
-          {children}
-          <Toaster position="top-center" richColors />
+          <LanguageProvider initialLanguage={lang}>
+            {children}
+            <Toaster position="top-center" richColors />
+          </LanguageProvider>
         </ReduxProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>

@@ -19,9 +19,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Logo } from "@/components/shared/logo"
-import { MAIN_NAV, isGroup } from "@/constants/nav"
+import { isGroup } from "@/constants/nav"
 import { SITE } from "@/constants/site"
-import { GoogleTranslate } from "@/components/shared/google-translate"
+import { LanguageSwitcher } from "@/components/shared/language-switcher"
+import { useLanguage } from "@/context/LanguageContext"
 
 // Social icons as inline SVG (no extra package needed)
 function FacebookIcon({ className }) {
@@ -98,6 +99,37 @@ function HoverDropdown({ item, isGroupActive, isActive }) {
   )
 }
 
+function getLocalizedNav(t) {
+  return [
+    { label: t("nav.home", "Home"), href: "/" },
+    {
+      label: t("nav.about", "About"),
+      children: [
+        { label: t("about.title", t("nav.about", "About Us")), href: "/about" },
+        { label: t("nav.president_message", "President's Message"), href: "/founder-message" },
+        { label: t("nav.vision_mission", "Vision & Mission"), href: "/vision-mission" },
+        { label: t("objectives.title", "Objectives"), href: "/objectives" },
+        { label: t("nav.team", "Management Team"), href: "/team" },
+        { label: t("nav.awards", "Awards & Recognition"), href: "/awards" },
+        { label: t("testimonials_section.title", "Testimonials"), href: "/testimonials" },
+      ],
+    },
+    {
+      label: t("nav.our_work", "Activities"),
+      children: [
+        { label: t("activities.title", t("nav.activities", "Programs & Activities")), href: "/projects" },
+        { label: t("conferences.title", t("nav.events", "Events & Forums")), href: "/events" },
+        { label: t("nav.crowdfunding", "Crowdfunding"), href: "/crowdfunding" },
+      ],
+    },
+    { label: t("nav.media_centre", "Media Centre"), href: "/news" },
+    { label: t("publications.title", t("nav.publications", "Publications & Resources")), href: "/publications" },
+    { label: t("gallery.title", t("nav.gallery", "Gallery")), href: "/gallery/photos" },
+    { label: t("contact.title", t("nav.contact", "Contact")), href: "/contact" },
+    { label: t("nav.donate", "Donate"), href: "/donate" },
+  ]
+}
+
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser, clearUser } from "@/redux/features/userSlice"
 import { LayoutDashboard, LogOut } from "lucide-react"
@@ -105,6 +137,7 @@ import api from "@/service/api"
 import { toast } from "sonner"
 
 function TopBar() {
+  const { t, isRTL } = useLanguage()
   const user = useSelector(selectUser)
   const { data: siteContent } = useSelector((state) => state.siteContent)
   const dispatch = useDispatch()
@@ -160,7 +193,7 @@ function TopBar() {
           </a>
           <span className="hidden text-white/40 xl:inline">·</span>
           <span className="hidden text-white/55 xl:inline">
-            Head Office · New Delhi, India
+            {t("contact.head_office_title", "Head Office")} · {isRTL ? "نيودلهي، الهند" : "New Delhi, India"}
           </span>
         </div>
         {/* Social icons + Auth links */}
@@ -179,32 +212,32 @@ function TopBar() {
           </a>
           <span className="h-3 w-px bg-white/20" />
 
-          <GoogleTranslate variant="dark" />
+          <LanguageSwitcher variant="dark" />
           <span className="h-3 w-px bg-white/20" />
 
           {user ? (
             <div className="flex items-center gap-2">
               <Link href={user.role === "admin" ? '/admin' : '/member'} className="inline-flex items-center gap-1.5 text-navy bg-accent transition hover:bg-white px-3 py-1 rounded-full text-[11px] font-bold">
                 <LayoutDashboard className="size-3.5" />
-                Go to Dashboard
+                {t("nav.portal", "Go to Dashboard")}
               </Link>
               <button
                 onClick={handleLogout}
                 className="inline-flex items-center gap-1 text-white/80 hover:text-rose-300 text-[11px] font-semibold transition-colors ml-1"
               >
                 <LogOut className="size-3" />
-                Logout
+                {t("nav.logout", "Logout")}
               </button>
             </div>
           ) : (
             <>
               <Link href="/login" className="inline-flex items-center gap-1 text-white/70 transition hover:text-white text-[11px] font-semibold">
                 <User className="size-3" />
-                Member Login
+                {t("nav.member_login", "Member Login")}
               </Link>
               <Link href="/admin-login" className="inline-flex items-center gap-1 text-white/70 transition hover:text-white text-[11px] font-semibold">
                 <Lock className="size-3" />
-                Admin Login
+                {t("nav.admin_login", "Admin Login")}
               </Link>
             </>
           )}
@@ -215,12 +248,15 @@ function TopBar() {
 }
 
 export function Navbar() {
+  const { t, isRTL } = useLanguage()
   const pathname = usePathname()
   const user = useSelector(selectUser)
   const { data: siteContent } = useSelector((state) => state.siteContent)
   const dispatch = useDispatch()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+
+  const navItems = getLocalizedNav(t)
 
   const handleLogout = async () => {
     try {
@@ -285,7 +321,7 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden items-center gap-2 lg:flex">
-            {MAIN_NAV.map((item) =>
+            {navItems.map((item) =>
               isGroup(item) ? (
                 <HoverDropdown
                   key={item.label}
@@ -317,7 +353,7 @@ export function Navbar() {
             >
               <Link href="/membership">
                 <User className="mr-1.5 size-3.5" />
-                Become a Member
+                {t("nav.apply_member", "Become a Member")}
               </Link>
             </Button>
 
@@ -335,12 +371,12 @@ export function Navbar() {
 
                 <div className="flex items-center justify-between border-b border-border/70 bg-secondary/40 p-4">
                   <Logo />
-                  <GoogleTranslate variant="light" />
+                  <LanguageSwitcher variant="light" />
                 </div>
 
                 <div className="p-3">
                   <Accordion type="multiple" className="w-full">
-                    {MAIN_NAV.map((item) =>
+                    {navItems.map((item) =>
                       isGroup(item) ? (
                         <AccordionItem key={item.label} value={item.label} className="border-border/60">
                           <AccordionTrigger className="px-2 py-3 text-sm font-semibold hover:no-underline hover:text-navy">
@@ -382,7 +418,7 @@ export function Navbar() {
                     <Button asChild className="h-11 w-full rounded-xl bg-accent font-bold text-accent-foreground hover:bg-accent/90">
                       <Link href="/membership">
                         <User className="mr-2 size-4" />
-                        Become a Member
+                        {t("nav.apply_member", "Become a Member")}
                       </Link>
                     </Button>
                     {user ? (
@@ -390,12 +426,12 @@ export function Navbar() {
                         <Button asChild variant="outline" className="h-11 w-full rounded-xl font-semibold border-navy text-navy hover:bg-navy/5">
                           <Link href={user.role === "admin" ? '/admin' : '/member'}>
                             <LayoutDashboard className="mr-2 size-4" />
-                            Go to Dashboard
+                            {t("nav.portal", "Go to Dashboard")}
                           </Link>
                         </Button>
                         <Button onClick={handleLogout} variant="ghost" className="h-10 w-full rounded-xl text-rose-600 hover:bg-rose-50 hover:text-rose-700 font-semibold">
                           <LogOut className="mr-2 size-4" />
-                          Logout
+                          {t("nav.logout", "Logout")}
                         </Button>
                       </>
                     ) : (
@@ -403,13 +439,13 @@ export function Navbar() {
                         <Button asChild variant="outline" className="h-11 w-full rounded-xl font-semibold border-navy text-navy hover:bg-navy/5">
                           <Link href="/login">
                             <User className="mr-2 size-4" />
-                            Member Login
+                            {t("nav.member_login", "Member Login")}
                           </Link>
                         </Button>
                         <Button asChild variant="ghost" className="h-10 w-full rounded-xl text-muted-foreground hover:text-navy">
                           <Link href="/admin-login">
                             <Lock className="mr-2 size-4" />
-                            Admin Login
+                            {t("nav.admin_login", "Admin Login")}
                           </Link>
                         </Button>
                       </>
