@@ -94,12 +94,12 @@ export function Footer() {
       <div className="pointer-events-none absolute -bottom-20 -left-16 size-64 rounded-full bg-lime/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-1">
-            <div className="inline-flex rounded-xl bg-white p-2.5 shadow-sm">
-              <Logo customName={t("org.short_name", "Al-Azhar Graduates")} />
+        <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-12">
+          <div className="sm:col-span-2 lg:col-span-5 xl:col-span-4 min-w-0">
+            <div className="inline-flex max-w-full rounded-xl bg-white p-2.5 shadow-sm">
+              <Logo />
             </div>
-            <p className="mt-5 text-sm leading-relaxed text-white/65">
+            <p className="mt-5 text-sm leading-relaxed text-white/65 max-w-md">
               {site.description}
             </p>
             <div className="mt-6 flex items-center gap-2.5">
@@ -133,7 +133,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="sm:col-span-1 lg:col-span-2 xl:col-span-2 min-w-0">
             <h3 className="text-sm font-bold uppercase tracking-wider text-accent">
               {t("footer.quick_links", "Quick Links")}
             </h3>
@@ -158,7 +158,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="sm:col-span-1 lg:col-span-2 xl:col-span-3 min-w-0">
             <h3 className="text-sm font-bold uppercase tracking-wider text-accent">
               {t("footer.resources", "Resources")}
             </h3>
@@ -183,7 +183,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="sm:col-span-2 lg:col-span-3 xl:col-span-3 min-w-0">
             <h3 className="text-sm font-bold uppercase tracking-wider text-accent">
               {t("footer.contact_info", "Reach Us")}
             </h3>

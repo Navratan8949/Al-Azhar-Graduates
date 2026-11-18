@@ -5,14 +5,7 @@ import Link from "next/link";
 import { useSiteBranding } from "@/hooks/useSiteBranding";
 import { useLanguage } from "@/context/LanguageContext";
 
-export function Logo({
-  variant = "dark",
-  showText = true,
-  className = "",
-  customName = null,
-  topText: customTop = null,
-  bottomText: customBottom = null,
-}) {
+export function Logo({ variant = "dark", showText = true, className = "" }) {
   const { siteName, shortName, logo } = useSiteBranding();
   let langContext = null;
   try {
@@ -20,8 +13,7 @@ export function Logo({
     langContext = useLanguage();
   } catch (e) {}
 
-  const currentOrgName =
-    customName || langContext?.t?.("org.name", shortName) || shortName;
+  const currentOrgName = langContext?.t?.("org.name", shortName) || shortName;
 
   const textColor =
     variant === "light" ? "text-navy-foreground" : "text-foreground";
@@ -30,19 +22,13 @@ export function Logo({
 
   // Split name for visual balance
   const words = currentOrgName.split(" ");
-  const topText =
-    customTop !== null
-      ? customTop
-      : words.slice(0, Math.ceil(words.length / 2)).join(" ");
-  const bottomText =
-    customBottom !== null
-      ? customBottom
-      : words.slice(Math.ceil(words.length / 2)).join(" ");
+  const topText = words.slice(0, Math.ceil(words.length / 2)).join(" ");
+  const bottomText = words.slice(Math.ceil(words.length / 2)).join(" ");
 
   return (
     <Link
       href="/"
-      className={`flex items-center gap-2 sm:gap-3 shrink-0 ${className}`}
+      className={`flex items-center gap-2 sm:gap-3 max-w-full min-w-0 ${className}`}
       aria-label={`${currentOrgName} home`}
     >
       <Image
@@ -50,18 +36,18 @@ export function Logo({
         alt={`${currentOrgName} logo`}
         width={400}
         height={400}
-        className="size-12 sm:size-16 shrink-0 object-contain"
+        className="size-11 sm:size-14 shrink-0 object-contain"
         priority
       />
       {showText && (
-        <span className="flex flex-col leading-tight min-w-0 max-w-[220px] sm:max-w-[280px]">
+        <span className="flex flex-col leading-tight min-w-0 flex-1">
           <span
-            className={`font-serif text-[11px] sm:text-[14px] font-bold tracking-tight ${textColor} truncate uppercase`}
+            className={`font-serif text-[10px] sm:text-[12px] xl:text-[13px] font-bold tracking-tight ${textColor} truncate uppercase`}
           >
             {topText}
           </span>
           <span
-            className={`text-[9px] sm:text-[11px] font-bold uppercase tracking-wider sm:tracking-[0.12em] ${subColor} truncate`}
+            className={`text-[8.5px] sm:text-[9.5px] xl:text-[10px] font-bold uppercase tracking-wider sm:tracking-[0.12em] ${subColor} truncate`}
           >
             {bottomText}
           </span>
