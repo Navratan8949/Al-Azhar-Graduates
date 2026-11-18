@@ -34,7 +34,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import api from "@/service/api";
-import { GoogleTranslate } from "@/components/shared/google-translate";
 
 const NAV = [
   { href: "/member", label: "Overview", icon: LayoutDashboard, exact: true },
@@ -219,7 +218,7 @@ export default function MemberLayout({ children }) {
     )?.label || "Dashboard";
 
   return (
-    <div className="flex min-h-dvh bg-[#f8fafc]">
+    <div dir="ltr" className="flex min-h-dvh bg-[#f8fafc]">
       {/* Desktop Sidebar */}
       <aside className="sticky top-0 hidden h-screen shrink-0 md:flex border-r border-border/40">
         {navContent}
@@ -239,24 +238,6 @@ export default function MemberLayout({ children }) {
           </div>
 
           <div className="flex items-center gap-5">
-            {/* <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Quick search..."
-                className="h-10 w-64 rounded-full border border-border/60 bg-slate-50 pl-10 pr-4 text-sm font-medium outline-none transition-all focus:border-navy focus:ring-1 focus:ring-navy placeholder:text-muted-foreground"
-              />
-            </div> */}
-
-            {/* <button className="relative flex size-10 items-center justify-center rounded-full border border-border/60 bg-white text-navy hover:bg-slate-50 transition-colors">
-              <Bell className="size-4.5" />
-              <span className="absolute right-2.5 top-2.5 size-2 rounded-full bg-rose-500 border-2 border-white"></span>
-            </button> */}
-
-            <GoogleTranslate variant="light" />
-
-            <div className="h-8 w-px bg-border/60"></div>
-
             <Link
               href="/member/profile"
               className="flex items-center gap-3 group"
@@ -294,7 +275,6 @@ export default function MemberLayout({ children }) {
           </div>
 
           <div className="flex items-center gap-3">
-            <GoogleTranslate variant="light" />
             <Link
               href="/member/profile"
               className="flex size-9 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-white shadow-sm"

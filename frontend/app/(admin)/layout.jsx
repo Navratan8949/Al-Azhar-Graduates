@@ -11,7 +11,6 @@ import { selectUser, clearUser } from "@/redux/features/userSlice"
 import api from "@/service/api"
 import { toast } from "sonner"
 import { useEffect, useState } from "react"
-import { GoogleTranslate } from "@/components/shared/google-translate"
 
 export default function AdminLayout({ children }) {
   const router = useRouter()
@@ -46,7 +45,7 @@ export default function AdminLayout({ children }) {
 
   return (
     <AdminAuthGuard>
-      <div className="flex min-h-dvh bg-[#f4f7f6]">
+      <div dir="ltr" className="flex min-h-dvh bg-[#f4f7f6]">
         <AdminSidebar />
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="sticky top-0 z-20 flex h-16 items-center justify-between gap-4 border-b border-navy/5 bg-white/70 px-4 backdrop-blur-xl md:px-8 shadow-[0_4px_24px_rgba(2,61,40,0.04)]">
@@ -84,7 +83,6 @@ export default function AdminLayout({ children }) {
             </div>
 
             <div className="flex items-center gap-3 sm:gap-4">
-              <GoogleTranslate variant="light" />
               <Link 
                 href="/" 
                 target="_blank" 
