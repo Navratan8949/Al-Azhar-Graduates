@@ -88,7 +88,7 @@ export default function NewsPage() {
                   <div className="flex flex-1 flex-col p-6">
                     <div className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                       <span className="rounded-md bg-secondary px-2 py-1 text-navy">
-                        {item.category?.replace("_", " ")}
+                        {t("category." + (item.category?.toLowerCase() || "news"), item.category?.replace("_", " "))}
                       </span>
                       <span className="flex items-center gap-1">
                         <Calendar className="size-3.5" />

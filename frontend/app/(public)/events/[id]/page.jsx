@@ -15,7 +15,7 @@ import { useParams } from "next/navigation"
 export default function EventDetailPage() {
   const params = useParams()
   const id = params?.id
-  const { language, isRTL } = useLanguage()
+  const { t, language, isRTL } = useLanguage()
   const [event, setEvent] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -72,7 +72,7 @@ export default function EventDetailPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/35" />
         <div className="relative mx-auto flex min-h-[46vh] max-w-7xl flex-col justify-end px-4 pb-12 pt-28">
           <Link href="/events" className="mb-6 inline-flex w-fit items-center gap-2 text-sm text-white/70 hover:text-white">
-            <ArrowLeft className={`size-4 ${isRTL ? "rotate-180" : ""}`} /> All events
+            <ArrowLeft className={`size-4 ${isRTL ? "rotate-180" : ""}`} /> {t("conferences.all_events", "All events")}
           </Link>
           <h1 className="max-w-3xl font-serif text-4xl font-bold tracking-tight md:text-5xl">{title}</h1>
           <div className="mt-5 flex flex-wrap gap-4 text-sm text-white/80">
@@ -87,7 +87,7 @@ export default function EventDetailPage() {
 
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
-          <h2 className="font-serif text-2xl font-semibold">Event details</h2>
+          <h2 className="font-serif text-2xl font-semibold">{t("conferences.details_title", "Event details")}</h2>
           <p className="mt-4 leading-relaxed text-muted-foreground whitespace-pre-wrap">{description}</p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
             Al-Azhar graduates and general participants can register below. Walk-ins are welcome subject to capacity.
@@ -100,6 +100,7 @@ export default function EventDetailPage() {
 }
 
 function RegistrationSidebar({ event, lastDate }) {
+  const { t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   
   const [formData, setFormData] = useState({ fullName: "", email: "", mobile: "" })
@@ -133,12 +134,12 @@ function RegistrationSidebar({ event, lastDate }) {
   return (
     <>
       <aside className="h-fit rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
-        <h3 className="font-serif text-xl font-semibold">Register</h3>
+        <h3 className="font-serif text-xl font-semibold">{t("conferences.register", "Register")}</h3>
         {lastDate && <p className="mt-2 text-sm text-muted-foreground">Registration closes {lastDate}</p>}
         
         {isRegistered ? (
           <div className="mt-6 rounded-xl bg-emerald-50 border border-emerald-100 p-4 text-center text-sm font-medium text-emerald-700">
-            You are successfully registered for this event!
+            {t("conferences.reg_success", "You are successfully registered for this event!")}
           </div>
         ) : (
           <Button 
@@ -146,7 +147,7 @@ function RegistrationSidebar({ event, lastDate }) {
             disabled={isDeadlinePassed}
             className="mt-6 h-11 w-full rounded-xl bg-navy font-semibold text-white hover:bg-navy/90"
           >
-            {isDeadlinePassed ? "Registration Closed" : "Register Now"}
+            {isDeadlinePassed ? t("conferences.reg_closed", "Registration Closed") : t("conferences.reg_now", "Register Now")}
           </Button>
         )}
       </aside>
@@ -161,28 +162,28 @@ function RegistrationSidebar({ event, lastDate }) {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             
-            <h3 className="font-serif text-xl font-bold text-navy mb-1">Event Registration</h3>
-            <p className="text-sm text-muted-foreground mb-6">Enter your details to register for this event.</p>
+            <h3 className="font-serif text-xl font-bold text-navy mb-1">{t("conferences.event_reg", "Event Registration")}</h3>
+            <p className="text-sm text-muted-foreground mb-6">{t("conferences.enter_details", "Enter your details to register for this event.")}</p>
             
             <form onSubmit={handleRegister} className="space-y-4">
               {error && <div className="rounded-lg bg-rose-50 p-3 text-sm text-rose-600 font-medium">{error}</div>}
               
               <div className="space-y-1">
-                <label className="text-sm font-medium">Full Name</label>
+                <label className="text-sm font-medium">{t("common.full_name", "Full Name")}</label>
                 <input required type="text" name="fullName" value={formData.fullName} onChange={handleChange} className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-navy focus:outline-none focus:ring-1 focus:ring-navy" placeholder="John Doe" />
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium">Email Address</label>
+                <label className="text-sm font-medium">{t("common.email", "Email Address")}</label>
                 <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-navy focus:outline-none focus:ring-1 focus:ring-navy" placeholder="john@example.com" />
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium">Phone Number</label>
+                <label className="text-sm font-medium">{t("common.phone", "Phone Number")}</label>
                 <input required type="tel" name="mobile" value={formData.mobile} onChange={handleChange} className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-navy focus:outline-none focus:ring-1 focus:ring-navy" placeholder="+91 9876543210" />
               </div>
 
               <Button type="submit" disabled={registering} className="w-full h-11 rounded-xl bg-accent text-accent-foreground font-bold hover:bg-accent/90 mt-2">
                 {registering ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
-                CONFIRM REGISTRATION
+                {t("conferences.confirm_reg", "CONFIRM REGISTRATION")}
               </Button>
             </form>
           </div>

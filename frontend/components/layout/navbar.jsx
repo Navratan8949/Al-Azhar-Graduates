@@ -454,7 +454,7 @@ export function Navbar() {
 
                   <div className="mt-6 rounded-xl bg-navy p-4 text-white">
                     <p className="text-xs font-semibold uppercase tracking-wider text-accent">
-                      Need help?
+                      {t("common.need_help", "Need help?")}
                     </p>
                     {site.phones.map((phone, idx) => (
                       <a key={idx} href={`tel:${phone.replace(/\s/g, "")}`} className="mt-2 block text-sm font-medium hover:text-accent transition-colors">

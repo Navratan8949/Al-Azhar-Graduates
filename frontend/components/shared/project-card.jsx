@@ -27,12 +27,12 @@ export function ProjectCard({ project }) {
               sizes="(max-width: 768px) 100vw, 33vw"
             />
           ) : (
-            <span className="text-muted-foreground font-serif">No Image</span>
+            <span className="text-muted-foreground font-serif">{t("common.no_data", "No Image")}</span>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
           {project.category && (
             <Badge className="absolute left-3 top-3 bg-accent text-accent-foreground hover:bg-accent">
-              {project.category}
+              {t("category." + (project.category?.toLowerCase() || "academic"), project.category)}
             </Badge>
           )}
         </div>

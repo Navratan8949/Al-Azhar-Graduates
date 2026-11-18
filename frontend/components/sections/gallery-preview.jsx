@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { getGalleryItems } from "@/service/gallery.service";
 import { useLanguage } from "@/context/LanguageContext";
+import { getLocalizedField } from "@/lib/localized-field";
 
 export function GalleryPreview() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
@@ -58,11 +59,11 @@ export function GalleryPreview() {
                 />
               ) : (
                 <div className="flex h-full items-center justify-center bg-slate-100 text-xs text-muted-foreground">
-                  No image
+                  {t("common.no_data", "No image")}
                 </div>
               )}
               <div className="absolute inset-x-0 bottom-0 bg-navy/75 p-2 text-xs font-semibold text-navy-foreground opacity-0 transition group-hover:opacity-100 line-clamp-1">
-                {item.title}
+                {getLocalizedField(item, "title", language)}
               </div>
             </Link>
           ))}

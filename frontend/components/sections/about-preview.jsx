@@ -73,9 +73,13 @@ export function AboutPreview() {
 
             <h2 
               className="text-balance font-bold leading-[1.15] text-primary text-4xl sm:text-5xl lg:text-[3.25rem] mb-8" 
-              style={{ fontFamily: "var(--font-cinzel), serif" }}
+              style={{ fontFamily: isRTL ? "inherit" : "var(--font-cinzel), serif" }}
             >
-              Connecting Graduates. Promoting <span className="text-accent italic font-normal">Scholarly Values.</span>
+              {language === "en" ? (
+                <>Connecting Graduates. Promoting <span className="text-accent italic font-normal">Scholarly Values.</span></>
+              ) : (
+                t("home.connecting_heading", "Connecting Graduates. Promoting Scholarly Values.")
+              )}
             </h2>
 
             <div className="space-y-6">

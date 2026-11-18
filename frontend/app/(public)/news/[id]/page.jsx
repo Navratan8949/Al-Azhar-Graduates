@@ -12,7 +12,7 @@ import { getLocalizedField } from "@/lib/localized-field"
 export default function NewsDetailPage() {
   const params = useParams()
   const router = useRouter()
-  const { language, isRTL } = useLanguage()
+  const { t, language, isRTL } = useLanguage()
   const [news, setNews] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -66,12 +66,12 @@ export default function NewsDetailPage() {
       <header className="bg-navy py-12 text-white sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link href="/news" className="mb-8 inline-flex items-center text-sm font-semibold text-white/70 hover:text-white transition-colors">
-            <ArrowLeft className={`mr-2 size-4 ${isRTL ? "rotate-180" : ""}`} /> Back to News
+            <ArrowLeft className={`mr-2 size-4 ${isRTL ? "rotate-180" : ""}`} /> {t("news.back_to_news", "Back to News")}
           </Link>
           
           <div className="mb-6 flex flex-wrap items-center gap-4 text-sm font-semibold uppercase tracking-wider text-accent">
             <span className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1">
-              <Tag className="size-4" /> {news.category?.replace("_", " ")}
+              <Tag className="size-4" /> {t("category." + (news.category?.toLowerCase() || "news"), news.category?.replace("_", " "))}
             </span>
             <span className="flex items-center gap-1.5 text-white/70">
               <Calendar className="size-4" />
@@ -112,7 +112,7 @@ export default function NewsDetailPage() {
         {/* Footer/Share section could go here */}
         <div className="mt-16 flex items-center justify-between border-t border-slate-200 pt-8">
           <Link href="/news" className="inline-flex items-center font-bold text-navy hover:text-accent transition-colors">
-            <ArrowLeft className={`mr-2 size-5 ${isRTL ? "rotate-180" : ""}`} /> View all news
+            <ArrowLeft className={`mr-2 size-5 ${isRTL ? "rotate-180" : ""}`} /> {t("news.view_all_news", "View all news")}
           </Link>
         </div>
       </div>

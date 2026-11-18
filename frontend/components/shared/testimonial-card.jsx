@@ -6,7 +6,7 @@ import { useLanguage } from "@/context/LanguageContext"
 import { getLocalizedField } from "@/lib/localized-field"
 
 export function TestimonialCard({ item }) {
-  const { language, isRTL } = useLanguage()
+  const { t, language, isRTL } = useLanguage()
   const name = getLocalizedField(item, "name", language)
   const designation = getLocalizedField(item, "designation", language) || item.role || "Supporter"
   const message = getLocalizedField(item, "message", language)
@@ -44,7 +44,7 @@ export function TestimonialCard({ item }) {
           ))}
         </div>
         <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white">
-          Verified
+          {t("common.verified", "Verified")}
         </span>
       </div>
     </div>

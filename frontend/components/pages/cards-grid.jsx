@@ -66,14 +66,14 @@ export function CardsGrid({ items = [], type }) {
                   />
                 ) : (
                   <span className="font-serif text-muted-foreground">
-                    No Image
+                    {t("common.no_data", "No Image")}
                   </span>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/30 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
               </div>
               <div className="flex flex-1 flex-col p-6 sm:p-8">
                 <p className="text-[11px] font-bold uppercase tracking-wider text-accent">
-                  {item.category || item.type || item.status || "Trust"}
+                  {t("category." + ((item.category || item.type || "academic").toLowerCase()), item.category || item.type || "Trust")}
                 </p>
                 <h2 className="mt-2 font-serif text-2xl font-bold leading-snug group-hover:text-accent transition-colors">
                   {title}
@@ -86,7 +86,7 @@ export function CardsGrid({ items = [], type }) {
                   <p className="mt-4 flex items-center gap-2 text-sm font-medium text-white/80">
                     <CalendarDays className="size-4 text-accent" />
                     {new Date(item.eventDate).toLocaleDateString(
-                      locale === "ar" ? "ar-EG" : locale === "ur" ? "ur-PK" : locale === "hi" ? "hi-IN" : "en-US",
+                      language === "ar" ? "ar-EG" : language === "ur" ? "ur-PK" : language === "hi" ? "hi-IN" : "en-US",
                       { day: "numeric", month: "short", year: "numeric" }
                     )}
                   </p>
@@ -95,7 +95,7 @@ export function CardsGrid({ items = [], type }) {
                 {hasProgressBar && (
                   <div className="mt-6 rounded-xl bg-white/5 p-4 border border-white/10">
                     <div className="mb-2 flex justify-between text-xs font-bold uppercase tracking-wider">
-                      <span className="text-white/70">Raised</span>
+                      <span className="text-white/70">{t("crowdfunding_section.raised", "Raised")}</span>
                       <span className="text-white">
                         ₹{raised.toLocaleString("en-IN")} / ₹
                         {goal.toLocaleString("en-IN")}

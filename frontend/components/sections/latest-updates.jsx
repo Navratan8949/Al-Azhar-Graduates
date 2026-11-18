@@ -141,7 +141,7 @@ export function LatestUpdates() {
                       >
                         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                           <span className="inline-flex items-center gap-1.5 rounded-md bg-accent/10 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-accent">
-                            {item.category?.replace("_", " ") || "NEWS"}
+                            {t("category." + (item.category?.toLowerCase() || "news"), item.category?.replace("_", " ") || "NEWS")}
                           </span>
                           <span className="flex shrink-0 items-center gap-1 text-[11px] font-medium text-white/70">
                             <Clock className="size-3" />
@@ -237,7 +237,7 @@ export function LatestUpdates() {
                 <div className="pointer-events-none absolute -right-6 -top-6 size-24 rounded-full bg-accent/20 blur-xl" />
                 <div className="relative z-10 min-w-0">
                   <span className="inline-flex items-center gap-1 rounded-full bg-accent/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent backdrop-blur-sm">
-                    ★ {t("conferences.peace_conf_title", "Featured Event")}
+                    ★ {t("conferences.featured_event", "Featured Event")}
                   </span>
                   <h3 className="mt-2 line-clamp-1 font-serif text-sm font-bold text-white sm:text-base">
                     {getLocalizedField(events[0], "title", language)}

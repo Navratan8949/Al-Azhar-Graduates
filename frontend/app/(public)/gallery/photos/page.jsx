@@ -48,7 +48,7 @@ function LightboxPhoto({ item, onClose, language }) {
           <p className="font-serif text-lg font-semibold text-white">{title}</p>
           {item.category && (
             <span className="mt-1 inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/70">
-              {item.category}
+              {t("category." + (item.category?.toLowerCase() || "conferences"), item.category)}
             </span>
           )}
         </div>
@@ -265,7 +265,7 @@ export default function GalleryPage() {
                           </p>
                           {item.category && (
                             <span className="mt-1 inline-block rounded-full bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
-                              {item.category}
+                              {t("category." + (item.category?.toLowerCase() || "conferences"), item.category)}
                             </span>
                           )}
                         </div>
@@ -310,14 +310,14 @@ export default function GalleryPage() {
                             </div>
                           </div>
                           <span className={`absolute ${isRTL ? "right-3" : "left-3"} top-3 rounded-full bg-black/60 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm`}>
-                            Video
+                            {t("gallery.video_title", "Video")}
                           </span>
                         </div>
                         <div className="p-4">
                           <p className="font-semibold text-navy">{title}</p>
                           {item.category && (
                             <span className="mt-1 inline-block rounded-full bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
-                              {item.category}
+                              {t("category." + (item.category?.toLowerCase() || "conferences"), item.category)}
                             </span>
                           )}
                         </div>

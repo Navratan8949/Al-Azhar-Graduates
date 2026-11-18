@@ -4,18 +4,20 @@ import * as LucideIcons from "lucide-react";
 import { Counter } from "@/components/shared/counter";
 import { Reveal } from "@/components/shared/reveal";
 import { useSelector } from "react-redux";
-
-const DEFAULT_STATS = [
-  { label: "Arabic Language Courses", value: "25+", icon: "GraduationCap" },
-  { label: "Academic Gatherings", value: "100+", icon: "Users" },
-  { label: "Welfare Programs", value: "10+", icon: "HandHeart" },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export function ImpactStats() {
+  const { t, language } = useLanguage();
   const { data: siteContent } = useSelector((state) => state.siteContent);
 
-  let stats = DEFAULT_STATS;
-  if (siteContent?.impact_stats?.content) {
+  const defaultStats = [
+    { label: t("impact.arabic_courses", "Arabic Language Courses"), value: "25+", icon: "GraduationCap" },
+    { label: t("impact.gatherings", "Academic Gatherings"), value: "100+", icon: "Users" },
+    { label: t("impact.welfare", "Welfare Programs"), value: "10+", icon: "HandHeart" },
+  ];
+
+  let stats = defaultStats;
+  if (siteContent?.impact_stats?.content && language === "en") {
     try {
       const parsed = JSON.parse(siteContent.impact_stats.content);
       if (Array.isArray(parsed) && parsed.length > 0) {
@@ -65,7 +67,13 @@ export function ImpactStats() {
                   )}
 
                   <p className="text-sm font-medium text-muted-foreground">
-                    {stat.label}
+                    {stat.label?.toLowerCase().includes("arabic")
+                      ? t("impact.arabic_courses", stat.label)
+                      : stat.label?.toLowerCase().includes("academic") || stat.label?.toLowerCase().includes("seminar")
+                      ? t("impact.gatherings", stat.label)
+                      : stat.label?.toLowerCase().includes("welfare") || stat.label?.toLowerCase().includes("community")
+                      ? t("impact.welfare", stat.label)
+                      : stat.label}
                   </p>
                 </div>
               </Reveal>

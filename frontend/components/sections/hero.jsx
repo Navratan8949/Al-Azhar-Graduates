@@ -140,11 +140,11 @@ export function Hero() {
   }
 
   let stats = [
-    { value: "25+", label: "Arabic Courses", icon: Users },
-    { value: "100+", label: "Academic Gatherings", icon: ShieldCheck },
-    { value: "10+", label: "Welfare Support", icon: Heart },
+    { value: "25+", label: t("impact.arabic_courses", "Arabic Courses"), icon: Users },
+    { value: "100+", label: t("impact.gatherings", "Academic Gatherings"), icon: ShieldCheck },
+    { value: "10+", label: t("impact.welfare", "Welfare Support"), icon: Heart },
   ];
-  if (siteContent?.impact_stats?.content) {
+  if (siteContent?.impact_stats?.content && language === "en") {
     try {
       const parsedStats = JSON.parse(siteContent.impact_stats.content);
       if (Array.isArray(parsedStats) && parsedStats.length > 0) {
@@ -298,7 +298,13 @@ export function Hero() {
                     {stat.value}
                   </p>
                   <p className="text-[11px] text-white/60 uppercase tracking-widest font-bold">
-                    {stat.label}
+                    {stat.label?.toLowerCase().includes("arabic")
+                      ? t("impact.arabic_courses", stat.label)
+                      : stat.label?.toLowerCase().includes("academic") || stat.label?.toLowerCase().includes("seminar")
+                      ? t("impact.gatherings", stat.label)
+                      : stat.label?.toLowerCase().includes("welfare") || stat.label?.toLowerCase().includes("support")
+                      ? t("impact.welfare", stat.label)
+                      : stat.label}
                   </p>
                 </div>
               </div>

@@ -13,8 +13,12 @@ export default function Page() {
   const { data: siteContent } = useSelector((state) => state.siteContent);
 
   let image = "/al-azhar-cairo.jpg";
-  let stats = isRTL
+  let stats = language === "ar"
     ? ["شبكة عالمية", "العلم والوسطية", "خدمة الإنسانية"]
+    : language === "ur"
+    ? ["عالمی نیٹ ورک", "علم و اعتدال", "خدمتِ انسانیت"]
+    : language === "hi"
+    ? ["वैश्विक नेटवर्क", "इस्लामी ज्ञान एवं संयम", "मानवता की सेवा"]
     : ["Global Network", "Islamic Scholarship", "Moderation & Peace"];
 
   const localizedAboutSections = [

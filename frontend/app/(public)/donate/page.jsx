@@ -29,6 +29,7 @@ import { getCrowdfundingById } from "@/service/crowdfunding.service";
 import { QRCodeSVG } from "qrcode.react";
 import Script from "next/script";
 import { FaqSection } from "@/components/sections/faq-section";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Dynamic Bank Details are now fetched from Redux state
 
@@ -54,6 +55,7 @@ function CopyBtn({ text }) {
 }
 
 function ManualDonationFormInner() {
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [linkedTitle, setLinkedTitle] = useState("");
   const [linkedType, setLinkedType] = useState("");
@@ -259,7 +261,7 @@ function ManualDonationFormInner() {
         {/* Quick amount selector */}
         <div className="rounded-3xl border border-border/50 bg-slate-50/50 p-6">
           <Label className="mb-4 block text-sm font-bold text-navy">
-            Select Amount (₹) *
+            {t("donate.select_amount", "Select Amount (₹) *")}
           </Label>
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
             {QUICK_AMOUNTS.map((a) => (
@@ -284,7 +286,7 @@ function ManualDonationFormInner() {
             <Input
               className="h-14 rounded-2xl pl-10 border border-border/60 bg-white font-bold text-lg text-navy placeholder:text-muted-foreground/60 shadow-sm focus-visible:border-lime focus-visible:ring-4 focus-visible:ring-lime/10 transition-all"
               type="number"
-              placeholder="Enter custom amount"
+              placeholder={t("donate.custom_amount", "Enter custom amount")}
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               required
@@ -297,7 +299,7 @@ function ManualDonationFormInner() {
         <div className="grid gap-5 sm:grid-cols-2 mt-2">
           <div className="grid gap-2.5">
             <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
-              Full Name *
+              {t("donate.full_name", "Full Name *")}
             </Label>
             <Input
               className="h-14 rounded-2xl border border-border/60 bg-slate-50/50 px-5 font-semibold text-navy shadow-sm focus-visible:bg-white focus-visible:border-lime focus-visible:ring-4 focus-visible:ring-lime/10 transition-all"
@@ -309,7 +311,7 @@ function ManualDonationFormInner() {
           </div>
           <div className="grid gap-2.5">
             <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
-              Email Address *
+              {t("donate.email", "Email Address *")}
             </Label>
             <Input
               type="email"
@@ -324,7 +326,7 @@ function ManualDonationFormInner() {
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="grid gap-2.5">
             <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
-              Phone Number *
+              {t("donate.phone", "Phone Number *")}
             </Label>
             <Input
               className="h-14 rounded-2xl border border-border/60 bg-slate-50/50 px-5 font-semibold text-navy shadow-sm focus-visible:bg-white focus-visible:border-lime focus-visible:ring-4 focus-visible:ring-lime/10 transition-all"
@@ -336,7 +338,7 @@ function ManualDonationFormInner() {
           </div>
           <div className="grid gap-2.5">
             <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
-              Payment Method *
+              {t("donate.payment_method", "Payment Method *")}
             </Label>
             <div className="relative">
               <select
@@ -344,10 +346,10 @@ function ManualDonationFormInner() {
                 value={form.paymentMethod}
                 onChange={(e) => set("paymentMethod", e.target.value)}
               >
-                <option value="online">Instant Online (Card/UPI)</option>
-                <option value="upi">Direct UPI (QR / VPA)</option>
-                <option value="bank">Bank Transfer (NEFT)</option>
-                <option value="cash">Cash Contribution</option>
+                <option value="online">{t("donate.method_online", "Instant Online (Card/UPI)")}</option>
+                <option value="upi">{t("donate.method_upi", "Direct UPI (QR / VPA)")}</option>
+                <option value="bank">{t("donate.method_bank", "Bank Transfer (NEFT)")}</option>
+                <option value="cash">{t("donate.method_cash", "Cash Contribution")}</option>
               </select>
               <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 size-5 rotate-90 text-navy pointer-events-none" />
             </div>
@@ -358,7 +360,7 @@ function ManualDonationFormInner() {
           <div className="rounded-3xl border border-amber-200 bg-amber-50/50 p-6 space-y-5 mt-2">
             <div className="grid gap-2.5">
               <Label className="text-xs font-bold uppercase tracking-widest text-amber-900 ml-1">
-                Transaction ID / Reference (UTR) *
+                {t("donate.transaction_id", "Transaction ID / Reference (UTR) *")}
               </Label>
               <Input
                 className="h-14 rounded-2xl border border-amber-200 bg-white px-5 font-semibold text-navy placeholder:text-amber-900/40 shadow-sm focus-visible:border-amber-400 focus-visible:ring-4 focus-visible:ring-amber-400/10 transition-all"
@@ -370,7 +372,7 @@ function ManualDonationFormInner() {
             </div>
             <div className="grid gap-2.5">
               <Label className="text-xs font-bold uppercase tracking-widest text-amber-900 ml-1">
-                Payment Screenshot (Optional)
+                {t("donate.screenshot", "Payment Screenshot (Optional)")}
               </Label>
               <input
                 type="file"
@@ -384,11 +386,11 @@ function ManualDonationFormInner() {
 
         <div className="grid gap-2.5 mt-2">
           <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
-            Donation Purpose (Optional)
+            {t("donate.purpose", "Donation Purpose (Optional)")}
           </Label>
           <Textarea
             className="min-h-[120px] rounded-2xl border border-border/60 bg-slate-50/50 p-5 font-medium text-navy placeholder:text-muted-foreground/60 shadow-sm focus-visible:bg-white focus-visible:border-lime focus-visible:ring-4 focus-visible:ring-lime/10 transition-all resize-none"
-            placeholder="E.g. Education fund, General donation, or in memory of someone..."
+            placeholder={t("donate.purpose_placeholder", "E.g. Education fund, General donation, or in memory of someone...")}
             value={form.purpose}
             onChange={(e) => set("purpose", e.target.value)}
           />
@@ -400,14 +402,14 @@ function ManualDonationFormInner() {
           className="mt-4 h-16 w-full rounded-2xl bg-navy text-lg font-bold text-white shadow-xl shadow-navy/20 transition-all hover:-translate-y-1 hover:bg-navy/90 hover:shadow-2xl hover:shadow-navy/30"
         >
           {loading ? (
-            "Processing Securely…"
+            t("donate.processing", "Processing Securely…")
           ) : form.paymentMethod === "online" ? (
             <span className="flex items-center justify-center gap-3">
-              <ShieldCheck className="size-6" /> Pay Securely (₹{amount || "0"})
+              <ShieldCheck className="size-6" /> {t("donate.pay_securely", "Pay Securely")} (₹{amount || "0"})
             </span>
           ) : (
             <span className="flex items-center justify-center gap-3">
-              <Check className="size-6" /> Submit Donation Details
+              <Check className="size-6" /> {t("donate.submit_btn", "Submit Donation Details")}
             </span>
           )}
         </Button>
@@ -437,6 +439,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSiteContent } from "@/redux/features/siteContentSlice";
 
 export default function DonatePage() {
+  const { t, isRTL } = useLanguage();
   const [activeTab, setActiveTab] = useState("upi");
   const dispatch = useDispatch();
   const { data: siteContent } = useSelector((state) => state.siteContent);
@@ -486,15 +489,13 @@ export default function DonatePage() {
 
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-lime/30 bg-lime/10 px-5 py-2 text-xs font-bold uppercase tracking-widest text-lime mb-8 backdrop-blur-md">
-            <Heart className="size-4 animate-pulse" /> Support Our Mission
+            <Heart className="size-4 animate-pulse" /> {t("donate.badge", "Support Our Mission")}
           </div>
           <h1 className="font-serif text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.1]">
-            Empower with{" "}
-            <span className="text-lime text-gradient">Generosity</span>
+            {t("donate.title", "Empower with Generosity")}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-medium text-white/70">
-            Your contribution directly empowers education, welfare, and
-            community programs. Every donation creates a lasting impact.
+            {t("donate.subtitle", "Your contribution directly empowers education, welfare, and community programs. Every donation creates a lasting impact.")}
           </p>
         </div>
       </section>
@@ -506,7 +507,7 @@ export default function DonatePage() {
           <div className="lg:col-span-5 space-y-8">
             <div className="rounded-[2.5rem] bg-white p-8 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-border/50">
               <h2 className="font-serif text-3xl font-bold text-navy mb-6">
-                How to donate
+                {t("donate.how_to_donate", "How to donate")}
               </h2>
 
               <div className="flex rounded-2xl border border-border/50 bg-slate-50 p-1.5 mb-8">
@@ -514,12 +515,12 @@ export default function DonatePage() {
                   [
                     "upi",
                     <Smartphone key="upi" className="size-4" />,
-                    "UPI / QR",
+                    t("donate.tab_upi", "UPI / QR"),
                   ],
                   [
                     "bank",
                     <Building2 key="bank" className="size-4" />,
-                    "Bank Transfer",
+                    t("donate.tab_bank", "Bank Transfer"),
                   ],
                 ].map(([key, icon, label]) => (
                   <button
@@ -561,7 +562,7 @@ export default function DonatePage() {
                     <div className="w-full space-y-5 rounded-2xl bg-slate-50 p-5 border border-border/50">
                       <div>
                         <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-                          UPI ID
+                          {t("donate.upi_id", "UPI ID")}
                         </p>
                         <p className="mt-1 flex items-center font-mono text-lg font-bold text-navy">
                           {BANK.upi}
@@ -570,7 +571,7 @@ export default function DonatePage() {
                       </div>
                       <div>
                         <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-                          Account Name
+                          {t("donate.account_name", "Account Name")}
                         </p>
                         <p className="mt-1 text-base font-semibold text-navy">
                           {BANK.accountName}
@@ -584,11 +585,11 @@ export default function DonatePage() {
               {activeTab === "bank" && (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300 space-y-4">
                   {[
-                    ["Account Name", BANK.accountName],
-                    ["Account Number", BANK.accountNumber],
-                    ["IFSC Code", BANK.ifsc],
-                    ["Bank Name", BANK.bank],
-                    ["Branch", BANK.branch],
+                    [t("donate.account_name", "Account Name"), BANK.accountName],
+                    [t("donate.account_number", "Account Number"), BANK.accountNumber],
+                    [t("donate.ifsc_code", "IFSC Code"), BANK.ifsc],
+                    [t("donate.bank_name", "Bank Name"), BANK.bank],
+                    [t("donate.branch", "Branch"), BANK.branch],
                   ].map(([label, value]) => (
                     <div
                       key={label}
@@ -609,8 +610,7 @@ export default function DonatePage() {
               <div className="mt-6 rounded-2xl bg-amber-50 px-5 py-4 text-xs font-semibold text-amber-900 border border-amber-100 flex gap-3 items-start">
                 <Info className="size-5 shrink-0 mt-0.5 text-amber-600" />
                 <p>
-                  After offline payment, please fill out the form on the right
-                  to receive your donation receipt.
+                  {t("donate.offline_notice", "After offline payment, please fill out the form on the right to receive your donation receipt.")}
                 </p>
               </div>
             </div>
@@ -641,12 +641,10 @@ export default function DonatePage() {
               </span>
               <div>
                 <p className="font-bold text-emerald-900 text-lg">
-                  80G Tax Exemption
+                  {t("donate.tax_title", "80G Tax Exemption")}
                 </p>
                 <p className="mt-1 text-sm font-medium leading-relaxed text-emerald-800/80">
-                  Donations are eligible for 80G tax deduction. You'll
-                  automatically receive an official receipt by email for IT
-                  filing.
+                  {t("donate.tax_desc", "Donations are eligible for 80G tax deduction. You will automatically receive an official receipt by email for IT filing.")}
                 </p>
               </div>
             </div>
@@ -657,10 +655,10 @@ export default function DonatePage() {
             <div className="sticky top-24 overflow-hidden rounded-[2.5rem] border border-border/50 bg-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)]">
               <div className="bg-white px-8 pt-8 pb-4">
                 <h2 className="font-serif text-3xl font-bold text-navy">
-                  Secure Donation Form
+                  {t("donate.form_title", "Secure Donation Form")}
                 </h2>
                 <p className="mt-2 text-muted-foreground font-medium">
-                  Please enter your details below.
+                  {t("donate.form_desc", "Please enter your details below.")}
                 </p>
               </div>
               <div className="px-8 pb-8">

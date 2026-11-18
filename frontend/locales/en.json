@@ -43,7 +43,10 @@
     "admin_login": "Admin Login",
     "member_login": "Member Login",
     "portal": "Dashboard",
-    "logout": "Logout"
+    "logout": "Logout",
+    "fatwas": "Fatwas & Guidance",
+    "books": "Books & Articles",
+    "signup": "Create Free Account"
   },
   "home": {
     "heading": "Welcome to the India Branch",
@@ -84,7 +87,9 @@
         "label": "Contact Us",
         "href": "/contact"
       }
-    ]
+    ],
+    "tagline": "Knowledge | Moderation | Unity | Service to Humanity",
+    "connecting_heading": "Connecting Graduates. Promoting Scholarly Values."
   },
   "about": {
     "title": "About Us",
@@ -141,12 +146,13 @@
     "humanitarian_title": "Humanitarian & Community Initiatives",
     "humanitarian_text": "Promoting social solidarity through healthcare drives, support for underserved families, educational scholarships, and community relief.",
     "empowerment_title": "Scholar Empowerment",
-    "empowerment_text": "Empowering Indian scholars through international academic exposure, teacher training, and scholarly publication opportunities."
+    "empowerment_text": "Empowering Indian scholars through international academic exposure, teacher training, and scholarly publication opportunities.",
+    "desc": "Our core activities focus on the following fields: Academic, Research, Intellectual, Language, and Community."
   },
   "impact": {
     "title": "Our Impact in Numbers",
-    "arabic_courses": "25+ Arabic Language Courses & Workshops",
-    "gatherings": "100+ Academic & Intellectual Gatherings",
+    "arabic_courses": "Arabic Language Courses",
+    "gatherings": "Academic Gatherings",
     "welfare_programs": "10+ Welfare & Community Support Programs",
     "stats": [
       {
@@ -163,7 +169,8 @@
       }
     ],
     "dialogues": "Numerous goodwill meetings and academic dialogues.",
-    "cooperation": "Promoting educational cooperation between Indian scholars and Al-Azhar."
+    "cooperation": "Promoting educational cooperation between Indian scholars and Al-Azhar.",
+    "welfare": "Welfare Programs"
   },
   "conferences": {
     "title": "Conferences & Events",
@@ -174,14 +181,25 @@
     "peace_conf_focus": "The conference reinforced shared human values, moderate religious discourse, dialogue, and peaceful coexistence.",
     "upcoming_title": "Upcoming Events",
     "upcoming_subtitle": "Explore upcoming academic conferences, seminars, lectures, and training workshops.",
-    "details_title": "Event Details",
+    "details_title": "Event details",
     "fields": {
       "title": "Event Title",
       "date_time": "Date & Time",
       "venue": "Venue",
       "description": "Description",
       "registration": "Registration"
-    }
+    },
+    "all_events": "View All Events",
+    "desc": "Discover our latest conferences, academic sessions, and intellectual forums.",
+    "no_events": "No events scheduled at the moment.",
+    "featured_event": "Featured Event",
+    "register": "Register",
+    "reg_closed": "Registration Closed",
+    "reg_now": "Register Now",
+    "event_reg": "Event Registration",
+    "enter_details": "Enter your details to register for this event.",
+    "confirm_reg": "Confirm Registration",
+    "reg_success": "You are successfully registered for this event!"
   },
   "news": {
     "title": "News & Articles",
@@ -198,7 +216,11 @@
       "Interfaith Dialogue",
       "Society & Culture"
     ],
-    "read_full": "Read Full Article"
+    "read_full": "Read Full Article",
+    "all_articles": "View All Updates",
+    "no_articles": "No recent updates published yet.",
+    "back_to_news": "Back to News",
+    "view_all_news": "View all news"
   },
   "publications": {
     "title": "Publications",
@@ -224,7 +246,9 @@
     "photo_title": "Photo Gallery",
     "photo_desc": "Visual documentation of conferences, seminars, educational workshops, and community welfare programs.",
     "video_title": "Video Gallery",
-    "video_desc": "Watch recorded lectures, conference proceedings, interviews, and special video presentations."
+    "video_desc": "Watch recorded lectures, conference proceedings, interviews, and special video presentations.",
+    "photos_title": "Photo Gallery",
+    "photos_desc": "A visual record of our work, events, conferences, and gatherings."
   },
   "membership": {
     "title": "Membership",
@@ -281,7 +305,19 @@
     "declaration_title": "Declaration",
     "declaration_text": "I hereby declare that all information provided in this application is true and complete, and I pledge to uphold the objectives, principles, and regulations of the association.",
     "submit_button": "Submit Membership Application",
-    "service_desc": "Join our global network of Al-Azhar graduates."
+    "service_desc": "Join our global network of Al-Azhar graduates.",
+    "declaration_required": "Please check the declaration box to proceed.",
+    "submit_failed": "Failed to submit application.",
+    "auth_required_desc": "To maintain the integrity of our organization, official membership applications require a verified account. Please log in or create a free web account to proceed.",
+    "application_submitted": "Application Submitted!",
+    "application_submitted_desc": "Your official membership application has been received and is under review. You will be redirected to your dashboard shortly.",
+    "fill_notice": "Please fill out all the details accurately as per your Al-Azhar records.",
+    "update_profile_note": "To change this, update your profile first.",
+    "arabic_name_placeholder": "Enter Name in Arabic (if applicable)",
+    "father_placeholder": "Father's Full Name",
+    "for_id_card": "For your ID card",
+    "govt_id": "Govt. issued ID",
+    "cert_or_degree": "Certificate or Degree"
   },
   "president_message": {
     "section_title": "President's Message",
@@ -345,7 +381,9 @@
     "resources": "Resources & Info",
     "contact_info": "Contact Info",
     "copyright": "All Rights Reserved",
-    "rights": "World Association for Al-Azhar Graduates – India"
+    "rights": "World Association for Al-Azhar Graduates – India",
+    "tax_info": "Registered Charitable Trust · 80G & 12A Certified",
+    "connect_desc": "Stay updated with our latest activities."
   },
   "featured_projects": {
     "eyebrow": "Our Work",
@@ -353,14 +391,18 @@
     "description": "Ongoing initiatives creating real educational and social impact across communities in India.",
     "empty": "No featured projects published yet.",
     "empty_desc": "We will highlight our ongoing initiatives here soon.",
-    "view_all": "View All Projects"
+    "view_all": "View All Projects",
+    "subtitle": "Ongoing initiatives creating real change in communities across India.",
+    "no_projects": "No featured projects",
+    "no_projects_desc": "We will highlight our ongoing initiatives here soon."
   },
   "testimonials_section": {
     "eyebrow": "Voices of Impact",
     "title": "Words From Our Community",
     "description": "Reflections and feedback from scholars, students, and community members participating in our programs.",
     "empty": "No testimonials available at the moment.",
-    "view_all": "View All Testimonials"
+    "view_all": "View All Testimonials",
+    "no_testimonials": "No testimonials available at the moment."
   },
   "latest_updates": {
     "title": "Latest Updates & News",
@@ -380,13 +422,15 @@
     "badge": "Support Our Cause",
     "title": "Humanitarian & Welfare Campaigns",
     "description": "Join hands with us to make a lasting impact. Your contributions help provide educational opportunities and welfare to those in need.",
-    "view_all": "View All Campaigns"
+    "view_all": "View All Campaigns",
+    "raised": "Raised",
+    "support_now": "Support this campaign"
   },
   "common": {
     "scroll_to_top": "Back to top",
     "no_image": "No Image",
     "view_project": "View project",
-    "read_more": "Read more",
+    "read_more": "Read More",
     "know_more": "Know More",
     "detailed_story": "Detailed Plan & Fund Utilization",
     "verified_ngo_title": "100% Verified Non-Profit Campaign",
@@ -413,7 +457,35 @@
     "all_campaigns": "All campaigns",
     "why_campaign_matters": "Why this campaign matters",
     "campaign_funds_note": "Funds are tracked against the published target. Receipts are issued after verification.",
-    "donate_to_campaign": "Donate to this campaign"
+    "donate_to_campaign": "Donate to this campaign",
+    "privacy_policy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "no_data": "Nothing to show yet",
+    "check_back": "Check back later for updates in this section.",
+    "support_desc": "Your contribution helps fund various initiatives and outreach programs.",
+    "have_questions": "Have Questions?",
+    "faqs": "Frequently Asked Questions",
+    "faq_desc": "Find answers to common questions about our organization, membership, and educational programs.",
+    "newsletter": "Newsletter",
+    "stay_connected": "Stay connected with",
+    "newsletter_desc": "Receive event notices, academic updates and publications from Al-Azhar Graduates directly in your inbox.",
+    "email_placeholder": "Enter your email address...",
+    "subscribe": "Subscribe",
+    "privacy_note": "We care about your data. No spam, ever.",
+    "subscribe_success": "Thanks for subscribing!",
+    "error_occurred": "Something went wrong. Please try again.",
+    "view_details": "View project",
+    "get_directions": "Get Directions",
+    "download": "Download",
+    "all": "All Media",
+    "search": "Search gallery...",
+    "blood_group": "Blood Group (Optional)",
+    "select": "Select",
+    "verified": "Verified",
+    "need_help": "Need help?",
+    "full_name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number"
   },
   "founder": {
     "inspiration_badge": "Inspiration & Guiding Light",
@@ -523,5 +595,69 @@
     "honored": "Honored Recognition",
     "no_awards": "No awards found",
     "no_awards_desc": "Awards and certificates will appear here once published."
+  },
+  "category": {
+    "news": "News",
+    "press_release": "Press Release",
+    "event": "Event",
+    "article": "Article",
+    "announcement": "Announcement"
+  },
+  "crowdfunding": {
+    "all": "All campaigns",
+    "why_matters": "Why this campaign matters",
+    "transparency": "Funds are tracked against the published target. Receipts are issued after verification.",
+    "raised": "Raised",
+    "of": "of",
+    "funded": "funded",
+    "donate_btn": "Donate to this campaign"
+  },
+  "projects": {
+    "all": "All Programs",
+    "about": "About this program",
+    "statement": "This initiative is designed to strengthen academic and professional cooperation, creating meaningful opportunities for collective service and community development.",
+    "highlights_title": "Key Highlights",
+    "highlight1": "Academic excellence and continuous learning",
+    "highlight2": "Fostering moderate and balanced Islamic thought",
+    "highlight3": "Open to Al-Azhar graduates across India",
+    "highlight4": "Promoting interfaith dialogue and coexistence",
+    "start_date": "Start",
+    "end_date": "End"
+  },
+  "donate": {
+    "badge": "Support Our Mission",
+    "title": "Empower with Generosity",
+    "subtitle": "Your contribution directly empowers education, welfare, and community programs. Every donation creates a lasting impact.",
+    "how_to_donate": "How to donate",
+    "tab_upi": "UPI / QR",
+    "tab_bank": "Bank Transfer",
+    "upi_id": "UPI ID",
+    "account_name": "Account Name",
+    "account_number": "Account Number",
+    "ifsc_code": "IFSC Code",
+    "bank_name": "Bank Name",
+    "branch": "Branch",
+    "offline_notice": "After offline payment, please fill out the form on the right to receive your donation receipt.",
+    "tax_title": "80G Tax Exemption",
+    "tax_desc": "Donations are eligible for 80G tax deduction. You will automatically receive an official receipt by email for IT filing.",
+    "form_title": "Secure Donation Form",
+    "form_desc": "Please enter your details below.",
+    "select_amount": "Select Amount (₹) *",
+    "custom_amount": "Enter custom amount",
+    "full_name": "Full Name *",
+    "email": "Email Address *",
+    "phone": "Phone Number *",
+    "payment_method": "Payment Method *",
+    "method_online": "Instant Online (Card/UPI)",
+    "method_upi": "Direct UPI (QR / VPA)",
+    "method_bank": "Bank Transfer (NEFT)",
+    "method_cash": "Cash Contribution",
+    "transaction_id": "Transaction ID / Reference (UTR) *",
+    "screenshot": "Payment Screenshot (Optional)",
+    "purpose": "Donation Purpose (Optional)",
+    "purpose_placeholder": "E.g. Education fund, General donation, or in memory of someone...",
+    "submit_btn": "Submit Donation Details",
+    "pay_securely": "Pay Securely",
+    "processing": "Processing Securely…"
   }
 }
