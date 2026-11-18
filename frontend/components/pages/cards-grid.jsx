@@ -61,7 +61,7 @@ export function CardsGrid({ items = [], type }) {
                     src={item.image?.url || item.image}
                     alt={title || "Image"}
                     fill
-                    className="object-contain transition duration-500 group-hover:scale-105"
+                    className="object-cover object-center transition duration-500 group-hover:scale-105"
                     sizes="(min-width:1024px) 33vw, 100vw"
                   />
                 ) : (

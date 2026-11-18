@@ -23,7 +23,7 @@ export function ProjectCard({ project }) {
               src={project.image?.url || project.image}
               alt={title}
               fill
-              className="object-contain transition-transform duration-500 group-hover:scale-105"
+              className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 33vw"
             />
           ) : (

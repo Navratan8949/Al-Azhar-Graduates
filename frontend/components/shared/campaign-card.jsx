@@ -23,12 +23,12 @@ export function CampaignCard({ campaign }) {
   return (
     <Link href={`/crowdfunding/${campaign._id}`} className="group block h-full">
       <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border/80 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-lift">
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[16/10] overflow-hidden bg-muted">
           <Image
             src={campaign.image || "/placeholder.svg"}
             alt={title}
             fill
-            className="object-contain transition-transform duration-500 group-hover:scale-105"
+            className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         </div>
