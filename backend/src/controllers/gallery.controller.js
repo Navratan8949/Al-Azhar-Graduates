@@ -4,7 +4,10 @@ const { uploadLocalFile, deleteLocalFile } = require("../utils/fileUpload");
 // Admin — Create gallery item
 exports.createGalleryItem = async (req, res) => {
     try {
-        const { title, description, type, videoUrl, category, status } = req.body;
+        let { title, description, type, videoUrl, category, status, translations } = req.body;
+        if (typeof translations === "string") {
+            try { translations = JSON.parse(translations); } catch (e) { translations = {}; }
+        }
 
         let image = { public_id: "", url: "" };
         // For photos: upload image file; for videos: image is used as thumbnail
@@ -23,6 +26,7 @@ exports.createGalleryItem = async (req, res) => {
             videoUrl: videoUrl || "",
             category: category || "",
             status: status || "active",
+            translations: translations || {},
             createdBy: req.user.id,
         });
 
@@ -80,6 +84,13 @@ exports.updateGalleryItem = async (req, res) => {
         if (category !== undefined) galleryItem.category = category;
         if (status) galleryItem.status = status;
         if (videoUrl !== undefined) galleryItem.videoUrl = videoUrl;
+        if (req.body.translations !== undefined) {
+            let tr = req.body.translations;
+            if (typeof tr === "string") {
+                try { tr = JSON.parse(tr); } catch (e) { }
+            }
+            galleryItem.translations = tr;
+        }
 
         // If a new image/thumbnail uploaded
         if (req.file) {

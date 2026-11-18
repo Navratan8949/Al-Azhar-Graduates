@@ -10,7 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getLocalizedField } from "@/lib/localized-field";
 
 export default function Page() {
-  const { t, locale } = useLanguage();
+  const { t, language } = useLanguage();
   const [awards, setAwards] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -57,8 +57,9 @@ export default function Page() {
         ) : awards.length > 0 ? (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {awards.map((award, idx) => {
-              const title = getLocalizedField(award, "title", locale);
-              const description = getLocalizedField(award, "description", locale);
+              const title = getLocalizedField(award, "title", language);
+              const description = getLocalizedField(award, "description", language);
+              const awardedBy = getLocalizedField(award, "awardedBy", language) || award.awardedBy;
               return (
                 <Reveal key={award._id} delay={idx * 0.1}>
                   <article className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-border/60 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] hover:border-accent/30">
@@ -94,9 +95,9 @@ export default function Page() {
                             {award.year}
                           </span>
                         )}
-                        {award.awardedBy && (
+                        {awardedBy && (
                           <span className="text-sm font-semibold text-muted-foreground">
-                            {award.awardedBy}
+                            {awardedBy}
                           </span>
                         )}
                       </div>

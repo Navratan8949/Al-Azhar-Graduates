@@ -10,7 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getLocalizedField } from "@/lib/localized-field";
 
 export default function Page() {
-  const { t, locale } = useLanguage();
+  const { t, language } = useLanguage();
   const [team, setTeam] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -55,10 +55,10 @@ export default function Page() {
           ) : (
             <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {team.map((m, i) => {
-                const name = getLocalizedField(m, "name", locale);
+                const name = getLocalizedField(m, "name", language);
                 const designation =
-                  getLocalizedField(m, "designation", locale) ||
-                  getLocalizedField(m, "role", locale);
+                  getLocalizedField(m, "designation", language) ||
+                  getLocalizedField(m, "role", language);
 
                 return (
                   <Reveal key={m._id} delay={i * 0.1}>

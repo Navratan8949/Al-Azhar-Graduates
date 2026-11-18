@@ -28,7 +28,10 @@ exports.getAllContent = async (req, res) => {
 // Admin — Create or Update content by key (upsert)
 exports.upsertContent = async (req, res) => {
   try {
-    const { key, title, content, content_hi, content_gu } = req.body;
+    let { key, title, content, content_hi, content_gu, translations } = req.body;
+    if (typeof translations === "string") {
+      try { translations = JSON.parse(translations); } catch (e) { }
+    }
 
     const existingContent = await SiteContent.findOne({ key });
 
@@ -52,6 +55,7 @@ exports.upsertContent = async (req, res) => {
       content_gu,
       updatedBy: req.user._id,
     };
+    if (translations) updateData.translations = translations;
     if (image) updateData.image = image;
 
     const siteContent = await SiteContent.findOneAndUpdate(

@@ -3,7 +3,10 @@ const { uploadLocalFile, deleteLocalFile } = require("../utils/fileUpload");
 
 exports.createNews = async (req, res) => {
     try {
-        const { title, description, category, status } = req.body;
+        let { title, description, category, status, translations } = req.body;
+        if (typeof translations === "string") {
+            try { translations = JSON.parse(translations); } catch (e) { translations = {}; }
+        }
         let image = { public_id: "", url: "" };
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
@@ -18,6 +21,7 @@ exports.createNews = async (req, res) => {
             category,
             status,
             image,
+            translations: translations || {},
             createdBy: req.user.id
         });
 
@@ -52,6 +56,9 @@ exports.updateNews = async (req, res) => {
         if (!news) return res.status(404).json({ success: false, message: "News not found" });
 
         const updatedData = { ...req.body };
+        if (typeof updatedData.translations === "string") {
+            try { updatedData.translations = JSON.parse(updatedData.translations); } catch (e) { }
+        }
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
             if (uploadResult) {

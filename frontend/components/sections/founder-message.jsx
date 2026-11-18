@@ -39,10 +39,14 @@ export function FounderMessageSection() {
     } catch (e) {
       message = siteContent.founder_message.content
     }
+  } else if (siteContent?.founder_message?.translations?.[language]?.content) {
+    message = siteContent.founder_message.translations[language].content
   }
 
   if (siteContent?.founder_message?.title && language === "en") {
     title = siteContent.founder_message.title
+  } else if (siteContent?.founder_message?.translations?.[language]?.title) {
+    title = siteContent.founder_message.translations[language].title
   }
 
   if (siteContent?.founder_message?.image?.url) {

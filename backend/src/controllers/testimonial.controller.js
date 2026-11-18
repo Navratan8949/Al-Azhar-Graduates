@@ -3,7 +3,10 @@ const { uploadLocalFile, deleteLocalFile } = require("../utils/fileUpload");
 
 exports.createTestimonial = async (req, res) => {
     try {
-        const { name, designation, message, rating, status } = req.body;
+        let { name, designation, message, rating, status, translations } = req.body;
+        if (typeof translations === "string") {
+            try { translations = JSON.parse(translations); } catch (e) { translations = {}; }
+        }
 
         let image = { public_id: "", url: "" };
         if (req.file) {
@@ -19,7 +22,8 @@ exports.createTestimonial = async (req, res) => {
             message,
             rating,
             status,
-            image
+            image,
+            translations: translations || {}
         });
 
         res.status(201).json({ success: true, message: "Testimonial added successfully", testimonial });
@@ -46,6 +50,9 @@ exports.updateTestimonial = async (req, res) => {
         if (!testimonial) return res.status(404).json({ success: false, message: "Testimonial not found" });
 
         const updatedData = { ...req.body };
+        if (typeof updatedData.translations === "string") {
+            try { updatedData.translations = JSON.parse(updatedData.translations); } catch (e) { }
+        }
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
             if (uploadResult) {

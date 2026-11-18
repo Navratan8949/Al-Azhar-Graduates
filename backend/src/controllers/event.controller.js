@@ -3,7 +3,10 @@ const { uploadLocalFile, deleteLocalFile } = require("../utils/fileUpload");
 
 exports.createEvent = async (req, res) => {
     try {
-        const { title, description, location, eventDate, registrationLastDate, maxParticipants, status } = req.body;
+        let { title, description, location, eventDate, registrationLastDate, maxParticipants, status, translations } = req.body;
+        if (typeof translations === "string") {
+            try { translations = JSON.parse(translations); } catch (e) { translations = {}; }
+        }
         let image = { public_id: "", url: "" };
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
@@ -21,6 +24,7 @@ exports.createEvent = async (req, res) => {
             maxParticipants,
             status,
             image,
+            translations: translations || {},
             createdBy: req.user.id
         });
 
@@ -55,6 +59,9 @@ exports.updateEvent = async (req, res) => {
         if (!event) return res.status(404).json({ success: false, message: "Event not found" });
 
         const updatedData = { ...req.body };
+        if (typeof updatedData.translations === "string") {
+            try { updatedData.translations = JSON.parse(updatedData.translations); } catch (e) { }
+        }
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
             if (uploadResult) {

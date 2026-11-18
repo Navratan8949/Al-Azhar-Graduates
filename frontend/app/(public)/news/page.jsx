@@ -9,7 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getLocalizedField } from "@/lib/localized-field";
 
 export default function NewsPage() {
-  const { t, locale, isRTL } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -51,11 +51,11 @@ export default function NewsPage() {
         ) : news.length > 0 ? (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {news.map((item) => {
-              const title = getLocalizedField(item, "title", locale);
-              const description = getLocalizedField(item, "description", locale);
+              const title = getLocalizedField(item, "title", language);
+              const description = getLocalizedField(item, "description", language);
               const formattedDate = new Date(
                 item.publishedAt || item.createdAt
-              ).toLocaleDateString(locale === "ar" ? "ar-EG" : locale === "ur" ? "ur-PK" : locale === "hi" ? "hi-IN" : "en-US", {
+              ).toLocaleDateString(language === "ar" ? "ar-EG" : language === "ur" ? "ur-PK" : language === "hi" ? "hi-IN" : "en-US", {
                 month: "short",
                 day: "numeric",
                 year: "numeric",

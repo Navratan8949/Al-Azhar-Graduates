@@ -9,7 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getLocalizedField } from "@/lib/localized-field";
 
 export default function Page() {
-  const { t, locale, isRTL } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const [downloads, setDownloads] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -46,8 +46,8 @@ export default function Page() {
         ) : downloads.length > 0 ? (
           <div className="divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-card shadow-soft">
             {downloads.map((row) => {
-              const title = getLocalizedField(row, "title", locale);
-              const description = getLocalizedField(row, "description", locale);
+              const title = getLocalizedField(row, "title", language);
+              const description = getLocalizedField(row, "description", language);
               return (
                 <div
                   key={row._id}

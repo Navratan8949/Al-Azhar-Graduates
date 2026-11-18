@@ -7,12 +7,15 @@ import { ArrowLeft, CalendarDays, MapPin, Users, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { registerForEvent } from "@/service/event-registration.service"
 import { getEventById } from "@/service/event.service"
+import { useLanguage } from "@/context/LanguageContext"
+import { getLocalizedField } from "@/lib/localized-field"
 
 import { useParams } from "next/navigation"
 
 export default function EventDetailPage() {
   const params = useParams()
   const id = params?.id
+  const { language, isRTL } = useLanguage()
   const [event, setEvent] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -42,8 +45,13 @@ export default function EventDetailPage() {
 
   if (!event) return notFound()
 
+  const title = getLocalizedField(event, "title", language)
+  const description = getLocalizedField(event, "description", language)
+  const location = getLocalizedField(event, "location", language)
+  const dateLocale = language === "ar" ? "ar-EG" : language === "ur" ? "ur-PK" : language === "hi" ? "hi-IN" : "en-IN"
+
   const date = event.eventDate
-    ? new Date(event.eventDate).toLocaleDateString("en-IN", {
+    ? new Date(event.eventDate).toLocaleDateString(dateLocale, {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -52,24 +60,24 @@ export default function EventDetailPage() {
     : ""
 
   const last = event.registrationLastDate
-    ? new Date(event.registrationLastDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+    ? new Date(event.registrationLastDate).toLocaleDateString(dateLocale, { day: "numeric", month: "short", year: "numeric" })
     : null
 
   const imageUrl = event.image?.url || (typeof event.image === 'string' ? event.image : null) || "/placeholder.svg"
 
   return (
-    <article>
+    <article dir={isRTL ? "rtl" : "ltr"}>
       <div className="relative isolate min-h-[46vh] overflow-hidden bg-navy text-white">
         <Image src={imageUrl} alt="" fill className="object-cover opacity-50" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/35" />
         <div className="relative mx-auto flex min-h-[46vh] max-w-7xl flex-col justify-end px-4 pb-12 pt-28">
           <Link href="/events" className="mb-6 inline-flex w-fit items-center gap-2 text-sm text-white/70 hover:text-white">
-            <ArrowLeft className="size-4" /> All events
+            <ArrowLeft className={`size-4 ${isRTL ? "rotate-180" : ""}`} /> All events
           </Link>
-          <h1 className="max-w-3xl font-serif text-4xl font-bold tracking-tight md:text-5xl">{event.title}</h1>
+          <h1 className="max-w-3xl font-serif text-4xl font-bold tracking-tight md:text-5xl">{title}</h1>
           <div className="mt-5 flex flex-wrap gap-4 text-sm text-white/80">
             {date && <span className="inline-flex items-center gap-2"><CalendarDays className="size-4 text-accent" />{date}</span>}
-            <span className="inline-flex items-center gap-2"><MapPin className="size-4 text-accent" />{event.location}</span>
+            {location && <span className="inline-flex items-center gap-2"><MapPin className="size-4 text-accent" />{location}</span>}
             {event.maxParticipants > 0 && (
               <span className="inline-flex items-center gap-2"><Users className="size-4 text-accent" />{event.maxParticipants} seats</span>
             )}
@@ -80,7 +88,7 @@ export default function EventDetailPage() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
           <h2 className="font-serif text-2xl font-semibold">Event details</h2>
-          <p className="mt-4 leading-relaxed text-muted-foreground whitespace-pre-wrap">{event.description}</p>
+          <p className="mt-4 leading-relaxed text-muted-foreground whitespace-pre-wrap">{description}</p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
             Al-Azhar graduates and general participants can register below. Walk-ins are welcome subject to capacity.
           </p>

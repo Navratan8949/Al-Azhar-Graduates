@@ -15,7 +15,7 @@ function hrefFor(type, id) {
 }
 
 export function CardsGrid({ items = [], type }) {
-  const { t, locale, isRTL } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
 
   if (items.length === 0) {
     return (
@@ -36,10 +36,10 @@ export function CardsGrid({ items = [], type }) {
     <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => {
-          const title = getLocalizedField(item, "title", locale);
+          const title = getLocalizedField(item, "title", language);
           const description =
-            getLocalizedField(item, "description", locale) ||
-            getLocalizedField(item, "content", locale);
+            getLocalizedField(item, "description", language) ||
+            getLocalizedField(item, "content", language);
 
           const hasProgressBar =
             type === "campaign" &&

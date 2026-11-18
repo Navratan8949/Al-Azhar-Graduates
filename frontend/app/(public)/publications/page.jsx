@@ -9,7 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getLocalizedField } from "@/lib/localized-field";
 
 function PublicationsContent() {
-  const { t, locale, isRTL } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const searchParams = useSearchParams();
   const initialType = searchParams?.get("type") || "all";
 
@@ -89,8 +89,8 @@ function PublicationsContent() {
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredItems.map((item) => {
-              const title = getLocalizedField(item, "title", locale);
-              const description = getLocalizedField(item, "description", locale);
+              const title = getLocalizedField(item, "title", language);
+              const description = getLocalizedField(item, "description", language);
               return (
                 <div
                   key={item._id}

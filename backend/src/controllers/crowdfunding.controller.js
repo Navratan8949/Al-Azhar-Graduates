@@ -3,7 +3,10 @@ const { uploadLocalFile, deleteLocalFile } = require("../utils/fileUpload");
 
 exports.createCampaign = async (req, res) => {
     try {
-        const { title, description, targetAmount, startDate, endDate, status } = req.body;
+        let { title, description, targetAmount, startDate, endDate, status, translations } = req.body;
+        if (typeof translations === "string") {
+            try { translations = JSON.parse(translations); } catch (e) { translations = {}; }
+        }
 
         let image = { public_id: "", url: "" };
         if (req.file) {
@@ -20,7 +23,8 @@ exports.createCampaign = async (req, res) => {
             startDate,
             endDate,
             status,
-            image
+            image,
+            translations: translations || {}
         });
 
         res.status(201).json({ success: true, campaign });
@@ -54,6 +58,9 @@ exports.updateCampaign = async (req, res) => {
         if (!campaign) return res.status(404).json({ success: false, message: "Campaign not found" });
 
         const updatedData = { ...req.body };
+        if (typeof updatedData.translations === "string") {
+            try { updatedData.translations = JSON.parse(updatedData.translations); } catch (e) { }
+        }
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
             if (uploadResult) {

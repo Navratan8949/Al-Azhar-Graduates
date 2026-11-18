@@ -39,7 +39,11 @@ const downloadSchema = new mongoose.Schema(
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-        },
+        },,
+        translations: {
+            type: mongoose.Schema.Types.Mixed,
+            default: {},
+        }
     },
     { timestamps: true }
 );

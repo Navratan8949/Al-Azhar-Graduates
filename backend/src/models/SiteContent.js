@@ -41,6 +41,11 @@ const siteContentSchema = new mongoose.Schema(
             url: { type: String, default: "" },
         },
 
+        translations: {
+            type: mongoose.Schema.Types.Mixed,
+            default: {},
+        },
+
         updatedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",

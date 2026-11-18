@@ -9,21 +9,28 @@
 export function getLocalizedField(item, fieldName, currentLang = "en", fallback = "") {
   if (!item || typeof item !== "object") return fallback;
 
+  let lang = "en";
+  if (typeof currentLang === "string") {
+    lang = currentLang.toLowerCase();
+  } else if (currentLang && typeof currentLang === "object") {
+    lang = currentLang.language || currentLang.code || currentLang.lang || "en";
+  }
+
   // 1. Direct translation for current language
   if (
     item.translations &&
-    item.translations[currentLang] &&
-    typeof item.translations[currentLang] === "object" &&
-    item.translations[currentLang][fieldName] &&
-    typeof item.translations[currentLang][fieldName] === "string" &&
-    item.translations[currentLang][fieldName].trim() !== ""
+    item.translations[lang] &&
+    typeof item.translations[lang] === "object" &&
+    item.translations[lang][fieldName] &&
+    typeof item.translations[lang][fieldName] === "string" &&
+    item.translations[lang][fieldName].trim() !== ""
   ) {
-    return item.translations[currentLang][fieldName];
+    return item.translations[lang][fieldName];
   }
 
   // 2. English translation fallback
   if (
-    currentLang !== "en" &&
+    lang !== "en" &&
     item.translations &&
     item.translations.en &&
     typeof item.translations.en === "object" &&
@@ -59,7 +66,8 @@ export function isTranslatableField(fieldName) {
     "content",
     "summary",
     "role",
-    "heading"
+    "heading",
+    "awardedby"
   ];
   return translatableKeys.includes(fieldName?.toLowerCase());
 }

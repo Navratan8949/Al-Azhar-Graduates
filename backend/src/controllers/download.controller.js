@@ -19,7 +19,10 @@ exports.getAllDownloads = async (req, res) => {
 // Admin — Create download
 exports.createDownload = async (req, res) => {
     try {
-        const { title, description, category, fileType } = req.body;
+        let { title, description, category, fileType, translations } = req.body;
+        if (typeof translations === "string") {
+            try { translations = JSON.parse(translations); } catch (e) { translations = {}; }
+        }
 
         if (!req.file) {
             return res.status(400).json({ success: false, message: "File is required" });
@@ -36,6 +39,7 @@ exports.createDownload = async (req, res) => {
             category: category || "document",
             fileType: fileType || "pdf",
             file: { public_id: uploadResult.public_id, url: uploadResult.url },
+            translations: translations || {},
             createdBy: req.user._id,
         });
 
@@ -52,6 +56,9 @@ exports.updateDownload = async (req, res) => {
         if (!download) return res.status(404).json({ success: false, message: "Download not found" });
         
         const updatedData = { ...req.body };
+        if (typeof updatedData.translations === "string") {
+            try { updatedData.translations = JSON.parse(updatedData.translations); } catch (e) { }
+        }
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
             if (uploadResult) {

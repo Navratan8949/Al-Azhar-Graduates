@@ -14,7 +14,10 @@ exports.getAllTeamMembers = async (req, res) => {
 // Admin — Create team member
 exports.createTeamMember = async (req, res) => {
     try {
-        const { name, designation, description, email, phone, website, socialLinks, order } = req.body;
+        let { name, designation, description, email, phone, website, socialLinks, order, translations } = req.body;
+        if (typeof translations === "string") {
+            try { translations = JSON.parse(translations); } catch (e) { translations = {}; }
+        }
 
         let photo = { public_id: "", url: "" };
         if (req.file) {
@@ -32,6 +35,7 @@ exports.createTeamMember = async (req, res) => {
             socialLinks: socialLinks ? JSON.parse(socialLinks) : {},
             order: order || 0,
             photo,
+            translations: translations || {},
             createdBy: req.user._id,
         });
 
@@ -48,6 +52,9 @@ exports.updateTeamMember = async (req, res) => {
         if (!member) return res.status(404).json({ success: false, message: "Team member not found" });
 
         const updatedData = { ...req.body };
+        if (typeof updatedData.translations === "string") {
+            try { updatedData.translations = JSON.parse(updatedData.translations); } catch (e) { }
+        }
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
             if (uploadResult) {

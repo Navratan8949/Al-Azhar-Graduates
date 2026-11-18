@@ -14,7 +14,10 @@ exports.getAllAwards = async (req, res) => {
 // Admin — Create award
 exports.createAward = async (req, res) => {
     try {
-        const { title, description, awardedBy, year } = req.body;
+        let { title, description, awardedBy, year, translations } = req.body;
+        if (typeof translations === "string") {
+            try { translations = JSON.parse(translations); } catch (e) { translations = {}; }
+        }
 
         let image = { public_id: "", url: "" };
         if (req.file) {
@@ -28,6 +31,7 @@ exports.createAward = async (req, res) => {
             awardedBy,
             year,
             image,
+            translations: translations || {},
             createdBy: req.user._id,
         });
 
@@ -44,6 +48,9 @@ exports.updateAward = async (req, res) => {
         if (!award) return res.status(404).json({ success: false, message: "Award not found" });
 
         const updatedData = { ...req.body };
+        if (typeof updatedData.translations === "string") {
+            try { updatedData.translations = JSON.parse(updatedData.translations); } catch (e) { }
+        }
         if (req.file) {
             const uploadResult = await uploadLocalFile(req.file.path);
             if (uploadResult) {

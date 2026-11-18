@@ -18,8 +18,8 @@ const CATEGORIES = [
   "Interviews",
 ];
 
-function LightboxPhoto({ item, onClose, locale }) {
-  const title = getLocalizedField(item, "title", locale);
+function LightboxPhoto({ item, onClose, language }) {
+  const title = getLocalizedField(item, "title", language);
   return (
     <div
       className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-sm"
@@ -57,8 +57,8 @@ function LightboxPhoto({ item, onClose, locale }) {
   );
 }
 
-function LightboxVideo({ item, onClose, locale }) {
-  const title = getLocalizedField(item, "title", locale);
+function LightboxVideo({ item, onClose, language }) {
+  const title = getLocalizedField(item, "title", language);
   return (
     <div
       className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-sm"
@@ -92,7 +92,7 @@ function LightboxVideo({ item, onClose, locale }) {
 }
 
 export default function GalleryPage() {
-  const { t, locale, isRTL } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
   const [galleryItems, setGalleryItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -112,7 +112,7 @@ export default function GalleryPage() {
   }, []);
 
   const filtered = galleryItems.filter((item) => {
-    const title = getLocalizedField(item, "title", locale) || "";
+    const title = getLocalizedField(item, "title", language) || "";
     const matchType = activeType === "all" || item.type === activeType;
     const matchCategory =
       activeFilter === "All" || item.category === activeFilter;
@@ -132,13 +132,13 @@ export default function GalleryPage() {
           <LightboxPhoto
             item={lightbox.item}
             onClose={() => setLightbox(null)}
-            locale={locale}
+            language={language}
           />
         ) : (
           <LightboxVideo
             item={lightbox.item}
             onClose={() => setLightbox(null)}
-            locale={locale}
+            language={language}
           />
         ))}
 
@@ -232,7 +232,7 @@ export default function GalleryPage() {
                 )}
                 <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
                   {photos.map((item, i) => {
-                    const title = getLocalizedField(item, "title", locale);
+                    const title = getLocalizedField(item, "title", language);
                     return (
                       <div
                         key={item._id}
@@ -289,7 +289,7 @@ export default function GalleryPage() {
                 )}
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {videos.map((item) => {
-                    const title = getLocalizedField(item, "title", locale);
+                    const title = getLocalizedField(item, "title", language);
                     return (
                       <div
                         key={item._id}
