@@ -5,7 +5,14 @@ import Link from "next/link";
 import { useSiteBranding } from "@/hooks/useSiteBranding";
 import { useLanguage } from "@/context/LanguageContext";
 
-export function Logo({ variant = "dark", showText = true, className = "" }) {
+export function Logo({
+  variant = "dark",
+  showText = true,
+  className = "",
+  customName = null,
+  topText: customTop = null,
+  bottomText: customBottom = null,
+}) {
   const { siteName, shortName, logo } = useSiteBranding();
   let langContext = null;
   try {
@@ -13,7 +20,8 @@ export function Logo({ variant = "dark", showText = true, className = "" }) {
     langContext = useLanguage();
   } catch (e) {}
 
-  const currentOrgName = langContext?.t?.("org.name", shortName) || shortName;
+  const currentOrgName =
+    customName || langContext?.t?.("org.name", shortName) || shortName;
 
   const textColor =
     variant === "light" ? "text-navy-foreground" : "text-foreground";
@@ -22,8 +30,14 @@ export function Logo({ variant = "dark", showText = true, className = "" }) {
 
   // Split name for visual balance
   const words = currentOrgName.split(" ");
-  const topText = words.slice(0, Math.ceil(words.length / 2)).join(" ");
-  const bottomText = words.slice(Math.ceil(words.length / 2)).join(" ");
+  const topText =
+    customTop !== null
+      ? customTop
+      : words.slice(0, Math.ceil(words.length / 2)).join(" ");
+  const bottomText =
+    customBottom !== null
+      ? customBottom
+      : words.slice(Math.ceil(words.length / 2)).join(" ");
 
   return (
     <Link
@@ -42,12 +56,12 @@ export function Logo({ variant = "dark", showText = true, className = "" }) {
       {showText && (
         <span className="flex flex-col leading-tight min-w-0 max-w-[220px] sm:max-w-[280px]">
           <span
-            className={`font-serif text-[10px] sm:text-[13px] font-bold tracking-tight ${textColor} truncate uppercase`}
+            className={`font-serif text-[11px] sm:text-[14px] font-bold tracking-tight ${textColor} truncate uppercase`}
           >
             {topText}
           </span>
           <span
-            className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider sm:tracking-[0.12em] ${subColor} truncate`}
+            className={`text-[9px] sm:text-[11px] font-bold uppercase tracking-wider sm:tracking-[0.12em] ${subColor} truncate`}
           >
             {bottomText}
           </span>

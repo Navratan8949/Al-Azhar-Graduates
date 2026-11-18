@@ -97,7 +97,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <div className="inline-flex rounded-xl bg-white p-2.5 shadow-sm">
-              <Logo />
+              <Logo customName={t("org.short_name", "Al-Azhar Graduates")} />
             </div>
             <p className="mt-5 text-sm leading-relaxed text-white/65">
               {site.description}
