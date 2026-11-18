@@ -66,3 +66,4 @@ export function LanguageSwitcher({ variant = "dark" }) {
 // Re-export as GoogleTranslate for backward compatibility across existing layouts
 export const GoogleTranslate = LanguageSwitcher;
 export default LanguageSwitcher;
+

@@ -418,3 +418,11 @@ body[lang="hi"] {
   transform: scaleX(-1);
 }
 
+/* Prevent accidental horizontal overflow across all devices */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+

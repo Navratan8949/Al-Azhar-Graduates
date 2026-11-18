@@ -213,7 +213,11 @@
       "Annual Reports",
       "Conference Proceedings",
       "Educational Materials"
-    ]
+    ],
+    "fatwas_title": "Fatwas & Guidance",
+    "fatwas_desc": "Islamic rulings and statements by Al-Azhar scholars.",
+    "books_title": "Books & Articles",
+    "books_desc": "Digital library of academic papers and publications."
   },
   "gallery": {
     "title": "Media Gallery",
@@ -276,7 +280,8 @@
     },
     "declaration_title": "Declaration",
     "declaration_text": "I hereby declare that all information provided in this application is true and complete, and I pledge to uphold the objectives, principles, and regulations of the association.",
-    "submit_button": "Submit Membership Application"
+    "submit_button": "Submit Membership Application",
+    "service_desc": "Join our global network of Al-Azhar graduates."
   },
   "president_message": {
     "section_title": "President's Message",

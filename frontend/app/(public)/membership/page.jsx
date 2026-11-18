@@ -60,7 +60,12 @@ export default function MembershipPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.declaration) {
-      setError(t("membership.declaration_required", "Please check the declaration box to proceed."));
+      setError(
+        t(
+          "membership.declaration_required",
+          "Please check the declaration box to proceed.",
+        ),
+      );
       return;
     }
     setError(null);
@@ -100,7 +105,10 @@ export default function MembershipPage() {
         router.push("/member");
       }, 3000);
     } catch (err) {
-      setError(err.response?.data?.message || t("membership.submit_failed", "Failed to submit application."));
+      setError(
+        err.response?.data?.message ||
+          t("membership.submit_failed", "Failed to submit application."),
+      );
     } finally {
       setLoading(false);
     }
@@ -118,7 +126,10 @@ export default function MembershipPage() {
             {t("membership.become_title", "Become a Member")}
           </h1>
           <p className="mt-4 text-base text-muted-foreground sm:text-lg max-w-2xl mx-auto">
-            {t("membership.desc", "Join the World Association for Al-Azhar Graduates – India Branch and become part of a growing national network of scholars, educators, and professionals.")}
+            {t(
+              "membership.desc",
+              "Join the World Association for Al-Azhar Graduates – India Branch and become part of a growing national network of scholars, educators, and professionals.",
+            )}
           </p>
         </div>
 
@@ -139,7 +150,10 @@ export default function MembershipPage() {
                 {t("membership.app_title", "Unlock Membership Application")}
               </h2>
               <p className="text-lg text-muted-foreground font-medium max-w-lg mx-auto leading-relaxed mb-10">
-                {t("membership.auth_required_desc", "To maintain the integrity of our organization, official membership applications require a verified account. Please log in or create a free web account to proceed.")}
+                {t(
+                  "membership.auth_required_desc",
+                  "To maintain the integrity of our organization, official membership applications require a verified account. Please log in or create a free web account to proceed.",
+                )}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
@@ -168,7 +182,10 @@ export default function MembershipPage() {
               {t("membership.application_submitted", "Application Submitted!")}
             </h2>
             <p className="mt-4 text-lg text-emerald-700 max-w-lg mx-auto">
-              {t("membership.application_submitted_desc", "Your official membership application has been received and is under review. You will be redirected to your dashboard shortly.")}
+              {t(
+                "membership.application_submitted_desc",
+                "Your official membership application has been received and is under review. You will be redirected to your dashboard shortly.",
+              )}
             </p>
           </div>
         ) : (
@@ -179,7 +196,10 @@ export default function MembershipPage() {
                 {t("membership.app_title", "Membership Application")}
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                {t("membership.fill_notice", "Please fill out all the details accurately as per your Al-Azhar records.")}
+                {t(
+                  "membership.fill_notice",
+                  "Please fill out all the details accurately as per your Al-Azhar records.",
+                )}
               </p>
             </div>
 
@@ -209,7 +229,10 @@ export default function MembershipPage() {
                       className="mt-1.5 w-full rounded-xl border border-border bg-slate-200 px-4 py-3 text-sm outline-none text-muted-foreground"
                     />
                     <p className="text-[10px] text-muted-foreground mt-1">
-                      {t("membership.update_profile_note", "To change this, update your profile first.")}
+                      {t(
+                        "membership.update_profile_note",
+                        "To change this, update your profile first.",
+                      )}
                     </p>
                   </div>
                   <div>
@@ -228,7 +251,10 @@ export default function MembershipPage() {
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.personal_fields.arabic_name", "Arabic Name (Optional)")}
+                      {t(
+                        "membership.personal_fields.arabic_name",
+                        "Arabic Name (Optional)",
+                      )}
                     </label>
                     <input
                       type="text"
@@ -240,13 +266,20 @@ export default function MembershipPage() {
                           arabicName: e.target.value,
                         }))
                       }
-                      placeholder={t("membership.arabic_name_placeholder", "Enter Name in Arabic (if applicable)")}
+                      placeholder={t(
+                        "membership.arabic_name_placeholder",
+                        "Enter Name in Arabic (if applicable)",
+                      )}
                       className="mt-1.5 w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-navy focus:ring-1 focus:ring-navy"
                     />
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.personal_fields.father_name", "Father's Name")} *
+                      {t(
+                        "membership.personal_fields.father_name",
+                        "Father's Name",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -258,13 +291,20 @@ export default function MembershipPage() {
                           fathersName: e.target.value,
                         }))
                       }
-                      placeholder={t("membership.father_placeholder", "Father's Full Name")}
+                      placeholder={t(
+                        "membership.father_placeholder",
+                        "Father's Full Name",
+                      )}
                       className="mt-1.5 w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-navy focus:ring-1 focus:ring-navy"
                     />
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.personal_fields.whatsapp", "WhatsApp Number")} *
+                      {t(
+                        "membership.personal_fields.whatsapp",
+                        "WhatsApp Number",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -319,7 +359,11 @@ export default function MembershipPage() {
                 <div className="grid gap-6 md:grid-cols-2 bg-slate-50 p-6 rounded-2xl border border-border/50">
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.academic_fields.faculty", "Al-Azhar Faculty")} *
+                      {t(
+                        "membership.academic_fields.faculty",
+                        "Al-Azhar Faculty",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -349,7 +393,11 @@ export default function MembershipPage() {
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.academic_fields.specialisation", "Specialization")} *
+                      {t(
+                        "membership.academic_fields.specialisation",
+                        "Specialization",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -367,7 +415,11 @@ export default function MembershipPage() {
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.academic_fields.graduation_year", "Year of Graduation")} *
+                      {t(
+                        "membership.academic_fields.graduation_year",
+                        "Year of Graduation",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -387,7 +439,11 @@ export default function MembershipPage() {
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.academic_fields.occupation", "Present Occupation")} *
+                      {t(
+                        "membership.academic_fields.occupation",
+                        "Present Occupation",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -405,7 +461,11 @@ export default function MembershipPage() {
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.academic_fields.institution", "Current Institution")} *
+                      {t(
+                        "membership.academic_fields.institution",
+                        "Current Institution",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -435,7 +495,11 @@ export default function MembershipPage() {
                 <div className="grid gap-6 md:grid-cols-2 bg-slate-50 p-6 rounded-2xl border border-border/50">
                   <div className="md:col-span-2">
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.address_fields.full_address", "Full Address")} *
+                      {t(
+                        "membership.address_fields.full_address",
+                        "Full Address",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -495,7 +559,11 @@ export default function MembershipPage() {
                   </div>
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {t("membership.address_fields.postal_code", "Postal Code")} *
+                      {t(
+                        "membership.address_fields.postal_code",
+                        "Postal Code",
+                      )}{" "}
+                      *
                     </label>
                     <input
                       required
@@ -533,7 +601,8 @@ export default function MembershipPage() {
                     />
                     <UploadCloud className="mx-auto size-8 text-navy/60 mb-3" />
                     <p className="text-sm font-semibold text-navy">
-                      {t("membership.documents_fields.photo", "Profile Photo")} *
+                      {t("membership.documents_fields.photo", "Profile Photo")}{" "}
+                      *
                     </p>
                     <p className="text-xs text-muted-foreground mt-1 truncate">
                       {formData.profileImage
@@ -573,12 +642,19 @@ export default function MembershipPage() {
                     />
                     <UploadCloud className="mx-auto size-8 text-navy/60 mb-3" />
                     <p className="text-sm font-semibold text-navy">
-                      {t("membership.documents_fields.certificate", "Al-Azhar Degree")} *
+                      {t(
+                        "membership.documents_fields.certificate",
+                        "Al-Azhar Degree",
+                      )}{" "}
+                      *
                     </p>
                     <p className="text-xs text-muted-foreground mt-1 truncate">
                       {formData.alAzharCertificate
                         ? formData.alAzharCertificate.name
-                        : t("membership.cert_or_degree", "Certificate or Degree")}
+                        : t(
+                            "membership.cert_or_degree",
+                            "Certificate or Degree",
+                          )}
                     </p>
                   </div>
                 </div>
@@ -600,7 +676,10 @@ export default function MembershipPage() {
                     className="mt-1 size-5 rounded border-gray-300 text-accent focus:ring-accent"
                   />
                   <span className="text-sm text-muted-foreground leading-relaxed">
-                    {t("membership.declaration_text", "I hereby declare that all information provided in this application is true and complete, and I pledge to uphold the objectives, principles, and regulations of the association.")}
+                    {t(
+                      "membership.declaration_text",
+                      "I hereby declare that all information provided in this application is true and complete, and I pledge to uphold the objectives, principles, and regulations of the association.",
+                    )}
                   </span>
                 </label>
 
@@ -612,9 +691,16 @@ export default function MembershipPage() {
                   {loading ? (
                     <Loader2 className="mr-2 size-5 animate-spin" />
                   ) : (
-                    t("membership.submit_button", "Submit Membership Application")
+                    t(
+                      "membership.submit_button",
+                      "Submit Membership Application",
+                    )
                   )}
-                  {!loading && <ArrowRight className={`size-5 ${isRTL ? "mr-2 rotate-180" : "ml-2"}`} />}
+                  {!loading && (
+                    <ArrowRight
+                      className={`size-5 ${isRTL ? "mr-2 rotate-180" : "ml-2"}`}
+                    />
+                  )}
                 </Button>
               </div>
             </form>
