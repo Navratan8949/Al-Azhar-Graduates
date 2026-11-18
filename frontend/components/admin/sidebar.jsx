@@ -147,7 +147,7 @@ export function AdminSidebar() {
   const user = reduxUseSelector(selectUser);
 
   return (
-    <aside className="sticky top-0 hidden h-screen w-[260px] shrink-0 flex-col bg-gradient-to-b from-navy via-navy to-[#022c1d] text-white shadow-[4px_0_24px_rgba(2,61,40,0.15)] lg:flex overflow-hidden relative border-r border-white/5">
+    <aside className="fixed inset-y-0 left-0 z-30 hidden h-screen w-[260px] shrink-0 flex-col bg-gradient-to-b from-navy via-navy to-[#022c1d] text-white shadow-[4px_0_24px_rgba(2,61,40,0.15)] lg:flex overflow-hidden border-r border-white/5">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
         style={{

@@ -45,9 +45,9 @@ export default function AdminLayout({ children }) {
 
   return (
     <AdminAuthGuard>
-      <div dir="ltr" className="flex min-h-dvh bg-[#f4f7f6]">
+      <div dir="ltr" className="min-h-dvh bg-[#f4f7f6]">
         <AdminSidebar />
-        <div className="flex min-w-0 flex-1 flex-col">
+        <div className="flex min-w-0 flex-1 flex-col lg:pl-[260px]">
           <header className="sticky top-0 z-20 flex h-16 items-center justify-between gap-4 border-b border-navy/5 bg-white/70 px-4 backdrop-blur-xl md:px-8 shadow-[0_4px_24px_rgba(2,61,40,0.04)]">
             <div className="flex items-center gap-3 lg:hidden">
               <Sheet>
