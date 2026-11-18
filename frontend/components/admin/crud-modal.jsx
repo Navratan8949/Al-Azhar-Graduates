@@ -26,32 +26,34 @@ export function CrudModal({ isOpen, onClose, onSubmit, title, schema, initialDat
       // Initialize translations structure
       const tr = dataToSet.translations && typeof dataToSet.translations === "object"
         ? { ...dataToSet.translations }
-        : {}
-      tr.en = tr.en || {}
-      tr.ar = tr.ar || {}
-      tr.ur = tr.ur || {}
-      tr.hi = tr.hi || {}
+        : {};
+      tr.en = tr.en || {};
+      tr.ar = tr.ar || {};
+      tr.ur = tr.ur || {};
+      tr.hi = tr.hi || {};
 
       // Seed tr.en with top-level translatable fields if not already present
-      (schema || []).forEach(f => {
+      const fieldList = Array.isArray(schema) ? schema : [];
+      fieldList.forEach(f => {
         if (isTranslatableField(f.name) && dataToSet[f.name] && !tr.en[f.name]) {
-          tr.en[f.name] = dataToSet[f.name]
+          tr.en[f.name] = dataToSet[f.name];
         }
-      })
-      dataToSet.translations = tr
+      });
+      dataToSet.translations = tr;
 
-      setFormData(dataToSet)
-      setActiveLang("en")
-      setError(null)
-      setLoading(false)
+      setFormData(dataToSet);
+      setActiveLang("en");
+      setError(null);
+      setLoading(false);
     }
-  }, [isOpen, initialData, schema])
+  }, [isOpen, initialData, schema]);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
-  const hasTranslatable = (schema || []).some(f => isTranslatableField(f.name))
-  const currentLangObj = LANGUAGES.find(l => l.code === activeLang) || LANGUAGES[0]
-  const isRTL = currentLangObj.dir === "rtl"
+  const fieldList = Array.isArray(schema) ? schema : [];
+  const hasTranslatable = fieldList.some(f => isTranslatableField(f.name));
+  const currentLangObj = LANGUAGES.find(l => l.code === activeLang) || LANGUAGES[0];
+  const isRTL = currentLangObj.dir === "rtl";
 
   const handleFieldChange = (name, value) => {
     if (isTranslatableField(name)) {
@@ -88,8 +90,8 @@ export function CrudModal({ isOpen, onClose, onSubmit, title, schema, initialDat
   }
 
   const fieldsToRender = activeLang === "en"
-    ? (schema || [])
-    : (schema || []).filter(f => isTranslatableField(f.name))
+    ? fieldList
+    : fieldList.filter(f => isTranslatableField(f.name));
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
